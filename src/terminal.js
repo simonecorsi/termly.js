@@ -1,13 +1,7 @@
 (function (window, document, undefined) {
-  const Commands = require('./commands');
-  var terminal_row = '\
-    <span class="term_head" style="color:lightgreen;">guest@'+ (location.hostname ? location.hostname : 'localhost') +' ➜</span> \
-    <input type="text" class="command_input" size="1"> \
-  ';
-
   var Terminal = {
     init: function ( terminal_container, custom_commands ) {
-      this.Commands = Commands;
+      this.Commands = require('./commands');
       if(custom_commands) this.addCustomCommands(custom_commands);
       this.terminal_container = terminal_container;
       this.generateRow( terminal_container );
@@ -19,7 +13,7 @@
       return '\
         <span class="term_head" style="color:lightgreen;">guest@'+ (location.hostname ? location.hostname : 'localhost') +' \
         ➜</span> \
-        <input type="text" class="command_input" size="1"> \
+        <input type="text" class="command_input" size="1" style="cursor:none;"> \
       ';
     },
     addCustomCommands:function (custom_commands) {
@@ -31,27 +25,24 @@
     },
     generateRow: function ( terminal_container ) {
       var that = this;
-      var t, current, input;
-      t = document.createElement('div');
+      var terminal_row, current, input;
+      terminal_row = document.createElement('div');
       current = document.querySelectorAll(".current")[0];
       if(current){
         current.children[1].disabled = true;
         current.className = 'inner_terminal';
       }
-      t.className = 'current inner_terminal';
-      t.innerHTML = this.generateTerminalRow();
-      terminal_container.appendChild(t);
+      terminal_row.className = 'current inner_terminal';
+      terminal_row.innerHTML = this.generateTerminalRow();
+      terminal_container.appendChild(terminal_row);
       current = terminal_container.querySelector('.current');
-      var input = current.children[1];
+      input = current.children[1];
       input.focus();
-      input.addEventListener('keydown', that.consoleTypingHandler );
-      return t;
+      input.addEventListener('keyup', that.consoleTypingHandler );
     },
     getSTDIN: function (command) {
-      var that = this;
-      var res = that.parseCommand(command);
-      console.log(res);
-      if(!!res) that.sendSTDOUT(res);
+      var res = this.parseCommand(command);
+      if(!!res) this.sendSTDOUT(res);
     },
     sendSTDOUT: function (message, exit) {
       var res = document.createElement('pre');
@@ -93,17 +84,20 @@
     },
     consoleTypingHandler: function (e) {
       var input = this;
-      //var size = input.size;
+      var size = input.size;
+      var value = input.value;
       var key = e.which || e.keyCode;
       if (key === 13){
         Terminal.getSTDIN(input.value);
         return;
-      } else {
-        input.size += 1;
+      }
+      if( key >= 32 && key <= 126 ){
+        input.size = value.length + 2;
+      }
+      if( key === 8){
+        input.size = value.length ? value.length : 1;
       }
     },
-
   };
-
   window.Terminal = Terminal;
 })(window, window.document)
