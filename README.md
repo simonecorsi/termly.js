@@ -1,12 +1,16 @@
 #### Simple Browser Terminal Simulator
 
 **will write docs later.**
+no styling included you must style it yourself :)
+very basic styling in the test.html file just for testing purposes.
+
 #### install
 
     bower install browser-terminal.js
 
 ####  USAGE
 
+    <div id="terminal_container"></div>
     <script src="terminal.min.js" charset="utf-8"></script>
     <script type="text/javascript">
       Terminal.init( document.getElementById('terminal_container'), [custom_commands|object] );
