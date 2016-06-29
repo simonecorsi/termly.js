@@ -9,7 +9,10 @@
 include in your page
 terminal.js or terminal.min.js
 
-    Terminal.init( document.getElementById('terminal_container'), custom_commands );
+    <script src="terminal.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      Terminal.init( document.getElementById('terminal_container'), custom_commands );
+    </script>
 
 
 ######  EXTEND
