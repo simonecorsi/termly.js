@@ -6,12 +6,10 @@
     bower install browser-terminal.js
 
 ######  USAGE
-include in your page
-terminal.js or terminal.min.js
 
     <script src="terminal.min.js" charset="utf-8"></script>
     <script type="text/javascript">
-      Terminal.init( document.getElementById('terminal_container'), custom_commands );
+      Terminal.init( document.getElementById('terminal_container'), [custom_commands|object] );
     </script>
 
 
