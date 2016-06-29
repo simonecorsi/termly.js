@@ -1,12 +1,15 @@
 #### Simple Browser Terminal Simulator
 
 **will write docs later.**
+#### install
+
+    bower install browser-terminal.js
 
 ######  USAGE
 include in your page
 terminal.js or terminal.min.js
 
-    var term = Terminal.init( document.getElementById('terminal_container'), custom_commands );
+    Terminal.init( document.getElementById('terminal_container'), custom_commands );
 
 
 ######  EXTEND
