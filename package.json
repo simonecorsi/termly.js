@@ -1,18 +1,26 @@
 {
-  "name": "faketerm.js",
-  "version": "1.0.0",
+  "name": "browser-terminal-simulator.js",
+  "version": "0.0.1",
   "description": "Fake Terminal for the sake of it",
   "main": "terminal.dist.js",
   "scripts": {
     "start": "npm run build",
     "build": " browserify ./src/terminal.js -o ./terminal.js && uglifyjs terminal.js > terminal.min.js",
-    "watch": "watchify ./src/terminal.js -o 'uglifyjs -cm > terminal.min.js' --verbose"
+    "watch": "watchify ./src/terminal.js -o 'uglifyjs -cm > terminal.min.js' --verbose --debug"
   },
   "keywords": [
     "terminal",
     "javascript",
+    "simulator",
+    "browser",
     "fake"
   ],
   "author": "Simone Corsi",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "axios": "^0.12.0",
+    "browserify": "^13.0.1",
+    "uglify-js": "^2.6.4",
+    "watchify": "^3.7.0"
+  }
 }

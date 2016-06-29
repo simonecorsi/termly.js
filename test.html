@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BrowserTerminalSimulator.js</title>
+  <style>
+    /*body{
+      background: #333;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+    *{
+      font-family: 'Courier', sans-serif;
+      letter-spacing: 1px;
+      font-size: 16px;
+    }
+
+    input{
+      padding: 0 5px;
+      border:none;
+      outline:none;
+      background: transparent;
+      color: white;
+      position: relative;
+    }
+    input::after{
+      content:'_';
+      color: white;
+    }
+
+    p{
+      margin-top: 10px;
+      margin-bottom: 10px;
+
+    }*/
+  </style>
+</head>
+<body>
+
+  <h6>type help</h6>
+  <div id="terminal_container">
+
+  </div>
+
+  <script src="terminal.min.js" charset="utf-8"></script>
+  <script type="text/javascript">
+    var custom = {
+      custom: "CUSTOM!!!",
+      help: "HELP!",
+    }
+    var term = Terminal.init( document.getElementById('terminal_container'), custom );
+  </script>
+</body>
+</html>
