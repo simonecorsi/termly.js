@@ -1,8 +1,8 @@
 {
-  "name": "browser-terminal-simulator.js",
+  "name": "browser-terminal.js",
   "version": "0.0.1",
-  "description": "Fake Terminal for the sake of it",
-  "main": "terminal.dist.js",
+  "description": "Simple Browser Terminal in pure js for presentational purpose",
+  "main": "terminal.js",
   "scripts": {
     "start": "npm run build",
     "build": " browserify ./src/terminal.js -o ./terminal.js && uglifyjs terminal.js > terminal.min.js",
@@ -13,6 +13,9 @@
     "javascript",
     "simulator",
     "browser",
+    "presentation",
+    "mockup",
+    "commands",
     "fake"
   ],
   "author": "Simone Corsi",
