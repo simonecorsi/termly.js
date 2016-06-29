@@ -1,12 +1,5 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-module.exports = {
-  text: "!!!!!asdasd MEssage",
-  ao: 2
-}
-
-},{}],2:[function(require,module,exports){
 (function (window, document, undefined) {
-  const DEFAULT_COMMANDS = require('./commands');
+  const Commands = require('./commands');
   var terminal_row = '\
     <span class="term_head" style="color:lightgreen;">➜ </span> \
     <input type="text" class="command_input" size="1"> \
@@ -14,7 +7,7 @@ module.exports = {
 
   var Terminal = {
     init: function ( terminal_container, commands ) {
-      this.commands = commands || DEFAULT_COMMANDS;
+      this.Commands = Commands || DEFAULT_COMMANDS;
       this.container = terminal_container;
       this.generateRow( terminal_container );
       window.addEventListener('click', function () {
@@ -52,8 +45,16 @@ module.exports = {
       this.generateRow(this.container);
     },
     parseCommand:function (command) {
-      console.log(command);
-      return "OK";
+      var Commands = this.Commands;
+      for(var key in Commands){
+        if(Commands.hasOwnProperty(key)){
+          if(command === key){
+            return JSON.stringify(Commands[key]);
+          }
+        }
+      }
+      return "Command not found: type help for list of commands.";
+
     },
     consoleTypingHandler: function (e) {
       var input = this;
@@ -71,12 +72,4 @@ module.exports = {
 
 
   window.Terminal = Terminal;
-
-  document.onkeydown = function (e) {
-    var evtobj = window.event? event : e
-    //if (evtobj.ctrlKey || evtobj.altKey || evtobj.shiftKey || evtobj.metaKey && !evtobj.Backspace) e.preventDefault();
-  }
-
 })(window, window.document)
-
-},{"./commands":1}]},{},[2]);

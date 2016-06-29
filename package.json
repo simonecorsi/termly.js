@@ -1,0 +1,18 @@
+{
+  "name": "faketerm.js",
+  "version": "1.0.0",
+  "description": "Fake Terminal for the sake of it",
+  "main": "terminal.dist.js",
+  "scripts": {
+    "start": "npm run build",
+    "build": " browserify ./src/terminal.js -o ./terminal.js && uglifyjs terminal.js > terminal.min.js",
+    "watch": "watchify ./src/terminal.js -o 'uglifyjs -cm > terminal.min.js' --verbose"
+  },
+  "keywords": [
+    "terminal",
+    "javascript",
+    "fake"
+  ],
+  "author": "Simone Corsi",
+  "license": "ISC"
+}
