@@ -5,7 +5,7 @@
 
     bower install browser-terminal.js
 
-######  USAGE
+####  USAGE
 
     <script src="terminal.min.js" charset="utf-8"></script>
     <script type="text/javascript">
@@ -13,7 +13,7 @@
     </script>
 
 
-######  EXTEND
+####  EXTEND
 ./src/commands.js key/value pair when user enter a command it's checked against commands.js keys.
 
 accepted data types:
@@ -21,12 +21,13 @@ accepted data types:
 - Array
 - Object
 - Function
-  - __functions **MUST** return one of the above data type**
+  - __functions **MUST** return one of the above data type__
 
 custom commands can be added on init, pass a object with the new commands.
 Commands can be of any type, if it's a fuction it MUST resturn a primitive value.
 there are reserved keyword that wont be overrided (help,about,clear,exit) you must edit in commands.js and rebuild if you want to change them.
 
 #### DEV
+
 npm install
 npm run build || npm run watch
