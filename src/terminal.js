@@ -1,7 +1,7 @@
 (function (window, document, undefined) {
   const Commands = require('./commands');
   var terminal_row = '\
-    <span class="term_head" style="color:lightgreen;">➜</span> \
+    <span class="term_head" style="color:lightgreen;">guest@'+ (location.hostname ? location.hostname : 'localhost') +' ➜</span> \
     <input type="text" class="command_input" size="1"> \
   ';
 
@@ -14,6 +14,13 @@
       window.addEventListener('click', function () {
         document.getElementsByClassName('current')[0].children[1].focus();
       });
+    },
+    generateTerminalRow:function () {
+      return '\
+        <span class="term_head" style="color:lightgreen;">guest@'+ (location.hostname ? location.hostname : 'localhost') +' \
+        ➜</span> \
+        <input type="text" class="command_input" size="1"> \
+      ';
     },
     addCustomCommands:function (custom_commands) {
       for(var key in custom_commands){
@@ -32,7 +39,7 @@
         current.className = 'inner_terminal';
       }
       t.className = 'current inner_terminal';
-      t.innerHTML = terminal_row;
+      t.innerHTML = this.generateTerminalRow();
       terminal_container.appendChild(t);
       current = terminal_container.querySelector('.current');
       var input = current.children[1];
