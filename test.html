@@ -46,7 +46,20 @@ Welcome to localhost:80
       custom: "CUSTOM!!!",
       help: "HELP!",
     }
-    var term = Terminal.init( document.getElementById('terminal_container'), custom_commands );
+    var custom_filesystem = {
+      var:{
+        www: {
+          "test": "WELLCOME"
+        },
+        inner: {},
+        array:[1,2,3],
+      },
+      etc:{
+        apache2: {}
+      },
+      "test.md": "asd"
+    }
+    Terminal.init( document.getElementById('terminal_container'), custom_commands, custom_filesystem );
   </script>
 </body>
 </html>

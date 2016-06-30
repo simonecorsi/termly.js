@@ -36,7 +36,7 @@ var COMMANDS = {
   }
 }
 
-COMMANDS.__proto__.__filesystem = require('./filesystem');;
+COMMANDS.__proto__.__filesystem = require('./filesystem');
 
 module.exports = COMMANDS;
 
