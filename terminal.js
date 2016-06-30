@@ -69,7 +69,7 @@ var COMMANDS = {
   }
 }
 
-COMMANDS.__proto__.__filesystem = require('./filesystem');;
+COMMANDS.__proto__.__filesystem = require('./filesystem');
 
 module.exports = COMMANDS;
 
@@ -83,7 +83,8 @@ const FS = {
     www: {
       "test": "WELLCOME"
     },
-    inner: {}
+    inner: {},
+    array:[1,2,3],
   },
   etc:{
     apache2: {}
@@ -113,7 +114,7 @@ FS.__proto__.getCurrentDirIstance = function () {
 
 FS.__proto__.__filetype = function (file) {
   if(typeof file === 'string') return 'FILE';
-  if(typeof file === 'object') return 'DIR';
+  if(typeof file === 'object' && !Array.isArray(file)) return 'DIR';
 }
 
 FS.__proto__.getNode = function(fs, path){
@@ -170,15 +171,10 @@ FS.__proto__.__cat = function (argv) {
   var that = this;
   var current_dir = FS.getCurrentDirIstance();
   if(!argv) return "cat need 1 input file.";
-  //get file if exist
-
-  console.log(current_dir);
-
   var file = current_dir[argv[0]] || null;
-
+  //get file if exist
   if(!file) return "File not found.";
   if( that.__filetype(file) === 'DIR') return 'Is a directory.';
-
   return file;
 }
 
@@ -234,33 +230,10 @@ function formatDirRow(dir) {
 }
 
 },{}],4:[function(require,module,exports){
-function syntaxHighlight(json) {
-    if (typeof json != 'string') {
-         json = JSON.stringify(json, undefined, 2);
-    }
-    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
-        var cls = 'number';
-        if (/^"/.test(match)) {
-            if (/:$/.test(match)) {
-                cls = 'key';
-            } else {
-                cls = 'string';
-            }
-        } else if (/true|false/.test(match)) {
-            cls = 'boolean';
-        } else if (/null/.test(match)) {
-            cls = 'null';
-        }
-        return '<span class="' + cls + '">' + match + '</span>';
-    });
-}
-
 (function (window, document, undefined) {
   var Terminal = {
-    init: function ( terminal_container, custom_commands ) {
+    init: function ( terminal_container, custom_commands, custom_filesystem ) {
       this.Commands = require('./commands');
-      //this.filesystem = require('./filesystem');
       if(custom_commands) this.addCustomCommands(custom_commands);
       this.terminal_container = terminal_container;
       this.generateRow( terminal_container );
