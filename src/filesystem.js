@@ -1,18 +1,22 @@
 // *FILESYSTEM
-const FS = {
+var FS = {
   var:{
     www: {
-      "test": "WELLCOME"
+      "anotherfile": "WELLCOME"
     },
     inner: {},
-    array:[1,2,3],
   },
   etc:{
-    apache2: {}
+    apache2: {
+      "apache2.conf": "Not what you are looking for"
+    }
   },
-  "test.md": "asd"
+  "thisisafile.md": "What did you expect?"
 }
 
+FS.__initFS = function (custom_filesystem) {
+  if(custom_filesystem) FS = custom_filesystem;
+}
 
 FS.__proto__.pwd = '/';
 FS.__proto__.__pwd = function () {

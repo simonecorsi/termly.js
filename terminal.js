@@ -70,6 +70,9 @@ var COMMANDS = {
 }
 
 COMMANDS.__proto__.__filesystem = require('./filesystem');
+COMMANDS.__proto__.__initFS = function (custom_filesystem) {
+  COMMANDS.__filesystem.__initFS(custom_filesystem);
+}
 
 module.exports = COMMANDS;
 
@@ -78,20 +81,24 @@ module.exports = COMMANDS;
 
 },{"../package.json":1,"./filesystem":3}],3:[function(require,module,exports){
 // *FILESYSTEM
-const FS = {
+var FS = {
   var:{
     www: {
-      "test": "WELLCOME"
+      "anotherfile": "WELLCOME"
     },
     inner: {},
-    array:[1,2,3],
   },
   etc:{
-    apache2: {}
+    apache2: {
+      "apache2.conf": "Not what you are looking for"
+    }
   },
-  "test.md": "asd"
+  "thisisafile.md": "What did you expect?"
 }
 
+FS.__initFS = function (custom_filesystem) {
+  if(custom_filesystem) FS = custom_filesystem;
+}
 
 FS.__proto__.pwd = '/';
 FS.__proto__.__pwd = function () {
@@ -234,6 +241,7 @@ function formatDirRow(dir) {
   var Terminal = {
     init: function ( terminal_container, custom_commands, custom_filesystem ) {
       this.Commands = require('./commands');
+      this.Commands.__initFS(custom_filesystem || null);
       if(custom_commands) this.addCustomCommands(custom_commands);
       this.terminal_container = terminal_container;
       this.generateRow( terminal_container );

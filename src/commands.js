@@ -37,6 +37,9 @@ var COMMANDS = {
 }
 
 COMMANDS.__proto__.__filesystem = require('./filesystem');
+COMMANDS.__proto__.__initFS = function (custom_filesystem) {
+  COMMANDS.__filesystem.__initFS(custom_filesystem);
+}
 
 module.exports = COMMANDS;
 

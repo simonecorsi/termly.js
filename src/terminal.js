@@ -2,6 +2,7 @@
   var Terminal = {
     init: function ( terminal_container, custom_commands, custom_filesystem ) {
       this.Commands = require('./commands');
+      this.Commands.__initFS(custom_filesystem || null);
       if(custom_commands) this.addCustomCommands(custom_commands);
       this.terminal_container = terminal_container;
       this.generateRow( terminal_container );

@@ -47,17 +47,12 @@ Welcome to localhost:80
       help: "HELP!",
     }
     var custom_filesystem = {
-      var:{
-        www: {
-          "test": "WELLCOME"
-        },
-        inner: {},
-        array:[1,2,3],
-      },
-      etc:{
-        apache2: {}
-      },
-      "test.md": "asd"
+      "testingCustomFs":{
+        "file": "Im a file",
+        "nestedDir": {
+          "file2": "file"
+        }
+      }
     }
     Terminal.init( document.getElementById('terminal_container'), custom_commands, custom_filesystem );
   </script>
