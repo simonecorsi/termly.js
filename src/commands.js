@@ -28,8 +28,17 @@ var COMMANDS = {
   cat:function (argv) {
     return this.__filesystem.__cat( argv );
   },
+  cd:function (argv) {
+    return this.__filesystem.__cd( argv );
+  },
+  pwd:function () {
+    return this.__filesystem.__pwd();
+  }
 }
 
 COMMANDS.__proto__.__filesystem = require('./filesystem');;
 
 module.exports = COMMANDS;
+
+
+// recursive traversing

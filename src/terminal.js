@@ -33,9 +33,10 @@ function syntaxHighlight(json) {
       });
     },
     generateTerminalRow:function () {
+      var that = this;
       return '\
         <span class="term_head" style="color:lightgreen;">guest@'+ (location.hostname ? location.hostname : 'localhost') +' \
-        ➜</span> \
+        ➜ '+ that.Commands.pwd() +' </span> \
         <input type="text" class="command_input" size="1" style="cursor:none;"> \
       ';
     },
@@ -64,9 +65,7 @@ function syntaxHighlight(json) {
       input.addEventListener('keyup', that.consoleTypingHandler );
     },
     getSTDIN: function (command) {
-      command = command.trim();
-      // get argv if there are
-      var argv = command.split(" ");
+      var argv = command.trim().split(" ");
       var res = this.parseCommand(argv);
       if(!!res) this.sendSTDOUT(res);
     },
@@ -79,10 +78,7 @@ function syntaxHighlight(json) {
     parseCommand:function (argv) {
       var that = this;
       var Commands = this.Commands;
-
-      // handle argv
       command = argv.shift();
-
 
       for(var key in Commands){
         if(Commands.hasOwnProperty(key) && command === key){

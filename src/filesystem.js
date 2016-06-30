@@ -1,7 +1,9 @@
 // *FILESYSTEM
 const FS = {
   var:{
-    www: {}
+    www: {
+      "test": "asd"
+    }
   },
   etc:{
     apache2: {}
@@ -26,6 +28,11 @@ FS.__proto__.__ls = function () {
   return ls;
 }
 
+FS.__proto__.pwd = '/';
+FS.__proto__.__pwd = function () {
+  return this.pwd;
+}
+
 FS.__proto__.__filetype = function (file) {
   if(typeof file === 'string') return 'FILE';
   if(typeof file === 'object') return 'DIR';
@@ -40,8 +47,53 @@ FS.__proto__.__cat = function (argv) {
   if( that.__filetype(file) === 'DIR') return 'Is a directory.';
 
   return FS[argv[0]];
-
 }
+
+
+FS.__proto__.__cd = function (argv) {
+  if(!argv) return "Path argument expected.";
+  if(argv.length > 1 ) return "Too many arguments";
+  var path = argv[0];
+
+  // GO BACK
+  if(path === '..'){
+    return 'go back 1 dir'
+  }
+
+  // START FROM ROOT
+  if(path[0] === '/') {
+    return "start from root"
+  }
+
+  // relative path
+  path = path.split('/');
+  return FS.getNode(FS, path);
+
+  //this.pwd = "/var/";
+  return argv;
+}
+
+
+FS.__proto__.getNode = function(fs, path){
+  if ( path.length === 0 || !path ) return "No path provided";
+  var fs = Object.assign({}, fs);
+  var path = Object.assign([], path);
+
+
+  if ( path.length === 1) {
+    if( !fs ) return 'path '+ path[0] +' dont exists' ;
+    if( fs && !fs[ path[0] ] ) return 'path '+ path[0] +' dont exists' ;
+
+    if( FS.__filetype( fs[ path[0] ] ) === 'FILE' ) return 'Is a file';
+
+    return fs[ path[0] ];
+  }
+
+  fs = fs[path[0]] ? fs[path[0]] : null;
+  path.shift();
+  return FS.getNode(fs, path);
+}
+
 
 module.exports = FS;
 
