@@ -18,6 +18,7 @@
     "commands",
     "fake"
   ],
+  "repository": "https://github.com/Kirkhammetz/browser-terminal.js",
   "author": "Simone Corsi",
   "license": "ISC",
   "devDependencies": {

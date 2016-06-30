@@ -1,5 +1,6 @@
 var package = require('../package.json');
 
+
 var COMMANDS = {
   help: function () {
     var command_list = [];
@@ -21,6 +22,14 @@ var COMMANDS = {
   exit: function () {
     return "SGEXIT";
   },
+  ls:function () {
+    return this.__filesystem.__ls();
+  },
+  cat:function (argv) {
+    return this.__filesystem.__cat( argv );
+  },
 }
+
+COMMANDS.__proto__.__filesystem = require('./filesystem');;
 
 module.exports = COMMANDS;

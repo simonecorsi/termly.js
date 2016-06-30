@@ -1,7 +1,30 @@
+function syntaxHighlight(json) {
+    if (typeof json != 'string') {
+         json = JSON.stringify(json, undefined, 2);
+    }
+    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+        var cls = 'number';
+        if (/^"/.test(match)) {
+            if (/:$/.test(match)) {
+                cls = 'key';
+            } else {
+                cls = 'string';
+            }
+        } else if (/true|false/.test(match)) {
+            cls = 'boolean';
+        } else if (/null/.test(match)) {
+            cls = 'null';
+        }
+        return '<span class="' + cls + '">' + match + '</span>';
+    });
+}
+
 (function (window, document, undefined) {
   var Terminal = {
     init: function ( terminal_container, custom_commands ) {
       this.Commands = require('./commands');
+      //this.filesystem = require('./filesystem');
       if(custom_commands) this.addCustomCommands(custom_commands);
       this.terminal_container = terminal_container;
       this.generateRow( terminal_container );
@@ -41,7 +64,10 @@
       input.addEventListener('keyup', that.consoleTypingHandler );
     },
     getSTDIN: function (command) {
-      var res = this.parseCommand(command);
+      command = command.trim();
+      // get argv if there are
+      var argv = command.split(" ");
+      var res = this.parseCommand(argv);
       if(!!res) this.sendSTDOUT(res);
     },
     sendSTDOUT: function (message, exit) {
@@ -50,24 +76,40 @@
       this.terminal_container.appendChild(res);
       if(!exit) this.generateRow(this.terminal_container);
     },
-    parseCommand:function (command) {
+    parseCommand:function (argv) {
       var that = this;
       var Commands = this.Commands;
+
+      // handle argv
+      command = argv.shift();
+
+
       for(var key in Commands){
         if(Commands.hasOwnProperty(key) && command === key){
-          var res = (typeof Commands[key] === 'function') ? JSON.stringify(Commands[key](), null, 2) : JSON.stringify(Commands[key], null, 2) ;
+          var stdout;
+          var res = (typeof Commands[key] === 'function') ? Commands[key]( argv.length ? argv : null ) : Commands[key] ;
           switch (true) {
-            case (typeof res === 'string' && res === '"SGEXIT"'):
+            case (typeof res === 'string' && res === 'SGEXIT'):
               that.exitHandler();
               return null;
               break;
-            case (typeof res === 'string' && res === '"SGCLEAR"'):
+            case (typeof res === 'string' && res === 'SGCLEAR'):
               that.clearHandler();
               return null;
+              break;
+            case (typeof res === 'string'):
+              stdout = res;
+              break;
+            case (typeof res === 'object' && Array.isArray(res)):
+              stdout = res.join('\n');
+              break;
+            case (typeof res === 'object' && !Array.isArray(res)):
+              stdout = JSON.stringify(res, null, 2);
               break;
             default:
               return res;
           }
+          return stdout;
         }
       }
       return "Command not found: type help for list of commands.";
