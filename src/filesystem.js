@@ -125,7 +125,7 @@ FS.__proto__.__cd = function (argv) {
     // IF CD INTO ROOT DIR
     if(path[0] === ''){
       FS.setCurrentDir('');
-      return argv;
+      return this.__pwd();
     }
   }else{
     // IF PATH IS RELATIVE
