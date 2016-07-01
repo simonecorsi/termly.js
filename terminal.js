@@ -7,7 +7,7 @@ module.exports={
   "scripts": {
     "start": "npm run build",
     "build": " browserify ./src/terminal.js -o ./terminal.js && uglifyjs terminal.js > terminal.min.js",
-    "watch": "watchify ./src/terminal.js -o 'uglifyjs -cm > terminal.min.js' --verbose --debug"
+    "watch": "watchify --verbose --debug ./src/terminal.js -o 'uglifyjs -cm > terminal.min.js'"
   },
   "keywords": [
     "terminal",
@@ -94,7 +94,7 @@ var FS = {
     }
   },
   "thisisafile.md": "What did you expect?"
-}
+};
 
 FS.__initFS = function (custom_filesystem) {
   if(custom_filesystem) FS = custom_filesystem;
@@ -122,6 +122,7 @@ FS.__proto__.getCurrentDirIstance = function () {
 FS.__proto__.__filetype = function (file) {
   if(typeof file === 'string') return 'FILE';
   if(typeof file === 'object' && !Array.isArray(file)) return 'DIR';
+  if(typeof file === 'object' && Array.isArray(file)) return 'LIST';
 }
 
 FS.__proto__.getNode = function(fs, path){
@@ -164,9 +165,11 @@ FS.__proto__.__ls = function () {
     if(current_dir.hasOwnProperty(key)){
       var stat = '';
       if(that.__filetype(current_dir[key]) === 'DIR'){
-        stat = formatDirRow(key)
+        stat = formatDirRow(key);
       } else if(that.__filetype(current_dir[key]) === 'FILE'){
-        stat = formatFileRow(key)
+        stat = formatFileRow(key);
+      } else{
+        stat = formatFileRow(key);
       }
       ls.push(stat);
     }
@@ -190,7 +193,6 @@ FS.__proto__.__cd = function (argv) {
   if(!argv) return "Path argument expected.";
   if(argv.length > 1 ) return "Too many arguments";
   var path = argv[0];
-  var fs;
 
   // GO BACK
   if(path === '..'){
@@ -252,9 +254,9 @@ function formatDirRow(dir) {
     generateTerminalRow:function () {
       var that = this;
       return '\
-        <span class="term_head" style="color:lightgreen;">guest@'+ (location.hostname ? location.hostname : 'localhost') +' \
+        <span class="terminal_info">guest@'+ (location.hostname ? location.hostname : 'localhost') +' \
         ➜ '+ that.Commands.pwd() +' </span> \
-        <input type="text" class="command_input" size="1" style="cursor:none;"> \
+        <input type="text" class="terminal_input" size="1" style="cursor:none;"> \
       ';
     },
     addCustomCommands:function (custom_commands) {
@@ -271,9 +273,9 @@ function formatDirRow(dir) {
       current = document.querySelectorAll(".current")[0];
       if(current){
         current.children[1].disabled = true;
-        current.className = 'inner_terminal';
+        current.className = 'terminal_row';
       }
-      terminal_row.className = 'current inner_terminal';
+      terminal_row.className = 'current terminal_row';
       terminal_row.innerHTML = this.generateTerminalRow();
       terminal_container.appendChild(terminal_row);
       current = terminal_container.querySelector('.current');
@@ -314,7 +316,8 @@ function formatDirRow(dir) {
               stdout = res;
               break;
             case (typeof res === 'object' && Array.isArray(res)):
-              stdout = res.join('\n');
+              res.unshift("");
+              stdout = res.join('\n').replace( new RegExp( '\n', 'g' ), '\n- ' );
               break;
             case (typeof res === 'object' && !Array.isArray(res)):
               stdout = JSON.stringify(res, null, 2);

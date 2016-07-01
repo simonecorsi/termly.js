@@ -13,9 +13,9 @@
     generateTerminalRow:function () {
       var that = this;
       return '\
-        <span class="term_head" style="color:lightgreen;">guest@'+ (location.hostname ? location.hostname : 'localhost') +' \
+        <span class="terminal_info">guest@'+ (location.hostname ? location.hostname : 'localhost') +' \
         ➜ '+ that.Commands.pwd() +' </span> \
-        <input type="text" class="command_input" size="1" style="cursor:none;"> \
+        <input type="text" class="terminal_input" size="1" style="cursor:none;"> \
       ';
     },
     addCustomCommands:function (custom_commands) {
@@ -32,9 +32,9 @@
       current = document.querySelectorAll(".current")[0];
       if(current){
         current.children[1].disabled = true;
-        current.className = 'inner_terminal';
+        current.className = 'terminal_row';
       }
-      terminal_row.className = 'current inner_terminal';
+      terminal_row.className = 'current terminal_row';
       terminal_row.innerHTML = this.generateTerminalRow();
       terminal_container.appendChild(terminal_row);
       current = terminal_container.querySelector('.current');
@@ -75,7 +75,8 @@
               stdout = res;
               break;
             case (typeof res === 'object' && Array.isArray(res)):
-              stdout = res.join('\n');
+              res.unshift("");
+              stdout = res.join('\n').replace( new RegExp( '\n', 'g' ), '\n- ' );
               break;
             case (typeof res === 'object' && !Array.isArray(res)):
               stdout = JSON.stringify(res, null, 2);

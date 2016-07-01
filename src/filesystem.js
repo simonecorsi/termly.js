@@ -12,7 +12,7 @@ var FS = {
     }
   },
   "thisisafile.md": "What did you expect?"
-}
+};
 
 FS.__initFS = function (custom_filesystem) {
   if(custom_filesystem) FS = custom_filesystem;
@@ -40,6 +40,7 @@ FS.__proto__.getCurrentDirIstance = function () {
 FS.__proto__.__filetype = function (file) {
   if(typeof file === 'string') return 'FILE';
   if(typeof file === 'object' && !Array.isArray(file)) return 'DIR';
+  if(typeof file === 'object' && Array.isArray(file)) return 'LIST';
 }
 
 FS.__proto__.getNode = function(fs, path){
@@ -82,9 +83,11 @@ FS.__proto__.__ls = function () {
     if(current_dir.hasOwnProperty(key)){
       var stat = '';
       if(that.__filetype(current_dir[key]) === 'DIR'){
-        stat = formatDirRow(key)
+        stat = formatDirRow(key);
       } else if(that.__filetype(current_dir[key]) === 'FILE'){
-        stat = formatFileRow(key)
+        stat = formatFileRow(key);
+      } else{
+        stat = formatFileRow(key);
       }
       ls.push(stat);
     }
@@ -108,7 +111,6 @@ FS.__proto__.__cd = function (argv) {
   if(!argv) return "Path argument expected.";
   if(argv.length > 1 ) return "Too many arguments";
   var path = argv[0];
-  var fs;
 
   // GO BACK
   if(path === '..'){
