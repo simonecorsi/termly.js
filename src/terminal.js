@@ -48,7 +48,8 @@
       if(!!res) this.sendSTDOUT(res);
     },
     sendSTDOUT: function (message, exit) {
-      var res = document.createElement('pre');
+      var res = document.createElement('div');
+      res.className = 'terminal_stdout';
       res.innerText = message;
       this.terminal_container.appendChild(res);
       if(!exit) this.generateRow(this.terminal_container);
