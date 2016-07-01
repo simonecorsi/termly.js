@@ -4,6 +4,8 @@
 PureJS, No Depencies, No styling included you must style it yourself :)
 There is just a very basic styling in the test.html file just for testing purposes.
 
+[Demo](http://terminal.simonecorsi.me/)
+
 #### Why?
 
 I needed a simple simulated terminal to use on one of my project just for presentation purposes and some funny re-uses,
