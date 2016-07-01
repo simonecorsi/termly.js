@@ -196,25 +196,36 @@ FS.__proto__.__cd = function (argv) {
 
   // GO BACK
   if(path === '..'){
-    return 'go back 1 dir'
-  }
-
-  // IF PATH IS ABSOLUTE
-  if(path[0] === '/') {
-    path = path.split('/');
+    if(this.__pwd() === '/' ) return "Currently in root directory."
+    path = this.__pwd().split('/');
     path.shift();
-
-    // IF CD INTO ROOT DIR
-    if(path[0] === ''){
+    path.pop();
+    //handle back in ROOT
+    if(!path.length){
       FS.setCurrentDir('');
-      return argv;
+      return this.__pwd();
     }
-  }else{
-    // IF PATH IS RELATIVE
-    path = FS.__pwd().length === 1  ? FS.__pwd() + path : FS.__pwd() + '/' + path;
-    path = path.split('/');
-    path.shift();
+  }else {
+    // IF PATH IS ABSOLUTE
+    if(path[0] === '/') {
+      path = path.split('/');
+      path.shift();
+
+      // IF CD INTO ROOT DIR
+      if(path[0] === ''){
+        FS.setCurrentDir('');
+        return this.__pwd();
+      }
+    }else{
+      // IF PATH IS RELATIVE
+      path = FS.__pwd().length === 1  ? FS.__pwd() + path : FS.__pwd() + '/' + path;
+      path = path.split('/');
+      path.shift();
+    }
+
   }
+
+  console.log(path);
 
   var node = FS.getNode(FS, path);
   if(node){
