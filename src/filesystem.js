@@ -75,7 +75,7 @@ FS.__proto__.getNode = function(fs, path){
 // COMMANDS
 //------------------------------------------------
 FS.__proto__.__ls = function () {
-  var ls = [];
+  var ls = "";
   var that = this;
   var current_dir = FS.getCurrentDirIstance();
 
@@ -89,7 +89,7 @@ FS.__proto__.__ls = function () {
       } else{
         stat = formatFileRow(key);
       }
-      ls.push(stat);
+      ls += stat + "\n";
     }
   }
   return ls;
