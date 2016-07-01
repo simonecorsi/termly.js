@@ -35,16 +35,17 @@
   <pre>
 Welcome to browser-terminal.js
   * Type help for list of commands
+  *
   * still WIP
   *
-  * source:
-  * https://github.com/Kirkhammetz/browser-terminal.js
+  * Unix terminal simulator for presentational purposes
+  * can be extended with custom commands & filesystem
+  * with some work even with http requests.
   *
+  * source:
+  * <a href="https://github.com/Kirkhammetz/browser-terminal.js" style="color:white !important; text-decoration:none;">https://github.com/Kirkhammetz/browser-terminal.js</a>
   </pre>
-  <div id="terminal_container">
-
-  </div>
-
+  <div id="terminal_container"></div>
   <script src="terminal.min.js" charset="utf-8"></script>
   <script type="text/javascript">
     var custom_commands = {
@@ -52,12 +53,11 @@ Welcome to browser-terminal.js
       help: "HELP!",
     }
     var custom_filesystem = {
-      "testingCustomFs":{
         "file": "Im a file",
         "nestedDir": {
           "file2": "file"
-        }
-      }
+        },
+        "array": [1,2,3]
     }
     Terminal.init( document.getElementById('terminal_container'), custom_commands, custom_filesystem );
   </script>
