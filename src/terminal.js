@@ -6,7 +6,8 @@
       if(custom_commands) this.addCustomCommands(custom_commands);
       this.terminal_container = terminal_container;
       this.generateRow( terminal_container );
-      window.addEventListener('click', function () {
+      window.addEventListener('click', function (e) {
+        e.stopPropagation();
         document.getElementsByClassName('current')[0].children[1].focus();
       });
     },
