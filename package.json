@@ -5,7 +5,7 @@
   "main": "terminal.js",
   "scripts": {
     "start": "npm run build",
-    "build": " browserify ./src/terminal.js -o ./terminal.js && uglifyjs terminal.js > terminal.min.js",
+    "build": "browserify ./src/terminal.js -o ./terminal.js && uglifyjs terminal.js > terminal.min.js",
     "watch": "watchify --verbose --debug ./src/terminal.js -o 'uglifyjs -cm > terminal.min.js'"
   },
   "keywords": [
