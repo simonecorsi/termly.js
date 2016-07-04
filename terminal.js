@@ -1,7 +1,7 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports={
   "name": "browser-terminal.js",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Simple Browser Terminal in pure js for presentational purpose",
   "main": "terminal.js",
   "scripts": {
@@ -258,9 +258,9 @@ function formatDirRow(dir) {
       if(custom_commands) this.addCustomCommands(custom_commands);
       this.terminal_container = terminal_container;
       this.generateRow( terminal_container );
-      // window.addEventListener('click', function () {
-      //   document.getElementsByClassName('current')[0].children[1].focus();
-      // });
+      window.addEventListener('click', function () {
+        document.getElementsByClassName('current')[0].children[1].focus();
+      });
     },
     generateTerminalRow:function () {
       var that = this;

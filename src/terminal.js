@@ -6,9 +6,9 @@
       if(custom_commands) this.addCustomCommands(custom_commands);
       this.terminal_container = terminal_container;
       this.generateRow( terminal_container );
-      // window.addEventListener('click', function () {
-      //   document.getElementsByClassName('current')[0].children[1].focus();
-      // });
+      window.addEventListener('click', function () {
+        document.getElementsByClassName('current')[0].children[1].focus();
+      });
     },
     generateTerminalRow:function () {
       var that = this;
