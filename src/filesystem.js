@@ -59,7 +59,7 @@ FS.__proto__.getNode = function(fs, path){
         console.error('path '+ path[0] +' dont exists');
         return null;
     }
-    if( FS.__filetype( fs[ path[0] ] ) === 'FILE' ) {
+    if( FS.__filetype( fs[ path[0] ] ) === 'FILE' || FS.__filetype( fs[ path[0] ] ) === 'LIST' ) {
       console.error('its a file');
       return null;
     }
@@ -143,7 +143,7 @@ FS.__proto__.__cd = function (argv) {
 
   }
 
-  console.log(path);
+  //console.log(path);
 
   var node = FS.getNode(FS, path);
   if(node){
