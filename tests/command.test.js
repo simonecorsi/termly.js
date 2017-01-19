@@ -23,5 +23,16 @@ describe('Command Class', () => {
     expect(() => command.exec(() => {})).to.throw(Error)
   })
 
-  
+  it('should execute the function passed', () => {
+    const cmd_output = "this is the help command output"
+    const cmd = new Command('help', () => cmd_output)
+    expect(cmd.exec()).to.equal(cmd_output)
+  })
+
+  it('should command function must have this binded to Command Constructor', () => {
+    const cmd = new Command('help', function() { return this instanceof Command })
+    expect(cmd.exec()).to.equal(true)
+  })
+
+
 })
