@@ -1,11 +1,15 @@
 const Command = require('./Command')
 
+/**
+ *
+ * Interpreter
+ * Is the parent Class of the Main Shell Class
+ * - This class is the one that parse and run exec of command
+ * - Parsing of builtin command on runtime happen here
+ * - Will parse custom user Command too
+ *
+ */
 class Interpreter {
-
-  constructor(shell) {
-    console.log(shell)
-    this.ShellCommands = this.initBuiltinCommand()
-  }
 
   /**
    * Parse Command
@@ -63,12 +67,13 @@ class Interpreter {
   /*
    * Generate Builtin Command List
    */
-  initBuiltinCommand() {
+  initBuiltinCommand(ShellReference) {
     const Blueprints = require('../configs/builtin-commands')
     const ShellCommands = {}
     Object.keys(Blueprints).map((key) => {
       const cmd = Blueprints[key]
       if (typeof cmd.name === 'string' && typeof cmd.fn === 'function') {
+        cmd.shell = ShellReference
         ShellCommands[key] = new Command(cmd)
       }
     })

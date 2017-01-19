@@ -13,4 +13,12 @@ module.exports = {
     fn: args => args
   },
 
+  cd: {
+    name: 'cd',
+    type: 'builtin',
+    fn: function() {
+      console.log(this.shell)
+    }
+  }
+
 }

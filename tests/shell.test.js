@@ -18,4 +18,8 @@ describe('Shell Class', () => {
     expect(out[1]).to.equal('second')
   })
 
+  it('should have initialized the builtin command with shell reference', () => {
+    console.log(shellInstance.execute('cd'))
+  })
+
 })

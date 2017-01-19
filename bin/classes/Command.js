@@ -5,7 +5,7 @@
  * don't pass arrow function if you want to use this inside your command function to access various shared shell object
  */
 class Command {
-  constructor({ name, fn, type = 'usr', references} = {}){
+  constructor({ name, fn, type = 'usr', shell = undefined } = {}){
     if (typeof name !== 'string') throw Error('Command name must be a string')
     if (typeof fn !== 'function') throw Error('Command function must be... a function')
 
@@ -17,11 +17,8 @@ class Command {
     this.name = name
     this.type = type
 
-    /**
-     * Set Circular Reference Here in the future
-     */
-    if (Array.isArray(references)) {
-      console.log("Attaching circular references")
+    if (shell) {
+      this.shell = shell
     }
   }
 

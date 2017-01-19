@@ -6,13 +6,17 @@ const Interpreter = require('./Interpreter')
  */
 class Shell extends Interpreter{
   constructor({ filesystem, commands } = {}) {
-    super(this)
+    super()
 
     /**
      * [cwd description]
      * @type {Array}
      */
     this.cwd = ['/']
+
+    // Init builtin commands, @method in parent
+    // pass shell reference
+    this.ShellCommands = this.initBuiltinCommand(this)
   }
 
   /**
