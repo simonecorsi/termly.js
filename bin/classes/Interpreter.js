@@ -8,6 +8,8 @@ class Interpreter {
 
   exec(cmd) {
     // parse command
+    // [0] = command name
+    // [1+] = arguments
     const parsed = this.parse(cmd)
 
     // cross check if command exist
