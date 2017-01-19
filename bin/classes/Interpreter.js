@@ -2,7 +2,8 @@ const Command = require('./Command')
 
 class Interpreter {
 
-  constructor() {
+  constructor(shell) {
+    console.log(shell)
     this.ShellCommands = this.initBuiltinCommand()
   }
 
@@ -31,7 +32,7 @@ class Interpreter {
 
   /**
    * Exec Command
-   * @return string with output
+   * @return JSON String with output
    */
   exec(cmd) {
     // parse command
@@ -39,13 +40,14 @@ class Interpreter {
     // [1+] = arguments
     const parsed = this.parse(cmd)
 
-    // cross check if command exist
+    // X-check if command exist
     const command = this.ShellCommands[parsed[0]]
     if (!command) {
       return "-error shell: Command doesn't exist.\n"
     }
 
-    // execute command and return output
+    // get arguments array and
+    // execute command return error if throw
     const args = parsed.filter((e, i) => i > 0)
     let output
     try {
@@ -54,7 +56,7 @@ class Interpreter {
       return '-fatal command: Command execution produced an error.'
     }
 
-    // Format and Return
+    // Format data and Return
     return this.format(output)
   }
 

@@ -6,7 +6,7 @@ const Interpreter = require('./Interpreter')
  */
 class Shell extends Interpreter{
   constructor({ filesystem, commands } = {}) {
-    super()
+    super(this)
 
     /**
      * [cwd description]
