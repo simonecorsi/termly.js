@@ -4,7 +4,7 @@ const Command = require('../bin/classes/Command')
 describe('Command Class', () => {
   let command
   it('should init', () => {
-    command = new Command('cmd', () => {})
+    command = new Command({ name:'cmd', fn: () => {} })
     expect(command).to.exist
   })
 
@@ -25,12 +25,12 @@ describe('Command Class', () => {
 
   it('should execute the function passed', () => {
     const cmd_output = "this is the help command output"
-    const cmd = new Command('help', () => cmd_output)
+    const cmd = new Command({ name: 'help', fn: () => cmd_output})
     expect(cmd.exec()).to.equal(cmd_output)
   })
 
   it('should command function must have this binded to Command Constructor', () => {
-    const cmd = new Command('help', function() { return this instanceof Command })
+    const cmd = new Command({ name:'help', fn: function() { return this instanceof Command }})
     expect(cmd.exec()).to.equal(true)
   })
 
