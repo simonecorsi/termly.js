@@ -13,7 +13,7 @@ class Shell extends Interpreter{
   }
 
   execute(cmd) {
-
+    return this.exec(cmd)
     /**
      * Parse commands to array of args
      */
