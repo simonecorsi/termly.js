@@ -4,8 +4,9 @@
   "description": "Simple Browser Terminal in pure js for presentational purpose",
   "main": "terminal.js",
   "scripts": {
+    "test": "mocha --compilers babel-core/register tests/",
     "start": "npm run build",
-    "build": "browserify ./bin/terminal.js -o terminal.js -t [ babelify --presets [ es2015 stage-3 ] ]"
+    "build": "browserify ./bin/main.js -o dist/browser-terminal.js -t [ babelify --presets [ es2015, stage-3 ] ]"
   },
   "keywords": [
     "terminal",
@@ -30,6 +31,8 @@
     "babel-core": "^6.21.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-stage-3": "^6.17.0",
-    "babelify": "^7.3.0"
+    "babelify": "^7.3.0",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
   }
 }
