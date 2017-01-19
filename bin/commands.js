@@ -1,4 +1,4 @@
-var package = require('../package.json');
+var pkjson = require('../package.json');
 
 
 var COMMANDS = {
@@ -10,11 +10,11 @@ var COMMANDS = {
     return command_list;
   },
   about: {
-    name: package.name || '',
-    version: package.version || '',
-    author: package.author || '',
-    repository: package.repository || '',
-    license: package.license || '',
+    name: pkjson.name || '',
+    version: pkjson.version || '',
+    author: pkjson.author || '',
+    repository: pkjson.repository || '',
+    license: pkjson.license || '',
   },
   clear: function () {
     return "SGCLEAR";
