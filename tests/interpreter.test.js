@@ -8,21 +8,21 @@ describe('Interpreter Class', () => {
     expect(interpreter).to.exist
   })
 
-  it('[parseCommand] should accept only STRINGS', () => {
-    expect(interpreter.parseCommand.bind(interpreter, '')).to.throw(Error)
-    expect(interpreter.parseCommand.bind(interpreter, 123)).to.throw(Error)
-    expect(interpreter.parseCommand.bind(interpreter, {})).to.throw(Error)
-    expect(interpreter.parseCommand.bind(interpreter, [])).to.throw(Error)
-    expect(interpreter.parseCommand.bind(interpreter, () => {})).to.throw(Error)
-    expect(interpreter.parseCommand.bind(interpreter)).to.throw(Error)
+  it('[parse] should accept only STRINGS', () => {
+    expect(interpreter.parse.bind(interpreter, '')).to.throw(Error)
+    expect(interpreter.parse.bind(interpreter, 123)).to.throw(Error)
+    expect(interpreter.parse.bind(interpreter, {})).to.throw(Error)
+    expect(interpreter.parse.bind(interpreter, [])).to.throw(Error)
+    expect(interpreter.parse.bind(interpreter, () => {})).to.throw(Error)
+    expect(interpreter.parse.bind(interpreter)).to.throw(Error)
   })
 
   it('should parse a command and return an array of ARGS', () => {
-    expect(interpreter.parseCommand('command'))
+    expect(interpreter.parse('command'))
       .to.be.a('array')
       .to.have.length(1)
 
-    expect(interpreter.parseCommand('command arg1 arg2'))
+    expect(interpreter.parse('command arg1 arg2'))
       .to.be.a('array')
       .to.have.length(3)
   })

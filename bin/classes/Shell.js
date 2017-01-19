@@ -14,38 +14,6 @@ class Shell extends Interpreter{
 
   execute(cmd) {
     return this.exec(cmd)
-    /**
-     * Parse commands to array of args
-     */
-    let args
-    try {
-      args = this.parseCommand(cmd)
-    } catch (e) {
-      return {
-        state: 'error',
-        output: e.message || 'Error parsing command, Wrong input.',
-        command: cmd,
-      }
-    }
-
-    /**
-     * Send To Interpreter
-     */
-    let output
-    try {
-      this.exec(args)
-    } catch (e) {
-      return {
-        state: 'error',
-        output: e.message || 'Error executing command.',
-        command: args[0],
-        args,
-      }
-    }
-    return {
-      state: 'done',
-      output,
-    }
   }
 
 }
