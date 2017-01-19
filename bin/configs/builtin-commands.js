@@ -17,7 +17,7 @@ module.exports = {
     name: 'cd',
     type: 'builtin',
     fn: function() {
-      
+      return this.shell
     }
   }
 

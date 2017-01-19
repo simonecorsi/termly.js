@@ -19,7 +19,8 @@ describe('Shell Class', () => {
   })
 
   it('should have initialized the builtin command with shell reference', () => {
-    console.log(shellInstance.execute('cd'))
+    const cmd = Object.keys(shellInstance.ShellCommands)[0]
+    expect(shellInstance.ShellCommands[cmd].shell).to.exist
   })
 
 })

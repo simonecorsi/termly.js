@@ -31,7 +31,11 @@ class Interpreter {
     if (typeof output === 'function') {
       return '-invalid command: Command returned invalid data type.'
     }
-    return JSON.stringify(output)
+    try {
+      return JSON.stringify(output)
+    } catch (e) {
+      return '-invalid command: Command returned invalid data type: ' + e.message
+    }
   }
 
   /**
@@ -57,7 +61,7 @@ class Interpreter {
     try {
       output = command.exec(args)
     } catch (e) {
-      return '-fatal command: Command execution produced an error.'
+      return '-fatal command: Command execution produced an error ' + e.message
     }
 
     // Format data and Return
