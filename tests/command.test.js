@@ -29,6 +29,16 @@ describe('Command Class', () => {
     expect(cmd.exec()).to.equal(cmd_output)
   })
 
+  it('should execute the function when arguments are passed', () => {
+    const cmd = new Command({
+      name: 'arguments',
+      type: 'builtin',
+      fn: args => args
+    })
+    const out = cmd.exec(['first', 'second'])
+    expect(out).to.deep.equal(['first', 'second'])
+  })
+
   it('should command function must have this binded to Command Constructor', () => {
     const cmd = new Command({ name:'help', fn: function() { return this instanceof Command }})
     expect(cmd.exec()).to.equal(true)
