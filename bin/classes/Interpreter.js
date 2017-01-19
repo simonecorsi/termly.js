@@ -1,5 +1,9 @@
 class Interpreter {
 
+  constructor() {
+    this.ShellCommands = {}
+  }
+
   parse(cmd) {
     if (typeof cmd !== 'string') throw new Error('Command must be a string')
     if (!cmd.length) throw new Error('Command is empty')
@@ -23,6 +27,7 @@ class Interpreter {
   /*
    *  BUILTIN SHELL COMMANDS *
    */
+  initBuiltinCommand
 }
 
 // Object.defineProperty()
