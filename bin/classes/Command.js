@@ -10,12 +10,14 @@ class Command {
     this.fn = fn
   }
 
+  format() {}
+
   /**
    * Command Executor
    */
   exec(args = []) {
     if (typeof args !== 'undefined' && typeof args !== 'array') throw Error('Command exec args must be in an array')
-
+    return this.fn(...args)
   }
 }
 
