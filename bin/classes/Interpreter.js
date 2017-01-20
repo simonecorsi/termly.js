@@ -43,19 +43,17 @@ class Interpreter {
    * @return JSON String with output
    */
   exec(cmd) {
-    // parse command
-    // [0] = command name
-    // [1+] = arguments
+
+    //  Parse Command String: [0] = command name, [1+] = arguments
     const parsed = this.parse(cmd)
 
-    // X-check if command exist
+    //  X-check if command exist
     const command = this.ShellCommands[parsed[0]]
     if (!command) {
       return "-error shell: Command doesn't exist.\n"
     }
 
-    // get arguments array and
-    // execute command return error if throw
+    //  get arguments array and execute command return error if throw
     const args = parsed.filter((e, i) => i > 0)
     let output
     try {
@@ -64,7 +62,7 @@ class Interpreter {
       return '-fatal command: Command execution produced an error ' + e.message
     }
 
-    // Format data and Return
+    //  Format data and Return
     return this.format(output)
   }
 
@@ -84,7 +82,5 @@ class Interpreter {
     return ShellCommands
   }
 }
-
-// Object.defineProperty()
 
 module.exports = Interpreter
