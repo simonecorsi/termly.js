@@ -23,14 +23,17 @@ class Shell extends Interpreter{
     // Init builtin commands, @method in parent
     // pass shell reference
     this.ShellCommands = this.registerCommands(this)
-    this.ShellCommands = this.registerCommands(this, commands)
+    this.ShellCommands = {
+      ...this.ShellCommands,
+      ...this.registerCommands(this, commands),
+    }
   }
 
   /**
    * Pass control to Interpreter
    * @return output as [String]
    */
-  execute(cmd) {
+  run(cmd) {
     return this.exec(cmd)
   }
 

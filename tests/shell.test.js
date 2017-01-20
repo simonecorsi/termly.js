@@ -9,11 +9,11 @@ describe('Shell Class', () => {
   })
 
   it('should return error if command doesnt exist', () => {
-    expect(shellInstance.execute('test')).to.match(/-error/)
+    expect(shellInstance.run('test')).to.match(/-error/)
   })
 
   it('should run the arguments command and have all arguments parsed returned', () => {
-    const out = JSON.parse(shellInstance.execute('arguments first second'))
+    const out = JSON.parse(shellInstance.run('arguments first second'))
     expect(out[0]).to.equal('first')
     expect(out[1]).to.equal('second')
   })
@@ -37,10 +37,33 @@ describe('Shell Class', () => {
   })
 
   it('should create a shell with custom commands', () => {
-    const mock_cmds = {}
+    const mock_cmds = {
+      test: {
+        name: 'test',
+        fn: () => {
+          return 'This is a user inserted command'
+        }
+      },
+    }
     const shellInstance3 = new Shell({ commands: mock_cmds })
-    console.log(shellInstance3.ShellCommands)
-    shellInstance3.exec('test')
+    expect(shellInstance3.ShellCommands).to.exist
+    expect(shellInstance3.ShellCommands.test).to.exist
+    expect(shellInstance3.run('test')).to.equal(JSON.stringify('This is a user inserted command'))
+  })
+
+  it('should override builtin commands if user provide command with same name', () => {
+    const mock_cmds = {
+      help: {
+        name: 'help',
+        fn: () => {
+          return 'This should override the buitin help.'
+        }
+      },
+    }
+    const shellInstance4 = new Shell({ commands: mock_cmds })
+    expect(shellInstance4.ShellCommands).to.exist
+    expect(shellInstance4.ShellCommands.help).to.exist
+    expect(shellInstance4.run('help')).to.equal(JSON.stringify('This should override the buitin help.'))
   })
 
 })
