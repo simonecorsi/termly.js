@@ -10,7 +10,7 @@ class Shell extends Interpreter{
     super()
 
     /**
-     * Init Virtual FS and get reference
+     * Create the virtual filesystem
      */
     this.fs = new Filesystem(filesystem)
 
@@ -22,7 +22,8 @@ class Shell extends Interpreter{
 
     // Init builtin commands, @method in parent
     // pass shell reference
-    this.ShellCommands = this.initBuiltinCommand(this)
+    this.ShellCommands = this.registerCommands(this)
+    this.ShellCommands = this.registerCommands(this, commands)
   }
 
   /**

@@ -18,6 +18,7 @@ describe('Filesystem Class', () => {
 
   it('should have built the virtual fs', () => {
     expect(fsInstance.FileSystem).to.exist
+    expect(fsInstance.FileSystem.etc.content.apache2.content).to.be.a('object')
   })
 
   it('should create a custom filesystem when passed in costructor', () => {

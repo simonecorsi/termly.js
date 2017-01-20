@@ -69,8 +69,20 @@ class Interpreter {
   /*
    * Generate Builtin Command List
    */
-  initBuiltinCommand(ShellReference) {
-    const Blueprints = require('../configs/builtin-commands')
+  registerCommands(ShellReference, customCommands = undefined) {
+    let Blueprints = require('../configs/builtin-commands')
+    /**
+     * If custom commands are passed check for valid type
+     * If good to go generate those commands
+     */
+    if (customCommands) {
+      if (typeof customCommands === 'object' && !Array.isArray(customCommands)) {
+        Blueprints = customCommands
+      } else {
+        throw new Error('Custom command provided are not in a valid format.')
+      }
+    }
+
     const ShellCommands = {}
     Object.keys(Blueprints).map((key) => {
       const cmd = Blueprints[key]
