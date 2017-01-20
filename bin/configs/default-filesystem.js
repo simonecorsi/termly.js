@@ -1,6 +1,6 @@
 module.exports = {
 
-  file: 'Content',
+  'file.h': '#include <nope.h>',
 
   etc: {
     apache2: {
@@ -11,10 +11,17 @@ module.exports = {
   home: {
     guest: {
       docs: {
-        mydoc: 'TestFile',
-        mydoc2: 'TestFile2',
-        mydoc3: 'TestFile3',
+        'mydoc.md': 'TestFile',
+        'mydoc2.md': 'TestFile2',
+        'mydoc3.md': 'TestFile3',
       },
+    },
+  },
+
+  root:{
+    '.zshrc': 'not even close :)',
+    '.oh-my-zsh': {
+      themes: {},
     },
   },
 

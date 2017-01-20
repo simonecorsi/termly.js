@@ -29,4 +29,16 @@ describe('Filesystem Class', () => {
     expect(fsIntance2.FileSystem.dir.content).to.exist.and.to.be.a('object')
   })
 
+  it('should traverse the FS files and calling callabck on every file', () => {
+    let c = 0
+    fsInstance.fileWalker((file) => c++)
+    expect(c).to.equal(6)
+  })
+
+  it('should traverse the FS Dirs and calling callabck on every file', () => {
+    let c = 0
+    fsInstance.dirWalker((dir) => c++)
+    expect(c).to.equal(8)
+  })
+
 })

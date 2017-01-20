@@ -25,7 +25,7 @@ describe('Shell Class', () => {
 
   it('should have initialized the virtual filesystem with default and saved reference', () => {
     expect(shellInstance.fs).to.exist
-    expect(shellInstance.fs.FileSystem.file).to.exist
+    expect(shellInstance.fs.FileSystem['file.h']).to.exist
   })
 
   it('should create a custom filesystem when passed in costructor', () => {
