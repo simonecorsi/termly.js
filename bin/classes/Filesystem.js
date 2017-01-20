@@ -8,12 +8,7 @@ const File = require('./File')
 class Filesystem {
   constructor(fs = DEFAULT_FS) {
     if (typeof fs !== 'object' || Array.isArray(fs)) throw new Error('Virtual Filesystem provided not valid, initialization failed.')
-    this.FileSystem = this.initFs(fs)
-  }
-
-  initFs(fs) {
-    this.buildVirtualFs(fs)
-    return fs
+    this.FileSystem = (fs) => this.buildVirtualFs(fs)
   }
 
   buildVirtualFs(obj) {
