@@ -1,12 +1,18 @@
 const Interpreter = require('./Interpreter')
+const Filesystem = require('./Filesystem')
 
 /**
  * Shell Class inherits from Interpreter
  *
  */
 class Shell extends Interpreter{
-  constructor({ filesystem, commands } = {}) {
+  constructor({ filesystem = undefined, commands = undefined } = {}) {
     super()
+
+    /**
+     * Init Virtual FS and get reference
+     */
+    this.fs = new Filesystem(filesystem)
 
     /**
      * [cwd description]

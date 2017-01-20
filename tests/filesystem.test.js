@@ -1,7 +1,7 @@
 const { expect } = require('chai')
 const Filesystem = require('../bin/classes/Filesystem')
 
-describe.only('Filesystem Class', () => {
+describe('Filesystem Class', () => {
   let fsInstance
 
   it('should init', () => {

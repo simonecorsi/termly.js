@@ -23,4 +23,10 @@ describe('Shell Class', () => {
     expect(shellInstance.ShellCommands[cmd].shell).to.exist
   })
 
+  it('should have initialized the virtual filesystem and saved reference', () => {
+    console.log(shellInstance)
+    // const cmd = Object.keys(shellInstance.ShellCommands)[0]
+    // expect(shellInstance.ShellCommands[cmd].shell).to.exist
+  })
+
 })

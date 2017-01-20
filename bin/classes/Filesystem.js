@@ -12,9 +12,7 @@ class Filesystem {
   }
 
   initFs(fs) {
-    console.info('building virtual filesystem')
     this.buildVirtualFs(fs)
-    console.info('building virtual filesystem done!')
     return fs
   }
 
