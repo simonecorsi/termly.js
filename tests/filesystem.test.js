@@ -47,9 +47,9 @@ describe('Filesystem Class', () => {
     })
     it('should translate stringed path to an array', () => {
       expect(fsInstance.pathStringToArray('/etc/apache2')).to.eql(['/', 'etc', 'apache2'])
-      expect(fsInstance.pathStringToArray('etc/apache2')).to.eql(['etc', 'apache2'])
-      expect(fsInstance.pathStringToArray('etc/apache2/')).to.eql(['etc', 'apache2'])
-      expect(fsInstance.pathStringToArray('./etc/apache2/')).to.eql(['etc', 'apache2'])
+      expect(fsInstance.pathStringToArray('etc/apache2')).to.eql(['/', 'etc', 'apache2'])
+      expect(fsInstance.pathStringToArray('etc/apache2/')).to.eql(['/', 'etc', 'apache2'])
+      expect(fsInstance.pathStringToArray('./etc/apache2/')).to.eql(['/',  'etc', 'apache2'])
       expect(() => fsInstance.pathStringToArray('./etc//apache2/')).to.throw(Error)
     })
   })
@@ -69,6 +69,12 @@ describe('Filesystem Class', () => {
     })
     it('should throw error in deeper level too', () => {
       expect(() => fsInstance.fileWalker(['/', 'etc', 'vars'])).to.throw(Error)
+    })
+  })
+
+  describe('Bultin Change Direcotory function', () => {
+    it('should ', () => {
+      console.log(fsInstance.changeDir('/etc'))
     })
   })
 

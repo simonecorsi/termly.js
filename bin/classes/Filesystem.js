@@ -63,11 +63,21 @@ class Filesystem {
     if(pathArray[pathArray.length - 1] === '') pathArray.pop()
 
     // handle relative path with current working directory
-    if (newPath[0] !== '/') {
-      newPath.unshift('/')
+    if (pathArray[0] !== '/') {
+      pathArray = this.cwd.concat(pathArray)
     }
-
     return pathArray
+  }
+
+  /**
+   * Path from array to String
+   * For presentational purpose.
+   * TODO
+   * @param path [Array]
+   * @return {String}
+   */
+  pathArrayToString(path = []) {
+    
   }
 
   /**
@@ -78,6 +88,10 @@ class Filesystem {
    */
   fileWalker(path = ['/'], fs = this.FileSystem){
     if (!Array.isArray(path)) throw new Error('Path must be an array of nodes, use Filesystem.pathStringToArray({string})')
+
+    // Pure Func Wannabe
+    path = path.slice(0)
+    fs = Object.assign(fs, {})
 
     // Exit Condition
     if (!path.length) return fs
@@ -130,6 +144,27 @@ class Filesystem {
         }
       }
     }
+  }
+
+  /**
+   * Change Current Working Directory Gracefully
+   */
+  changeDir(path = '') {
+    let pathArray, dir
+    try {
+      pathArray = this.pathStringToArray(path)
+      dir = this.fileWalker(pathArray)
+    } catch (e) {
+      throw e
+    }
+    if (dir.type === 'file') {
+      throw new Error('Its a file not a directory')
+    }
+    if (!dir || dir.content) {
+      throw new Error('Invalid Path, doent exist')
+    }
+    this.cwd = pathArray
+    return `changed directory.`
   }
 }
 
