@@ -32,38 +32,44 @@ class Filesystem {
     }
   }
 
+  pathStringToArray(path = '') {
+    if (!path.length) throw new Error('Path cannot be empty')
+
+    // Check for invalid path, eg. two+ // in a row
+    if (path.match(/\/{2,}/g)) throw new Error(`-invalid path: ${path}`)
+
+    // Format and Composer array
+    let pathArray = path.split('/')
+    if (pathArray[0] === '') pathArray[0] = '/'
+    if (pathArray[0] === '.') pathArray.shift()
+    if(pathArray[pathArray.length - 1] === '') pathArray.pop()
+    return pathArray
+  }
+
   /**
    * Luke.. fileWalker
    * @param cb executed on each file found
    * @param fs [Shell Virtual Filesystem]
    */
   fileWalker(path = ['/'], fs = this.FileSystem){
-    if (!Array.isArray(path)) throw new Error('Path must be an array of nodes')
+    if (!Array.isArray(path)) throw new Error('Path must be an array of nodes, use Filesystem.pathStringToArray({string})')
 
     // Exit Condition
     if (!path.length) return fs
 
-    //  is a relative path
-    if (path[0].length && (path[0] !== '/' || path[0] === './')) {
+    // Get current node
+    let node = path.shift()
 
+    // Go deeper if it's not the root dir
+    if (node !== '/') {
+      // check if node exist
+      if (fs[node]) {
+        fs = fs[node].content
+      } else {
+        throw new Error('File doesn\'t exist')
+      }
     }
-
-    //  It's an absolute path
-
-    let currentNode = path.shift()
-
-    //  Root listing requested
-    if (currentNode === '/' && !path.length) {
-      return fs
-    } else {
-      fs = fs[ path[0] ]
-    }
-
-    console.log(this.FileSystem)
-
-    // Walk Again
     return this.fileWalker(path, fs)
-
   }
 
   /**

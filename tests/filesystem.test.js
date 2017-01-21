@@ -41,8 +41,36 @@ describe('Filesystem Class', () => {
     expect(c).to.equal(8)
   })
 
-  it('should filewalker', () => {
-    fsInstance.fileWalker(['/', 'etc'])
+  describe('pathStringToArray', () => {
+    it('should throw errror if no path is provided', () => {
+      expect(() => fsInstance.pathStringToArray()).to.throw(Error)
+    })
+    it('should translate stringed path to an array', () => {
+      expect(fsInstance.pathStringToArray('/etc/apache2')).to.eql(['/', 'etc', 'apache2'])
+      expect(fsInstance.pathStringToArray('etc/apache2')).to.eql(['etc', 'apache2'])
+      expect(fsInstance.pathStringToArray('etc/apache2/')).to.eql(['etc', 'apache2'])
+      expect(fsInstance.pathStringToArray('./etc/apache2/')).to.eql(['etc', 'apache2'])
+      expect(() => fsInstance.pathStringToArray('./etc//apache2/')).to.throw(Error)
+    })
   })
+
+  describe('FileWalker Filesystem function', () => {
+    it('should throw error if node dont exist', () => {
+      expect(() => fsInstance.fileWalker(['test'])).to.throw(Error)
+    })
+    it('should return root dir if no value is passed', () => {
+      expect(fsInstance.fileWalker([])).to.equal(fsInstance.FileSystem)
+    })
+    it('should return root if / passed', () => {
+      expect(fsInstance.fileWalker(['/'])).to.equal(fsInstance.FileSystem)
+    })
+    it('should walk if file is not in root', () => {
+      expect(fsInstance.fileWalker(['/', 'etc'])).to.equal(fsInstance.FileSystem.etc.content)
+    })
+    it('should throw error in deeper level too', () => {
+      expect(() => fsInstance.fileWalker(['/', 'etc', 'vars'])).to.throw(Error)
+    })
+  })
+
 
 })
