@@ -1,5 +1,6 @@
 const { expect } = require('chai')
 const Command = require('../bin/classes/Command')
+const Shell = require('../bin/classes/Shell')
 
 describe('Command Class', () => {
   let command
@@ -43,6 +44,15 @@ describe('Command Class', () => {
     const cmd = new Command({ name:'help', fn: function() { return this instanceof Command }})
     expect(cmd.exec()).to.equal(true)
   })
+})
 
+describe.only('Commands Integration Test', () => {
+  const shell = new Shell()
+  it('should change directory', () => {
+    shell.exec('cd /etc')
+    expect(shell.fs.cwd).to.eql([ '/', 'etc' ])
+  })
+
+  it('should throw error if not exist')
 
 })

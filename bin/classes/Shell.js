@@ -11,14 +11,10 @@ class Shell extends Interpreter{
 
     /**
      * Create the virtual filesystem
+     * @return reference to instance of @class Filesystem
      */
     this.fs = new Filesystem(filesystem, this)
 
-    /**
-     * Reference to Filesystem current working directory
-     * @type {Array}
-     */
-    this.cwd = this.fs.cwd
 
     // Init builtin commands, @method in parent
     // pass shell reference

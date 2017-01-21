@@ -31,6 +31,9 @@ class Interpreter {
     if (typeof output === 'function') {
       return '-invalid command: Command returned invalid data type.'
     }
+    if (output === undefined || typeof output === 'undefined') {
+      return '-invalid command: Command returned no data.'
+    }
     try {
       return JSON.stringify(output)
     } catch (e) {

@@ -9,6 +9,10 @@ class Filesystem {
   constructor(fs = DEFAULT_FS, shell = {}) {
     this.shell = shell
     if (typeof fs !== 'object' || Array.isArray(fs)) throw new Error('Virtual Filesystem provided not valid, initialization failed.')
+
+    // Not By Reference.
+    // HACK: Object assign refuse to work as intended.
+    fs = JSON.parse(JSON.stringify(fs))
     this.FileSystem = this.initFs(fs)
 
     // CWD for commands usage
@@ -77,7 +81,7 @@ class Filesystem {
    * @return {String}
    */
   pathArrayToString(path = []) {
-    
+
   }
 
   /**
@@ -150,6 +154,7 @@ class Filesystem {
    * Change Current Working Directory Gracefully
    */
   changeDir(path = '') {
+    if (typeof path !== 'string') throw new Error('Invalid input.')
     let pathArray, dir
     try {
       pathArray = this.pathStringToArray(path)

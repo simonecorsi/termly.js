@@ -73,9 +73,7 @@ describe('Filesystem Class', () => {
   })
 
   describe('Bultin Change Direcotory function', () => {
-    it('should ', () => {
-      console.log(fsInstance.changeDir('/etc'))
-    })
+    it('should DO THE TEST')
   })
 
 

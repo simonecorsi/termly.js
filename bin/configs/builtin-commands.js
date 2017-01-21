@@ -16,8 +16,9 @@ module.exports = {
   cd: {
     name: 'cd',
     type: 'builtin',
-    fn: function() {
-      return this.shell
+    fn: function(path) {
+      path = path.join()
+      return this.shell.fs.changeDir(path)
     }
   }
 
