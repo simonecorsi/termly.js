@@ -11,14 +11,25 @@ class Filesystem {
     if (typeof fs !== 'object' || Array.isArray(fs)) throw new Error('Virtual Filesystem provided not valid, initialization failed.')
     this.FileSystem = this.initFs(fs)
 
+    // CWD for commands usage
     this.cwd = ['/']
   }
 
+  /**
+   * Init & Pass Control to recurrsive function
+   * @return new Filesystem as nodes of multiple @class File
+   */
   initFs(fs) {
     this.buildVirtualFs(fs)
     return fs
   }
 
+  /**
+   * Traverse all node and build a virtual representation of a filesystem
+   * Each node is a File instance.
+   * @param Mocked Filesystem as Object
+   *
+   */
   buildVirtualFs(obj) {
     for (let key in obj) {
       if (obj.hasOwnProperty(key)) {
@@ -32,6 +43,13 @@ class Filesystem {
     }
   }
 
+  /**
+   * Get a stringed path and return as array
+   * throw error if path format is invalid
+   * Relative Path gets converted using Current Working Directory
+   * @param path {String}
+   * @return Array
+   */
   pathStringToArray(path = '') {
     if (!path.length) throw new Error('Path cannot be empty')
 
@@ -43,11 +61,18 @@ class Filesystem {
     if (pathArray[0] === '') pathArray[0] = '/'
     if (pathArray[0] === '.') pathArray.shift()
     if(pathArray[pathArray.length - 1] === '') pathArray.pop()
+
+    // handle relative path with current working directory
+    if (newPath[0] !== '/') {
+      newPath.unshift('/')
+    }
+
     return pathArray
   }
 
   /**
    * Luke.. fileWalker
+   * Accepts only Absolute Path, you must convert paths before calling using pathStringToArray
    * @param cb executed on each file found
    * @param fs [Shell Virtual Filesystem]
    */
