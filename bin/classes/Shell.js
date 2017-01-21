@@ -12,13 +12,13 @@ class Shell extends Interpreter{
     /**
      * Create the virtual filesystem
      */
-    this.fs = new Filesystem(filesystem)
+    this.fs = new Filesystem(filesystem, this)
 
     /**
-     * [cwd description]
+     * Reference to Filesystem current working directory
      * @type {Array}
      */
-    this.cwd = ['/']
+    this.cwd = this.fs.cwd
 
     // Init builtin commands, @method in parent
     // pass shell reference

@@ -6,9 +6,17 @@ const File = require('./File')
  * Represented as an object of nodes
  */
 class Filesystem {
-  constructor(fs = DEFAULT_FS) {
+  constructor(fs = DEFAULT_FS, shell = {}) {
+    this.shell = shell
     if (typeof fs !== 'object' || Array.isArray(fs)) throw new Error('Virtual Filesystem provided not valid, initialization failed.')
-    this.FileSystem = (fs) => this.buildVirtualFs(fs)
+    this.FileSystem = this.initFs(fs)
+
+    this.cwd = ['/']
+  }
+
+  initFs(fs) {
+    this.buildVirtualFs(fs)
+    return fs
   }
 
   buildVirtualFs(obj) {
@@ -26,33 +34,68 @@ class Filesystem {
 
   /**
    * Luke.. fileWalker
+   * @param cb executed on each file found
+   * @param fs [Shell Virtual Filesystem]
+   */
+  fileWalker(path = ['/'], fs = this.FileSystem){
+    if (!Array.isArray(path)) throw new Error('Path must be an array of nodes')
+
+    // Exit Condition
+    if (!path.length) return fs
+
+    //  is a relative path
+    if (path[0].length && (path[0] !== '/' || path[0] === './')) {
+
+    }
+
+    //  It's an absolute path
+
+    let currentNode = path.shift()
+
+    //  Root listing requested
+    if (currentNode === '/' && !path.length) {
+      return fs
+    } else {
+      fs = fs[ path[0] ]
+    }
+
+    console.log(this.FileSystem)
+
+    // Walk Again
+    return this.fileWalker(path, fs)
+
+  }
+
+  /**
+   * traverseFiles
    * accessing all file at least once
    * calling provided callback on each
    * @param cb executed on each file found
    * @param fs [Shell Virtual Filesystem]
    */
-  fileWalker(cb = ()=>{}, fs = this.FileSystem){
+  traverseFiles(cb = ()=>{}, fs = this.FileSystem){
+    const self = this.traverseFiles
     for (let node in fs) {
       if (fs.hasOwnProperty(node)) {
-        if (fs[node].type === 'dir') this.fileWalker(cb, fs[node].content)
+        if (fs[node].type === 'dir') this.traverseFiles(cb, fs[node].content)
         else cb(fs[node])
       }
     }
   }
 
   /**
-   * Dir Walker
+   * traverseDirs
    * accessing all directory at least once
    * calling provided callback on each
    * @param cb executed on each file found
    * @param fs [Shell Virtual Filesystem]
    */
-  dirWalker(cb = ()=>{}, fs = this.FileSystem){
+  traverseDirs(cb = ()=>{}, fs = this.FileSystem){
     for (let node in fs) {
       if (fs.hasOwnProperty(node)) {
         if (fs[node].type === 'dir') {
           cb(fs[node])
-          this.dirWalker(cb, fs[node].content)
+          this.traverseDirs(cb, fs[node].content)
         }
       }
     }

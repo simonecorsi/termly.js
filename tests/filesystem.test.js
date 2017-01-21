@@ -31,14 +31,18 @@ describe('Filesystem Class', () => {
 
   it('should traverse the FS files and calling callabck on every file', () => {
     let c = 0
-    fsInstance.fileWalker((file) => c++)
+    fsInstance.traverseFiles((file) => c++, undefined)
     expect(c).to.equal(6)
   })
 
   it('should traverse the FS Dirs and calling callabck on every file', () => {
     let c = 0
-    fsInstance.dirWalker((dir) => c++)
+    fsInstance.traverseDirs((dir) => c++)
     expect(c).to.equal(8)
+  })
+
+  it('should filewalker', () => {
+    fsInstance.fileWalker(['/', 'etc'])
   })
 
 })
