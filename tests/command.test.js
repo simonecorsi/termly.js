@@ -53,6 +53,8 @@ describe.only('Commands Integration Test', () => {
     expect(shell.fs.cwd).to.eql([ '/', 'etc' ])
   })
 
-  it('should throw error if not exist')
+  it('should throw error if not exist', () => {
+    expect(shell.exec('cd /dontexist')).to.match(/File doesn\'t exist/)
+  })
 
 })

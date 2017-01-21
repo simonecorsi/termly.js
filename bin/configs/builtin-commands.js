@@ -18,7 +18,11 @@ module.exports = {
     type: 'builtin',
     fn: function(path) {
       path = path.join()
-      return this.shell.fs.changeDir(path)
+      try{
+        return this.shell.fs.changeDir(path)
+      } catch(e) {
+        throw e
+      }
     }
   }
 
