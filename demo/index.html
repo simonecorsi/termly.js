@@ -31,21 +31,25 @@
   </style>
 </head>
 <body>
-
-  <pre>
+<div id="terminal_container">
+<pre>
 Welcome to browser-terminal.js
-  * Type help for list of commands
-  *
-  * still WIP
-  *
-  * Unix terminal simulator for presentational purposes
-  * can be extended with custom commands & filesystem
-  * with some work even with http requests.
-  *
-  * source:
-  * <a href="https://github.com/Kirkhammetz/browser-terminal.js" style="color:white !important; text-decoration:none;">https://github.com/Kirkhammetz/browser-terminal.js</a>
-  </pre>
-  <div id="terminal_container"></div>
+* Type help for list of commands
+*
+* still WIP
+*
+* Unix terminal simulator for presentational purposes
+* can be extended with custom commands & filesystem
+* with some work even with http requests.
+*
+* source:
+* <a href="https://github.com/Kirkhammetz/browser-terminal.js" style="color:white !important; text-decoration:none;">https://github.com/Kirkhammetz/browser-terminal.js</a>
+</pre>
+  <div class="current terminal_row">
+    <span class="terminal_info">guest@terminal.simonecorsi.me➜</span>
+    <input type="text" class="terminal_input" size="1" style="cursor:none;">
+  </div>
+</div>
   <script src="../dist/index.js" charset="utf-8"></script>
   <!-- <script type="text/javascript">
     var custom_commands = {

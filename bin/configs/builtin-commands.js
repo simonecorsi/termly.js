@@ -12,6 +12,14 @@ module.exports = {
     }
   },
 
+  whoami: {
+    name: 'whoami',
+    type: 'builtin',
+    fn: function() {
+      return this.shell.user
+    },
+  },
+
   /**
    * Return passed arguments, for testing purposes
    */
@@ -23,7 +31,7 @@ module.exports = {
 
   /**
    * Change Directory
-   * @type Success/Fail Message String
+   * @return Success/Fail Message String
    */
   cd: {
     name: 'cd',
@@ -43,7 +51,7 @@ module.exports = {
    * ls Command
    * List directory files
    * @param array of args
-   * @type formatted String
+   * @return formatted String
    */
   ls: {
     name: 'ls',
@@ -63,7 +71,31 @@ module.exports = {
       }
       return responseString
     }
+  },
 
+  /**
+   * CAT Command
+   * Read File
+   * @return formatted String
+   */
+  ls: {
+    name: 'ls',
+    type: 'builtin',
+    fn: function(path = ['./']) {
+      path = path.join()
+      let list, responseString = ''
+      try{
+        list = this.shell.fs.listDir(path)
+      } catch(e) {
+        throw e
+      }
+      for (let file in list) {
+        if (list.hasOwnProperty(file)) {
+          responseString += `${list[file].permission}\t${list[file].user} ${list[file].group}\t${list[file].name}\n`
+        }
+      }
+      return responseString
+    }
   },
 
 }

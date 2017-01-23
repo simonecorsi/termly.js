@@ -5,7 +5,7 @@
   "main": "terminal.js",
   "scripts": {
     "test": "mocha --compilers babel-core/register tests/",
-    "start": "npm run build",
+    "start": "npm run build:dev",
     "build": "browserify ./bin -o dist/browser-terminal.js -t [ babelify --presets [ es2015, stage-3 ] ]",
     "build:prod": "gulp browserify-production",
     "build:dev": "gulp browserify",

@@ -161,7 +161,7 @@ class Filesystem {
    * depend by a line in @method fileWalker, see comment there.
    * @return Directory Node Object
    */
-  getNode(path = '') {
+  getNode(path = '', fileType) {
     if (typeof path !== 'string') throw new Error('Invalid input.')
     let pathArray, node
     try {
@@ -170,8 +170,11 @@ class Filesystem {
     } catch (e) {
       throw e
     }
-    if (node.type === 'file') {
+    if (fileType === 'dir' && node.type === 'file') {
       throw new Error('Its a file not a directory')
+    }
+    if (fileType === 'file' && node.type === 'dir') {
+      throw new Error('Its a directory not a file')
     }
     if (!node || node.content) {
       throw new Error('Invalid Path, doent exist')
@@ -186,7 +189,7 @@ class Filesystem {
   changeDir(path = '') {
     let result
     try {
-      result = this.getNode(path)
+      result = this.getNode(path, 'dir')
     } catch (err) {
       throw err
     }
@@ -201,7 +204,7 @@ class Filesystem {
   listDir(path = '') {
     let result
     try {
-      result = this.getNode(path)
+      result = this.getNode(path, 'dir')
     } catch (err) {
       throw err
     }

@@ -6,7 +6,7 @@ const Filesystem = require('./Filesystem')
  *
  */
 class Shell extends Interpreter{
-  constructor({ filesystem = undefined, commands = undefined } = {}) {
+  constructor({ filesystem = undefined, commands = undefined, user = 'root' } = {}) {
     super()
 
     /**
@@ -14,7 +14,7 @@ class Shell extends Interpreter{
      * @return reference to instance of @class Filesystem
      */
     this.fs = new Filesystem(filesystem, this)
-
+    this.user = user
 
     // Init builtin commands, @method in parent
     // pass shell reference
@@ -32,7 +32,9 @@ class Shell extends Interpreter{
   run(cmd) {
     return this.exec(cmd)
   }
-
 }
+
+Object.defineProperty(Shell.prototype, 'fs', { writable: true, enumerable: false })
+Object.defineProperty(Shell.prototype, 'ShellCommands', { writable: true, enumerable: false })
 
 module.exports = Shell
