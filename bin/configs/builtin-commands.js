@@ -78,22 +78,18 @@ module.exports = {
    * Read File
    * @return formatted String
    */
-  ls: {
-    name: 'ls',
+  cat: {
+    name: 'cat',
     type: 'builtin',
     fn: function(path = ['./']) {
       path = path.join()
       let list, responseString = ''
       try{
-        list = this.shell.fs.listDir(path)
+        file = this.shell.fs.readFile(path)
       } catch(e) {
         throw e
       }
-      for (let file in list) {
-        if (list.hasOwnProperty(file)) {
-          responseString += `${list[file].permission}\t${list[file].user} ${list[file].group}\t${list[file].name}\n`
-        }
-      }
+      console.log(file)
       return responseString
     }
   },

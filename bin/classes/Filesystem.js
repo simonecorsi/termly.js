@@ -216,6 +216,16 @@ class Filesystem {
     return result.node
   }
 
+  readFile(path = '') {
+    let result
+    try {
+      result = this.getNode(path, 'file')
+    } catch (err) {
+      throw err
+    }
+    return result.node
+  }
+
   getCurrentDirectory() {
     let cwdAsString
     try {
