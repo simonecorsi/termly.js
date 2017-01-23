@@ -72,8 +72,17 @@ describe('Filesystem Class', () => {
     })
   })
 
-  describe('Bultin Change Direcotory function', () => {
-    it('should DO THE TEST')
+  describe('Bultin Change Directory function', () => {
+    it('should change the current working directory', () => {
+      fsInstance.changeDir('/etc')
+      expect(fsInstance.cwd).to.eql(['/', 'etc'])
+    })
+    it('should throw error if invalid path', () => {
+      expect(() => fsInstance.changeDir('///etc')).to.throw(Error).to.match(/invalid/)
+    })
+    it('should throw error if path not exist', () => {
+      expect(() => fsInstance.changeDir('/etc/idontexist')).to.throw(Error).to.match(/exist/)
+    })
   })
 
 

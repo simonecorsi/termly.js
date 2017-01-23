@@ -46,7 +46,7 @@ describe('Command Class', () => {
   })
 })
 
-describe.only('Commands Integration Test', () => {
+describe('Change Directory Integration Test', () => {
   const shell = new Shell()
   it('should change directory', () => {
     shell.exec('cd /etc')
@@ -57,4 +57,12 @@ describe.only('Commands Integration Test', () => {
     expect(shell.exec('cd /dontexist')).to.match(/File doesn\'t exist/)
   })
 
+  it('should throw error if invalid', () => {
+    expect(shell.exec('cd ///dontexist')).to.match(/invalid/)
+  })
+
+  it('should have changed current working dir', () => {
+    shell.exec('cd /etc')
+    expect(shell.fs.cwd).to.eql(['/', 'etc'])
+  })
 })
