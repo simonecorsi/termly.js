@@ -13,7 +13,7 @@ describe('Shell Class', () => {
   })
 
   it('should run the arguments command and have all arguments parsed returned', () => {
-    const out = JSON.parse(shellInstance.run('arguments first second'))
+    const out = shellInstance.run('arguments first second')
     expect(out[0]).to.equal('first')
     expect(out[1]).to.equal('second')
   })
@@ -48,7 +48,7 @@ describe('Shell Class', () => {
     const shellInstance3 = new Shell({ commands: mock_cmds })
     expect(shellInstance3.ShellCommands).to.exist
     expect(shellInstance3.ShellCommands.test).to.exist
-    expect(shellInstance3.run('test')).to.equal(JSON.stringify('This is a user inserted command'))
+    expect(shellInstance3.run('test')).to.equal('This is a user inserted command')
   })
 
   it('should override builtin commands if user provide command with same name', () => {
@@ -63,7 +63,7 @@ describe('Shell Class', () => {
     const shellInstance4 = new Shell({ commands: mock_cmds })
     expect(shellInstance4.ShellCommands).to.exist
     expect(shellInstance4.ShellCommands.help).to.exist
-    expect(shellInstance4.run('help')).to.equal(JSON.stringify('This should override the buitin help.'))
+    expect(shellInstance4.run('help')).to.equal('This should override the buitin help.')
   })
 
 })

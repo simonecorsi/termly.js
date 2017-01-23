@@ -46,6 +46,10 @@ describe('Command Class', () => {
   })
 })
 
+/**
+ * CD COMMAND
+ * @type {Command}
+ */
 describe('Change Directory Integration Test', () => {
   const shell = new Shell()
   it('should change directory', () => {
@@ -64,5 +68,27 @@ describe('Change Directory Integration Test', () => {
   it('should have changed current working dir', () => {
     shell.exec('cd /etc')
     expect(shell.fs.cwd).to.eql(['/', 'etc'])
+  })
+})
+
+/**
+ * LS COMMAND
+ * @type {Command}
+ */
+describe('List Directory Integration Test', () => {
+  const shell = new Shell()
+  it('should list directory', () => {
+    expect(shell.exec('ls /etc')).to.match(/drwxr-xr-x\troot root\tapache2/g)
+  })
+  it('should list nested directory', () => {
+    expect(shell.exec('ls /home/guest/docs')).to.have.length.above(15)
+    expect(() => shell.exec('ls /home/guest/docs')).to.not.throw(Error).to.be.a('string')
+  })
+  it('should throw error if not exist', () => {
+    expect(shell.exec('ls /dontexist')).to.match(/File doesn\'t exist/)
+  })
+
+  it('should throw error if invalid', () => {
+    expect(shell.exec('ls ///dontexist')).to.match(/invalid/)
   })
 })

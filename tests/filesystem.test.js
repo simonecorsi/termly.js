@@ -72,15 +72,20 @@ describe('Filesystem Class', () => {
     })
   })
 
-  describe('getNodeReference function', () => {
+  describe('getNode function', () => {
+    it('should throw error if invalid value is passed, only string accepted', () => {
+      expect(() => fsInstance.getNode([])).to.throw(Error)
+    })
     it('should throw error if invalid path', () => {
-      expect(() => fsInstance.getNodeReference('//etc')).to.throw(Error)
+      expect(() => fsInstance.getNode('//etc')).to.throw(Error)
     })
     it('should throw error if path dont exist', () => {
-      expect(() => fsInstance.getNodeReference('/notexist')).to.throw(Error)
+      expect(() => fsInstance.getNode('/notexist')).to.throw(Error)
     })
     it('should work and return path as array and dir node reference', () => {
-      // fsInstance.getNodeReference()
+      expect(fsInstance.getNode('/etc')).to.exist.to.have.property('node')
+      expect(fsInstance.getNode('/etc')).to.exist.to.have.property('path')
+      expect(fsInstance.getNode('/etc')).to.exist.to.have.property('pathArray')
     })
   })
 
@@ -94,6 +99,18 @@ describe('Filesystem Class', () => {
     })
     it('should throw error if path not exist', () => {
       expect(() => fsInstance.changeDir('/etc/idontexist')).to.throw(Error).to.match(/exist/)
+    })
+  })
+
+  describe('Bultin List Directory function', () => {
+    it('should throw error if invalid path', () => {
+      expect(() => fsInstance.listDir('///etc')).to.throw(Error).to.match(/invalid/)
+    })
+    it('should throw error if path not exist', () => {
+      expect(() => fsInstance.listDir('/etc/idontexist')).to.throw(Error).to.match(/exist/)
+    })
+    it('should list the current working directory', () => {
+      expect(fsInstance.listDir('/etc')).to.exist.to.be.a('object').to.have.property('apache2')
     })
   })
 

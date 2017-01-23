@@ -93,9 +93,14 @@ class Filesystem {
   fileWalker(path = ['/'], fs = this.FileSystem){
     if (!Array.isArray(path)) throw new Error('Path must be an array of nodes, use Filesystem.pathStringToArray({string})')
 
-    // Pure Func Wannabe
+    // avoid modifying external path reference
     path = path.slice(0)
-    fs = Object.assign(fs, {})
+
+    // TODO:
+    //  Choose:
+    //    - Go full pure
+    //    - Work on the reference of the actual node
+    // fs = Object.assign(fs, {})
 
     // Exit Condition
     if (!path.length) return fs
@@ -151,48 +156,58 @@ class Filesystem {
   }
 
   /**
-   * Get Directory Node Reference
-   * @return Directory Node Referenced Object
+   * Get Directory Node
+   * Passed as Reference or Instance,
+   * depend by a line in @method fileWalker, see comment there.
+   * @return Directory Node Object
    */
-  getNodeReference(path = '') {
+  getNode(path = '') {
     if (typeof path !== 'string') throw new Error('Invalid input.')
-    let pathArray, dir
+    let pathArray, node
     try {
       pathArray = this.pathStringToArray(path)
-      dir = this.fileWalker(pathArray)
+      node = this.fileWalker(pathArray)
     } catch (e) {
       throw e
     }
-    if (dir.type === 'file') {
+    if (node.type === 'file') {
       throw new Error('Its a file not a directory')
     }
-    if (!dir || dir.content) {
+    if (!node || node.content) {
       throw new Error('Invalid Path, doent exist')
     }
-    return { path, pathArray , dir }
+    return { path, pathArray , node }
   }
 
   /**
    * Change Current Working Directory Gracefully
+   * @return Message String.
    */
   changeDir(path = '') {
-    if (typeof path !== 'string') throw new Error('Invalid input.')
-    let pathArray, dir
+    let result
     try {
-      pathArray = this.pathStringToArray(path)
-      dir = this.fileWalker(pathArray)
-    } catch (e) {
-      throw e
+      result = this.getNode(path)
+    } catch (err) {
+      throw err
     }
-    if (dir.type === 'file') {
-      throw new Error('Its a file not a directory')
-    }
-    if (!dir || dir.content) {
-      throw new Error('Invalid Path, doent exist')
-    }
-    this.cwd = pathArray
+    this.cwd = result.pathArray
     return `changed directory.`
   }
+
+  /**
+   * List Current Working Directory Files
+   * @return {}
+   */
+  listDir(path = '') {
+    let result
+    try {
+      result = this.getNode(path)
+    } catch (err) {
+      throw err
+    }
+    return result.node
+  }
+
 }
 
 module.exports = Filesystem

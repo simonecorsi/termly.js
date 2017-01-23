@@ -34,11 +34,12 @@ class Interpreter {
     if (output === undefined || typeof output === 'undefined') {
       return '-invalid command: Command returned no data.'
     }
-    try {
-      return JSON.stringify(output)
-    } catch (e) {
-      return '-invalid command: Command returned invalid data type: ' + e.message
-    }
+    return output
+    // try {
+    //   return JSON.stringify(output)
+    // } catch (e) {
+    //   return '-invalid command: Command returned invalid data type: ' + e.message
+    // }
   }
 
   /**

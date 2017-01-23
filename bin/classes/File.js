@@ -8,6 +8,8 @@ class File {
     this.name = name
     this.type = type
     this.content = content
+    this.user = 'root'
+    this.group = 'root'
 
     if (this.type === 'file') {
       this.permission = 'rwxr--r--'
