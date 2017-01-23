@@ -72,6 +72,18 @@ describe('Filesystem Class', () => {
     })
   })
 
+  describe('getNodeReference function', () => {
+    it('should throw error if invalid path', () => {
+      expect(() => fsInstance.getNodeReference('//etc')).to.throw(Error)
+    })
+    it('should throw error if path dont exist', () => {
+      expect(() => fsInstance.getNodeReference('/notexist')).to.throw(Error)
+    })
+    it('should work and return path as array and dir node reference', () => {
+      // fsInstance.getNodeReference()
+    })
+  })
+
   describe('Bultin Change Directory function', () => {
     it('should change the current working directory', () => {
       fsInstance.changeDir('/etc')

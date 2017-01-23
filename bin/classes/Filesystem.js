@@ -151,6 +151,28 @@ class Filesystem {
   }
 
   /**
+   * Get Directory Node Reference
+   * @return Directory Node Referenced Object
+   */
+  getNodeReference(path = '') {
+    if (typeof path !== 'string') throw new Error('Invalid input.')
+    let pathArray, dir
+    try {
+      pathArray = this.pathStringToArray(path)
+      dir = this.fileWalker(pathArray)
+    } catch (e) {
+      throw e
+    }
+    if (dir.type === 'file') {
+      throw new Error('Its a file not a directory')
+    }
+    if (!dir || dir.content) {
+      throw new Error('Invalid Path, doent exist')
+    }
+    return { path, pathArray , dir }
+  }
+
+  /**
    * Change Current Working Directory Gracefully
    */
   changeDir(path = '') {

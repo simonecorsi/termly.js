@@ -26,4 +26,17 @@ module.exports = {
     }
   }
 
+  ls: {
+    name: 'ls',
+    type: 'builtin',
+    fn: function(path) {
+      path = path.join()
+      try{
+        return this.shell.fs.changeDir(path)
+      } catch(e) {
+        throw e
+      }
+    }
+  }
+
 }
