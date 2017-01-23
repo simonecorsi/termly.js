@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <title>BrowserTerminalSimulator.js</title>
   <style>
+    *{
+      font-size: 12px !important;
+    }
     body{
       background: #333;
       color: white;
@@ -34,52 +37,53 @@
   </style>
 </head>
 <body>
-<div id="terminal-container">
-<pre>
-Welcome to browser-terminal.js
-* Type help for list of commands
-*
-* still WIP
-*
-* Unix terminal simulator for presentational purposes
-* can be extended with custom commands & filesystem
-* with some work even with http requests.
-*
-* source:
-* <a href="https://github.com/Kirkhammetz/browser-terminal.js" style="color:white !important; text-decoration:none;">https://github.com/Kirkhammetz/browser-terminal.js</a>
-</pre>
-</div>
+  <div id="terminal-container">
+    <section id="header">
+      <h1>Welcome to browser-terminal.js</h1>
+      <h2>Simple Vanilla Javascript Terminal Emulator, with no depency.</h2>
+      <p>- Why? If you need to simulate a CLI tool on you documentation and you want to make it interactive</p>
+      <p>- You just want to play around</p>
+      <p>- You want a base to start with without reinventing the wheel.</p>
+      <p>It's simple, it's extensible, it's lightwell</p>
+      * Type help for list of commands<br>
+      * Type man &lt;command&gt; for list of commands<br>
+      *<br>
+      * v2.0<br>
+      * Breaking Changes! ReadMe on <a href="https://github.com/Kirkhammetz/browser-terminal.js" style="color:white !important; text-decoration:none;">Github</a><br>
+      *<br>
+      * can be extended with custom commands &amp; filesystem<br>
+      * with some work even with http requests.<br>
+      *<br>
+      * source:<br>
+      * <a href="https://github.com/Kirkhammetz/browser-terminal.js" style="color:white !important; text-decoration:none;">https://github.com/Kirkhammetz/browser-terminal.js</a>
+      <br>
+      *
+    </section>
+  </div>
   <script src="js/browser-terminal.min.js" charset="utf-8"></script>
   <script>
-  // * Options:
-  // *  - filesystem {Object}
-  // *  - commands {Object}
-  // *  - user {String}
-  // *  - hostname {String}
-  // */
     var terminal = new Terminal('#terminal-container', {
       hostname: 'myTest',
-      user: 'testUser'
+      user: 'testUser',
+      // filesystem: {
+      //   my_folder: {
+      //     my_sub_folder: {
+      //       my_file: 'Some Content',
+      //       some_list: ['hi', 'there'],
+      //     },
+      //   },
+      // },
+      commands: {
+        hostname: {
+          name: 'hostname',
+          man: 'Change hostname, take one params the new hostname',
+          fn: function(args) {
+            if (!args || !args[0]) throw new Error('You have to pass a new hostname')
+            return `hostname changed: ${this.shell.hostname = args[0]}`
+          }
+        }
+      }
     })
   </script>
-
-  <!-- <script type="text/javascript">
-    var custom_commands = {
-      custom: "CUSTOM!!!",
-      help: "HELP!",
-    }
-    var custom_filesystem = {
-        "file": "Im a file",
-        "etc": {
-          "file2": "file"
-        },
-        "var": {
-          www: {},
-          "file2": "file"
-        },
-        "array": [1,2,3]
-    }
-    Terminal.init( document.getElementById('terminal_container'), custom_commands, custom_filesystem );
-  </script> -->
 </body>
 </html>
