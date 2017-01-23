@@ -46,49 +46,69 @@ describe('Command Class', () => {
   })
 })
 
-/**
- * CD COMMAND
- * @type {Command}
- */
-describe('Change Directory Integration Test', () => {
-  const shell = new Shell()
-  it('should change directory', () => {
-    shell.exec('cd /etc')
-    expect(shell.fs.cwd).to.eql([ '/', 'etc' ])
+describe('Built-in commands tests', () => {
+  /**
+   * Help
+   * @type Command
+   */
+  describe.only('Help Command', () => {
+    const shell = new Shell()
+    it('should return list of commands', () => {
+      console.log(shell.exec('help'))
+    })
   })
 
-  it('should throw error if not exist', () => {
-    expect(shell.exec('cd /dontexist')).to.match(/File doesn\'t exist/)
+  /**
+  * CD COMMAND
+  * @type {Command}
+  */
+  describe('Change Directory Integration Test', () => {
+    const shell = new Shell()
+    it('should change directory', () => {
+      shell.exec('cd /etc')
+      expect(shell.fs.cwd).to.eql([ '/', 'etc' ])
+    })
+
+    it('should throw error if no path provided', () => {
+      expect(shell.exec('cd')).to.match(/invalid/)
+    })
+
+    it('should throw error if not exist', () => {
+      expect(shell.exec('cd /dontexist')).to.match(/File doesn\'t exist/)
+    })
+
+    it('should throw error if invalid', () => {
+      expect(shell.exec('cd ///dontexist')).to.match(/invalid/)
+    })
+
+    it('should have changed current working dir', () => {
+      shell.exec('cd /etc')
+      expect(shell.fs.cwd).to.eql(['/', 'etc'])
+    })
   })
 
-  it('should throw error if invalid', () => {
-    expect(shell.exec('cd ///dontexist')).to.match(/invalid/)
-  })
+  /**
+  * LS COMMAND
+  * @type {Command}
+  */
+  describe('List Directory Integration Test', () => {
+    const shell = new Shell()
+    it('should list directory', () => {
+      expect(shell.exec('ls /etc')).to.match(/drwxr-xr-x\troot root\tapache2/g)
+    })
+    it('should list current dir if no args passed', () => {
+      expect(shell.exec('ls')).to.have.length.above(15)
+    })
+    it('should list nested directory', () => {
+      expect(shell.exec('ls /home/guest/docs')).to.have.length.above(15)
+      expect(() => shell.exec('ls /home/guest/docs')).to.not.throw(Error).to.be.a('string')
+    })
+    it('should throw error if not exist', () => {
+      expect(shell.exec('ls /dontexist')).to.match(/File doesn\'t exist/)
+    })
 
-  it('should have changed current working dir', () => {
-    shell.exec('cd /etc')
-    expect(shell.fs.cwd).to.eql(['/', 'etc'])
-  })
-})
-
-/**
- * LS COMMAND
- * @type {Command}
- */
-describe('List Directory Integration Test', () => {
-  const shell = new Shell()
-  it('should list directory', () => {
-    expect(shell.exec('ls /etc')).to.match(/drwxr-xr-x\troot root\tapache2/g)
-  })
-  it('should list nested directory', () => {
-    expect(shell.exec('ls /home/guest/docs')).to.have.length.above(15)
-    expect(() => shell.exec('ls /home/guest/docs')).to.not.throw(Error).to.be.a('string')
-  })
-  it('should throw error if not exist', () => {
-    expect(shell.exec('ls /dontexist')).to.match(/File doesn\'t exist/)
-  })
-
-  it('should throw error if invalid', () => {
-    expect(shell.exec('ls ///dontexist')).to.match(/invalid/)
+    it('should throw error if invalid', () => {
+      expect(shell.exec('ls ///dontexist')).to.match(/invalid/)
+    })
   })
 })

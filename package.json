@@ -1,7 +1,7 @@
 {
   "name": "browser-terminal.js",
   "version": "0.2.6",
-  "description": "Simple Browser Terminal in pure js for presentational purpose",
+  "description": "Simple Browser Terminal in pure js, usable for web presentation of CLI tools and whatever you want it to do!",
   "main": "terminal.js",
   "scripts": {
     "test": "mocha --compilers babel-core/register tests/",

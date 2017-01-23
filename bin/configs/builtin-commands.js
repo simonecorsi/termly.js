@@ -1,13 +1,14 @@
 module.exports = {
 
   /**
-   * Return Help Message
+   * Help
+   * @return List of commands
    */
   help: {
     name: 'help',
     type: 'builtin',
-    fn: () => {
-      return 'This is the help.'
+    fn: function() {
+      return `Commands avaibles: ${Object.keys(this.shell.ShellCommands).join(', ')}`
     }
   },
 
@@ -28,6 +29,7 @@ module.exports = {
     name: 'cd',
     type: 'builtin',
     fn: function(path) {
+      if (!path) throw new Error('-invalid No path provided.')
       path = path.join()
       try{
         return this.shell.fs.changeDir(path)
@@ -40,12 +42,13 @@ module.exports = {
   /**
    * ls Command
    * List directory files
+   * @param array of args
    * @type formatted String
    */
   ls: {
     name: 'ls',
     type: 'builtin',
-    fn: function(path) {
+    fn: function(path = ['./'] ) {
       path = path.join()
       let list, responseString = ''
       try{
