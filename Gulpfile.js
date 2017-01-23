@@ -1,21 +1,21 @@
-var gulp = require('gulp')
+let gulp = require('gulp')
 
-var browserify = require('browserify')
-var watchify = require('watchify')
-var babelify = require('babelify')
+let browserify = require('browserify')
+let watchify = require('watchify')
+let babelify = require('babelify')
 
-var source = require('vinyl-source-stream')
-var buffer = require('vinyl-buffer')
-var merge = require('utils-merge')
+let source = require('vinyl-source-stream')
+let buffer = require('vinyl-buffer')
+let merge = require('utils-merge')
 
-var rename = require('gulp-rename')
-var uglify = require('gulp-uglify')
-var sourcemaps = require('gulp-sourcemaps')
+let rename = require('gulp-rename')
+let uglify = require('gulp-uglify')
+let sourcemaps = require('gulp-sourcemaps')
 
 
 /* nicer browserify errors */
-var gutil = require('gulp-util')
-var chalk = require('chalk')
+let gutil = require('gulp-util')
+let chalk = require('chalk')
 
 function map_error(err) {
   if (err.fileName) {
@@ -40,48 +40,49 @@ function map_error(err) {
 
   this.end()
 }
-/* */
 
-gulp.task('watchify', function () {
-  var args = merge(watchify.args, { debug: true })
-  var bundler = watchify(browserify('./bin/index.js', args)).transform(babelify, { /* opts */ })
-  bundle_js(bundler)
-
-  bundler.on('update', function () {
-    bundle_js(bundler)
-  })
-})
-
-function bundle_js(bundler) {
+function developBundler(bundler, name) {
   return bundler.bundle()
     .on('error', map_error)
-    .pipe(source('index.js'))
+    .pipe(source(name + '.js'))
     .pipe(buffer())
-    .pipe(gulp.dest('dist/'))
-    .pipe(rename('browser-terminal.min.js'))
+    .pipe(gulp.dest('./demo/js/'))
+    .pipe(rename(name + '.min.js'))
     .pipe(sourcemaps.init({ loadMaps: true }))
       // capture sourcemaps from transforms
       .pipe(uglify())
     .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('./demo/js/'))
+}
+function bundleProduction(bundler, name) {
+  return bundler.bundle()
+    .on('error', map_error)
+    .pipe(source('./bin/' + name + '.js'))
+    .pipe(buffer())
+    .pipe(rename(name + '.min.js'))
+    .pipe(uglify())
     .pipe(gulp.dest('dist/'))
 }
 
-// Without watchify
-gulp.task('browserify', function () {
-  var bundler = browserify('./bin/index.js', { debug: true }).transform(babelify, {/* options */ })
 
-  return bundle_js(bundler)
+gulp.task('shell', function () {
+  let bundler = browserify('./bin/browser-shell.js', { debug: true }).transform(babelify, {/* options */ })
+  return developBundler(bundler, 'browser-shell')
+})
+
+gulp.task('terminal', function () {
+  let bundler = browserify('./bin/browser-terminal.js', { debug: true }).transform(babelify, {/* options */ })
+  return developBundler(bundler, 'browser-terminal')
 })
 
 // Without sourcemaps
 gulp.task('browserify-production', function () {
-  var bundler = browserify('./bin/index.js').transform(babelify, {/* options */ })
+  let shellBundle = browserify('./bin/browser-shell.js').transform(babelify, {/* options */ })
+  let terminalBundle = browserify('./bin/browser-terminal.js').transform(babelify, {/* options */ })
 
-  return bundler.bundle()
-    .on('error', map_error)
-    .pipe(source('./bin/index.js'))
-    .pipe(buffer())
-    .pipe(rename('browser-terminal.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('dist/'))
+  bundleProduction(shellBundle, 'browser-shell')
+  bundleProduction(terminalBundle, 'browser-terminal')
 })
+
+gulp.task('default', ['shell', 'terminal'])
+gulp.task('production', ['browserify-production'])

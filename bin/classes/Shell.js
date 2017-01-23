@@ -6,7 +6,7 @@ const Filesystem = require('./Filesystem')
  *
  */
 class Shell extends Interpreter{
-  constructor({ filesystem = undefined, commands = undefined, user = 'root' } = {}) {
+  constructor({ filesystem = undefined, commands = undefined, user = 'root', hostname = 'my.host.me' } = {}) {
     super()
 
     /**
@@ -15,6 +15,7 @@ class Shell extends Interpreter{
      */
     this.fs = new Filesystem(filesystem, this)
     this.user = user
+    this.hostname = hostname
 
     // Init builtin commands, @method in parent
     // pass shell reference
