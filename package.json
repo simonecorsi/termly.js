@@ -1,6 +1,6 @@
 {
   "name": "browser-terminal.js",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Simple Browser Terminal in pure js, usable for web presentation of CLI tools and whatever you want it to do!",
   "main": "terminal.js",
   "scripts": {
