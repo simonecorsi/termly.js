@@ -12,6 +12,8 @@ class Terminal extends Shell{
 
     super(options) // must pass option here
 
+    this.hostname = options.hostname || 'host'
+
     if (!selector) throw new Error('No wrapper element selector provided')
     try {
       this.container = document.querySelector(selector)
@@ -50,7 +52,7 @@ class Terminal extends Shell{
     const div = document.createElement('div')
     div.classList.add('current', 'terminal-row')
     div.innerHTML = ''
-    div.innerHTML += `<span class="terminal-info">guest@terminal.simonecorsi.me ➜ </span>`
+    div.innerHTML += `<span class="terminal-info">guest@${this.hostname} ➜ </span>`
     div.innerHTML += `<input type="text" class="terminal-input" size="2" style="cursor:none;">`
 
     // add new row and focus it
