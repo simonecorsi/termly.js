@@ -51,8 +51,18 @@ Welcome to browser-terminal.js
 </div>
   <script src="js/browser-terminal.min.js" charset="utf-8"></script>
   <script>
-    var terminal = new Terminal('#terminal-container')
+  // * Options:
+  // *  - filesystem {Object}
+  // *  - commands {Object}
+  // *  - user {String}
+  // *  - hostname {String}
+  // */
+    var terminal = new Terminal('#terminal-container', {
+      hostname: 'myTest',
+      user: 'testUser'
+    })
   </script>
+
   <!-- <script type="text/javascript">
     var custom_commands = {
       custom: "CUSTOM!!!",
