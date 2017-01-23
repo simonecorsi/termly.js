@@ -6,7 +6,10 @@
   "scripts": {
     "test": "mocha --compilers babel-core/register tests/",
     "start": "npm run build",
-    "build": "browserify ./bin/main.js -o dist/browser-terminal.js -t [ babelify --presets [ es2015, stage-3 ] ]"
+    "build": "browserify ./bin -o dist/browser-terminal.js -t [ babelify --presets [ es2015, stage-3 ] ]",
+    "build:prod": "gulp browserify-production",
+    "build:dev": "gulp browserify",
+    "build:watch": "gulp watchify"
   },
   "keywords": [
     "terminal",

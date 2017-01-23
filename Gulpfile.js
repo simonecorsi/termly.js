@@ -79,7 +79,7 @@ gulp.task('browserify-production', function () {
 
   return bundler.bundle()
     .on('error', map_error)
-    .pipe(source('index.js'))
+    .pipe(source('./bin/index.js'))
     .pipe(buffer())
     .pipe(rename('browser-terminal.min.js'))
     .pipe(uglify())
