@@ -111,4 +111,22 @@ describe('Built-in commands tests', () => {
       expect(shell.exec('ls ///dontexist')).to.match(/invalid/)
     })
   })
+
+  /**
+  * CAT COMMAND
+  * @type {Command}
+  */
+  describe('List Directory Integration Test', () => {
+    const shell = new Shell()
+    it('should cat a file', () => {
+      // console.log(shell.exec('cat'))
+      expect(shell.exec('cat file.h')).to.equal('#include <nope.h>')
+      expect(shell.exec('cat ./file.h')).to.equal('#include <nope.h>')
+      expect(shell.exec('cat /file.h')).to.equal('#include <nope.h>')
+      // NESTED
+      expect(shell.exec('cat etc/apache2/apache2.conf')).to.equal('Not What you were looking for :)')
+      expect(shell.exec('cat ./etc/apache2/apache2.conf')).to.equal('Not What you were looking for :)')
+      expect(shell.exec('cat /etc/apache2/apache2.conf')).to.equal('Not What you were looking for :)')
+    })
+  })
 })

@@ -83,14 +83,13 @@ module.exports = {
     type: 'builtin',
     fn: function(path = ['./']) {
       path = path.join()
-      let list, responseString = ''
+      let file, responseString = ''
       try{
         file = this.shell.fs.readFile(path)
       } catch(e) {
         throw e
       }
-      console.log(file)
-      return responseString
+      return file.content
     }
   },
 

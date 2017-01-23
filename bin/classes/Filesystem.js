@@ -65,7 +65,6 @@ class Filesystem {
     if (pathArray[0] === '') pathArray[0] = '/'
     if (pathArray[0] === '.') pathArray.shift()
     if(pathArray[pathArray.length - 1] === '') pathArray.pop()
-
     // handle relative path with current working directory
     if (pathArray[0] !== '/') {
       pathArray = this.cwd.concat(pathArray)
@@ -169,21 +168,35 @@ class Filesystem {
   getNode(path = '', fileType) {
     if (typeof path !== 'string') throw new Error('Invalid input.')
     let pathArray, node
+
     try {
       pathArray = this.pathStringToArray(path)
       node = this.fileWalker(pathArray)
     } catch (e) {
       throw e
     }
+
+    /**
+     * ERROR HANDLING
+     */
+
+    // Handle List on a file
     if (fileType === 'dir' && node.type === 'file') {
       throw new Error('Its a file not a directory')
     }
+    // Handle readfile on a dir
     if (fileType === 'file' && node.type === 'dir') {
       throw new Error('Its a directory not a file')
     }
-    if (!node || node.content) {
-      throw new Error('Invalid Path, doent exist')
+    // handle readfile on non existing file
+    if (fileType === 'file' && !node.type) {
+      throw new Error('Invalid file path')
     }
+    // handle invalid / nonexisting path
+    if (!node) {
+      throw new Error('Invalid path, file/folder doesn\'t exist')
+    }
+
     return { path, pathArray , node }
   }
 
