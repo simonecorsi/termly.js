@@ -5,11 +5,16 @@ var Shell = require('./Shell')
  * Wrapper on the Shell class
  * This will only handle the UI of the terminal.
  * You can use it or use directly the browser-shell.js
- * and create your custom UI calling and displaying the Shell.run() commands
+ * and create your custom UI calling and displaying the @method run() commands
+ * ___________
+ * Options:
+ *  - filesystem {Object}
+ *  - commands {Object}
+ *  - user {String}
+ *  - hostname {String}
  */
 class Terminal extends Shell{
   constructor(selector = undefined, options = {}) {
-
     super(options) // must pass option here
 
     this.hostname = options.hostname || 'host'
@@ -73,6 +78,7 @@ class Terminal extends Shell{
   submitHandler(e) {
     e.stopPropagation()
     // RUN when ENTER is pressed
+    e.target.size = e.target.value.length + 2 || 3
     if (event.which == 13 || event.keyCode == 13) {
       e.preventDefault()
       const command = e.target.value.trim()

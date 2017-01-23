@@ -3,12 +3,15 @@ const Filesystem = require('./Filesystem')
 
 /**
  * Shell Class inherits from Interpreter
- *
+ * Options:
+ *  - filesystem {Object}
+ *  - commands {Object}
+ *  - user {String}
+ *  - hostname {String}
  */
 class Shell extends Interpreter{
   constructor({ filesystem = undefined, commands = undefined, user = 'root', hostname = 'my.host.me' } = {}) {
     super()
-
     /**
      * Create the virtual filesystem
      * @return reference to instance of @class Filesystem

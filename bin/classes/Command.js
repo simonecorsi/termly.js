@@ -5,7 +5,7 @@
  * don't pass arrow function if you want to use this inside your command function to access various shared shell object
  */
 class Command {
-  constructor({ name, fn, type = 'usr', shell = undefined } = {}){
+  constructor({ name, fn, type = 'usr', shell = undefined, man = ''} = {}){
     if (typeof name !== 'string') throw Error('Command name must be a string')
     if (typeof fn !== 'function') throw Error('Command function must be... a function')
 
@@ -16,6 +16,7 @@ class Command {
     this.fn = fn.bind(this)
     this.name = name
     this.type = type
+    this.man = man
 
     if (shell) {
       this.shell = shell
