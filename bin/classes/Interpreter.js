@@ -68,7 +68,7 @@ class Interpreter {
     try {
       output = command.exec(args)
     } catch (e) {
-      return '-fatal command: Command execution produced an error ' + e.message
+      return '-fatal command: ' + e.message
     }
 
     //  Format data and Return

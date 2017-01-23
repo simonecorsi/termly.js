@@ -17,7 +17,6 @@ class Terminal extends Shell{
     if (!selector) throw new Error('No wrapper element selector provided')
     try {
       this.container = document.querySelector(selector)
-      console.log(this.container)
       if (!this.container) throw new Error('new Terminal(): DOM element not found')
     } catch (e) {
       throw new Error('new Terminal(): Not valid DOM selector.')
@@ -52,7 +51,7 @@ class Terminal extends Shell{
     const div = document.createElement('div')
     div.classList.add('current', 'terminal-row')
     div.innerHTML = ''
-    div.innerHTML += `<span class="terminal-info">guest@${this.hostname} ➜ </span>`
+    div.innerHTML += `<span class="terminal-info">guest@${this.hostname} - ${this.fs.getCurrentDirectory()} ➜ </span>`
     div.innerHTML += `<input type="text" class="terminal-input" size="2" style="cursor:none;">`
 
     // add new row and focus it

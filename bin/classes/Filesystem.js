@@ -81,7 +81,11 @@ class Filesystem {
    * @return {String}
    */
   pathArrayToString(path = []) {
-
+    if (!Array.isArray(path)) throw new Error('-fatal filesystem: path must be an array')
+    if (!path.length) throw new Error('-invalid filesystem: path not provided')
+    let output = path.join('/')
+    // remove / multiple occurrence
+    return output.replace(/\/{2,}/g, '/')
   }
 
   /**
@@ -112,7 +116,8 @@ class Filesystem {
     if (node !== '/') {
       // check if node exist
       if (fs[node]) {
-        fs = fs[node].content
+        // return file or folder
+        fs = fs[node].type === 'dir' ? fs[node].content : fs[node]
       } else {
         throw new Error('File doesn\'t exist')
       }
@@ -209,6 +214,16 @@ class Filesystem {
       throw err
     }
     return result.node
+  }
+
+  getCurrentDirectory() {
+    let cwdAsString
+    try {
+      cwdAsString = this.pathArrayToString(this.cwd)
+    } catch (e) {
+      return '-invalid filesystem: An error occured while parsing current working directory to string.'
+    }
+    return cwdAsString
   }
 
 }
