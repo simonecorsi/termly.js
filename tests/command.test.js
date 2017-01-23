@@ -51,7 +51,7 @@ describe('Built-in commands tests', () => {
    * Help
    * @type Command
    */
-  describe.only('Help Command', () => {
+  describe('Help Command', () => {
     const shell = new Shell()
     it('should return list of commands', () => {
       console.log(shell.exec('help'))

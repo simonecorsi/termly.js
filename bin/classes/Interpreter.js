@@ -49,12 +49,17 @@ class Interpreter {
   exec(cmd) {
 
     //  Parse Command String: [0] = command name, [1+] = arguments
-    const parsed = this.parse(cmd)
+    let parsed
+    try {
+      parsed = this.parse(cmd)
+    } catch (e) {
+      return '-fatal command: ' + e.message || 'Some Error Occured'
+    }
 
     //  X-check if command exist
     const command = this.ShellCommands[parsed[0]]
     if (!command) {
-      return "-error shell: Command doesn't exist.\n"
+      return `-error shell: Command ${parsed[0]} doesn't exist.\n`
     }
 
     //  get arguments array and execute command return error if throw

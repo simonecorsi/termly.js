@@ -31,7 +31,7 @@
   </style>
 </head>
 <body>
-<div id="terminal_container">
+<div id="terminal-container">
 <pre>
 Welcome to browser-terminal.js
 * Type help for list of commands
@@ -44,15 +44,11 @@ Welcome to browser-terminal.js
 *
 * source:
 * <a href="https://github.com/Kirkhammetz/browser-terminal.js" style="color:white !important; text-decoration:none;">https://github.com/Kirkhammetz/browser-terminal.js</a>
-</pre>
-  <div class="current terminal_row">
-    <span class="terminal_info">guest@terminal.simonecorsi.me➜</span>
-    <input type="text" class="terminal_input" size="1" style="cursor:none;">
-  </div>
+</pre>  
 </div>
-  <script src="../dist/browser-shell.min.js" charset="utf-8"></script>
+  <script src="js/browser-terminal.min.js" charset="utf-8"></script>
   <script>
-    var shell = new Shell()
+    var terminal = new Terminal('#terminal-container')
   </script>
   <!-- <script type="text/javascript">
     var custom_commands = {
