@@ -6,8 +6,8 @@
   "scripts": {
     "test": "mocha --compilers babel-core/register tests/",
     "build": "npm run build:dev && npm run build:prod",
-    "build:dev": "gulp browserify",
-    "build:prod": "gulp browserify-production"
+    "build:dev": "gulp",
+    "build:prod": "gulp production"
   },
   "keywords": [
     "terminal",

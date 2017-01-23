@@ -46,13 +46,13 @@ function developBundler(bundler, name) {
     .on('error', map_error)
     .pipe(source(name + '.js'))
     .pipe(buffer())
-    .pipe(gulp.dest('./demo/js/'))
+    .pipe(gulp.dest('./docs/js/'))
     .pipe(rename(name + '.min.js'))
     .pipe(sourcemaps.init({ loadMaps: true }))
       // capture sourcemaps from transforms
       .pipe(uglify())
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('./demo/js/'))
+    .pipe(gulp.dest('./docs/js/'))
 }
 function bundleProduction(bundler, name) {
   return bundler.bundle()
