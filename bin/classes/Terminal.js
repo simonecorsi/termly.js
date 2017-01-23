@@ -65,7 +65,7 @@ class Terminal extends Shell{
 
   generateOutput(out = '') {
     const pre = document.createElement('pre')
-    pre.innerHTML = out
+    pre.textContent = out
     this.container.appendChild(pre)
     return this.generateRow()
   }
