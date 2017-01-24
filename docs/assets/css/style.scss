@@ -1,0 +1,100 @@
+---
+---
+
+// @import 'jekyll-theme-cayman';
+@import "{{ site.theme }}";
+@import "animation";
+
+$black: #333;
+$terminal-black: #30353A;
+$terminal-white: #E0E8F0;
+$white: #fff;
+$primary: #C02B2B;
+$primary-dark: darken($primary,10%);
+$secondary: #C06F2B;
+$secondary-dark: darken($secondary,10%);
+$red:#E75448;
+$green:#2ecc71;
+$yellow:#f39c12;
+$gradient: linear-gradient(-120deg, $secondary, $primary);
+// $secondary: #043227;
+// $secondary-dark: #097168;
+// $middle: #ffcc88;
+// $primary: #fa482e;
+// $primary-light: #f4a32e;
+$Courier: 'Courier new', 'Courier', sans-serif;
+$SansSerif: 'Open Sans', 'Helvetica', 'Helvetica Neue', 'Arial', sans-serif;
+
+body{
+  font-family: $SansSerif;
+}
+
+.main-content{
+  h1,h2,h3,h4,h5,h6{
+    font-family: $Courier;
+    color: $primary;
+    font-weight: bold;
+  }
+}
+
+#homepage{
+  .page-header{
+    background-color: $primary !important;
+    background-image: $gradient;
+    padding-bottom: 0 !important;
+    overflow: hidden;
+    .project-name{
+      letter-spacing: 3px;
+      font-family: $Courier;
+    }
+
+    #terminal-wrapper{
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+      top: 0px;
+      @extend .animate;
+      .terminal-topbar {
+        background: $terminal-white;
+        height: 30px;
+        border-radius: 8px 8px 0 0;
+        padding-left: 10px;
+        text-align: right;
+        .button{
+          height: 15px;
+          width: 15px;
+          border-radius: 50%;
+          display: inline-block;
+          margin: 7px;
+          &.red{ background: $red; }
+          &.green{ background: $green; }
+          &.yellow{ background: $yellow; }
+        }
+      }
+      #terminal-container{
+        & * { font-size: 14px; letter-spacing: 1px; }
+        background: $terminal-black;
+        font-family: $Courier;
+        text-align: left;
+        padding: 10px;
+        height: 360px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        h1{
+          font-size: 16px;
+          letter-spacing: 3px;
+        }
+        input.terminal-input{
+          padding: 0 5px;
+          border:none;
+          outline:none;
+          background: transparent;
+          color: white;
+          position: relative;
+        }
+      }
+    }
+  }
+
+}

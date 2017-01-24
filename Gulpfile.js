@@ -54,16 +54,26 @@ function developBundler(bundler, name) {
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./docs/js/'))
 }
+
 function bundleProduction(bundler, name) {
-  return bundler.bundle()
+  /** dist/ Folder **/
+  bundler.bundle()
     .on('error', map_error)
     .pipe(source('./bin/' + name + '.js'))
     .pipe(buffer())
     .pipe(rename(name + '.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('dist/'))
-}
 
+  /** Github page docs **/
+  bundler.bundle()
+    .on('error', map_error)
+    .pipe(source('./bin/' + name + '.js'))
+    .pipe(buffer())
+    .pipe(rename(name + '.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('docs/assets/js'))
+}
 
 gulp.task('shell', function () {
   let bundler = browserify('./bin/browser-shell.js', { debug: true }).transform(babelify, {/* options */ })
