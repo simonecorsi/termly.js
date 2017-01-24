@@ -52,7 +52,7 @@ function developBundler(bundler, name) {
       // capture sourcemaps from transforms
       .pipe(uglify())
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('./docs/js/'))
+    .pipe(gulp.dest('./dev/')) // <<<<
 }
 
 function bundleProduction(bundler, name) {
@@ -94,5 +94,5 @@ gulp.task('browserify-production', function () {
   bundleProduction(terminalBundle, 'browser-terminal')
 })
 
-gulp.task('default', ['shell', 'terminal'])
+gulp.task('default', ['browserify-production'])
 gulp.task('production', ['browserify-production'])
