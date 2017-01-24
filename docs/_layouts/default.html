@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
   </head>
   <body id="homepage">
+    <pre>
+      {{ site.asset_dir }}
+    </pre>
     <div class="page-header">
       <h1 class="project-name">{{ site.title | default: site.github.repository_name }}</h1>
       <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
@@ -60,7 +63,7 @@
       </footer>
     </section>
 
-    <script src='/assets/js/browser-terminal.min.js'></script>
+    <script src='{{ site.baseurl }}/assets/js/browser-terminal.min.js'></script>
     <script>var shell = new Terminal('#terminal-container')</script>
 
     {% if site.google_analytics %}
