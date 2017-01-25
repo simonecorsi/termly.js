@@ -143,7 +143,7 @@ module.exports = {
   http: {
     name: 'http',
     type: 'builtin',
-    man: 'Send http requests.\n syntax: http METHOD [property:data,] URL.\neg: http GET http://jsonplaceholder.typicode.com/\nhttp POST title:MyTitle http://jsonplaceholder.typicode.com/posts',
+    man: 'Send http requests.\n syntax: http METHOD [property:data,] URL.\ntry: http GET https://jsonplaceholder.typicode.com/posts\nhttp POST title:MyTitle https://jsonplaceholder.typicode.com/posts',
     fn: function http(args = []) {
       if (!args || !args.length || args.length < 2) throw new Error(`http: no parameters provided, provide URL and/or method \n help: ${this.shell.ShellCommands['http'].man}`)
 
@@ -175,8 +175,6 @@ module.exports = {
       return fetch(url, request).then((res) => {
         if (res.ok) return res.json()
         throw new Error(`Request Failed (${res.status || 500}): ${res.statusText || 'Some Error Occured.'}`)
-      }).catch((err) => {
-        console.log(err)
       })
     },
   },
