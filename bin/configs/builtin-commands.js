@@ -136,24 +136,47 @@ module.exports = {
 
   /**
    * HTTP
-   * Return command manual info
+   * Return Data from an HTTP request
+   * FIXME: NEED FIXS FOR FORM DATA WITH SPACES
    * @return {string}
    */
   http: {
     name: 'http',
     type: 'builtin',
-    man: 'Send http requests.\n syntax: http METHOD URL.\neg: http GET www.google.com\nGET Method can be omitted',
+    man: 'Send http requests.\n syntax: http METHOD [property:data,] URL.\neg: http GET http://jsonplaceholder.typicode.com/\nhttp POST title:MyTitle http://jsonplaceholder.typicode.com/posts',
     fn: function http(args = []) {
-      console.log(args)
-      return
-      if (!args || !args.length) throw new Error(`http: no parameters provided, provide URL and/or method \n help: ${this.shell.ShellCommands['http'].man}`)
-      return fetch('http://www.google.com', {
-        method: 'POST'
-      }).then((res) => {
+      if (!args || !args.length || args.length < 2) throw new Error(`http: no parameters provided, provide URL and/or method \n help: ${this.shell.ShellCommands['http'].man}`)
+
+      // Get Method and URL
+      let method, url
+      method = args[0].toUpperCase()
+      url = args[args.length - 1]
+
+      /*
+       * Build Payload
+       * If args > 2 there are values in beetween method and url
+       * format prop:value
+       * FIXME Space not allowed, must change how commands arguments are parsed
+       */
+      let payload = {}
+      if (args.length > 2) {
+        args.map((e, i, array) => {
+          if (i != 0 && i !== args.length - 1) {
+            let parse = e.split(':')
+            payload[parse[0]] = parse[1]
+          }
+        })
+      }
+      let request = {
+        method,
+        headers: { "Content-Type": "application/json" },
+      }
+      if (method !== 'GET') request.body = JSON.stringify(payload)
+      return fetch(url, request).then((res) => {
         if (res.ok) return res.json()
-        throw new Error(`Request Failer (${res.status || 500}): ${res.statusText || 'Some Error Occured.'}`)
+        throw new Error(`Request Failed (${res.status || 500}): ${res.statusText || 'Some Error Occured.'}`)
       }).catch((err) => {
-        throw new Error(`Request Failer (${err.status || 500}): ${err.statusText || 'Some Error Occured.'}`)
+        console.log(err)
       })
     },
   },

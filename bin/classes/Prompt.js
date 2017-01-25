@@ -90,9 +90,18 @@ class Terminal extends Shell{
 
       // EXEC
       const output = this.run(command)
-      // if is a {Promise} resolve it
+      // if is a {Promise} resolve it ad parse as json
       if (output['then']) {
-        return output.then(res => this.generateOutput(res)).catch(err => this.generateOutput(err.message))
+        return output.then(res => {
+          if (typeof res === 'object') {
+            try {
+              res = JSON.stringify(res, null, 2)
+            } catch (e) {
+              return this.generateOutput('-fatal http: Response received but had a problem parsing it.')
+            }
+          }
+          return this.generateOutput(res)
+        }).catch(err => this.generateOutput(err.message))
       }
       return this.generateOutput(output)
     }

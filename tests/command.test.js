@@ -134,10 +134,10 @@ describe('Built-in commands tests', () => {
   * HTTP REQUESTS COMMAND
   * @type {Command}
   */
-  describe.only('List Directory Integration Test', () => {
+  describe('List Directory Integration Test', () => {
     const shell = new Shell()
     it('should return error if no params are provided', () => expect(shell.exec('http')).to.match(/-fatal/))
-    it('should ', () => {
-    })
+    it('should return error if less than 2 params passed [method, url]', () => expect(shell.exec('http get')).to.match(/-fatal/))
+    it('[TODO Sinon or Mock XMLHttpRequest] should do a basic GET request')
   })
 })

@@ -13,7 +13,14 @@ class Interpreter {
 
   /**
    * Parse Command
+   * String is splitted by spaces
    * @return Array of args as in C
+   * ---
+   *   IDEA: Regexp every word is an argument, to proide something else you must enclose
+   *   it in single or double quotes.
+   *   To pass a json use single quotes since the json starndard requires double quotes in it
+   *   @return cmd.match(/[^\s"']+|"([^"]*)"|'([^']*)'/g)
+   * ---
    */
   parse(cmd) {
     if (typeof cmd !== 'string') throw new Error('Command must be a string')
@@ -44,7 +51,7 @@ class Interpreter {
 
   /**
    * Exec Command
-   * @return JSON String with output
+   * @return {String}
    */
   exec(cmd) {
 
