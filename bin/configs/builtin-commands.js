@@ -9,7 +9,7 @@ module.exports = {
     name: 'help',
     type: 'builtin',
     man: 'List of available commands',
-    fn: function() {
+    fn: function help() {
       return `Commands available: ${Object.keys(this.shell.ShellCommands).join(', ')}`
     }
   },
@@ -18,7 +18,7 @@ module.exports = {
     name: 'whoami',
     type: 'builtin',
     man: 'Current user',
-    fn: function() {
+    fn: function whoami() {
       return this.shell.user
     },
   },
@@ -27,7 +27,7 @@ module.exports = {
     name: 'about',
     type: 'builtin',
     man: 'About this project',
-    fn: function() {
+    fn: function about() {
       let str = ''
       str += `name: ${name}\n`
       str += `version: ${version}\n`
@@ -57,7 +57,7 @@ module.exports = {
     name: 'cd',
     type: 'builtin',
     man: 'Change directory, pass absolute or relative path: eg. cd /etc, cd / cd/my/nested/dir',
-    fn: function(path) {
+    fn: function cd(path) {
       if (!path) throw new Error('-invalid No path provided.')
       path = path.join()
       try{
@@ -78,7 +78,7 @@ module.exports = {
     name: 'ls',
     type: 'builtin',
     man: 'list directory files, pass absolute/relative path, if empty list current directory',
-    fn: function(path = ['./'] ) {
+    fn: function ls(path = ['./'] ) {
       path = path.join()
       let list, responseString = ''
       try{
@@ -125,7 +125,7 @@ module.exports = {
     name: 'man',
     type: 'builtin',
     man: 'Command manual, takes one argument, command name',
-    fn: function(args) {
+    fn: function man(args) {
       if (!args || !args[0]) throw new Error('man: no command provided.')
       let command = args[0]
       if (!this.shell.ShellCommands[command]) throw new Error('command doesn\'t exist.')
@@ -133,4 +133,29 @@ module.exports = {
       return this.shell.ShellCommands[command].man
     },
   },
+
+  /**
+   * HTTP
+   * Return command manual info
+   * @return {string}
+   */
+  http: {
+    name: 'http',
+    type: 'builtin',
+    man: 'Send http requests.\n syntax: http METHOD URL.\neg: http GET www.google.com\nGET Method can be omitted',
+    fn: function http(args = []) {
+      console.log(args)
+      return
+      if (!args || !args.length) throw new Error(`http: no parameters provided, provide URL and/or method \n help: ${this.shell.ShellCommands['http'].man}`)
+      return fetch('http://www.google.com', {
+        method: 'POST'
+      }).then((res) => {
+        if (res.ok) return res.json()
+        throw new Error(`Request Failer (${res.status || 500}): ${res.statusText || 'Some Error Occured.'}`)
+      }).catch((err) => {
+        throw new Error(`Request Failer (${err.status || 500}): ${err.statusText || 'Some Error Occured.'}`)
+      })
+    },
+  },
+
 }

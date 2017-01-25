@@ -129,4 +129,15 @@ describe('Built-in commands tests', () => {
       expect(shell.exec('cat /etc/apache2/apache2.conf')).to.equal('Not What you were looking for :)')
     })
   })
+
+  /**
+  * HTTP REQUESTS COMMAND
+  * @type {Command}
+  */
+  describe.only('List Directory Integration Test', () => {
+    const shell = new Shell()
+    it('should return error if no params are provided', () => expect(shell.exec('http')).to.match(/-fatal/))
+    it('should ', () => {
+    })
+  })
 })

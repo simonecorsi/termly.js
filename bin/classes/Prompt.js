@@ -90,6 +90,10 @@ class Terminal extends Shell{
 
       // EXEC
       const output = this.run(command)
+      // if is a {Promise} resolve it
+      if (output['then']) {
+        return output.then(res => this.generateOutput(res)).catch(err => this.generateOutput(err.message))
+      }
       return this.generateOutput(output)
     }
   }
