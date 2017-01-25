@@ -1,7 +1,7 @@
 {
   "name": "termly.js",
   "version": "2.0.0",
-  "description": "Simple Browser Terminal in pure js, usable for web presentation of CLI tools and whatever you want it to do!",
+  "description": "Simple, Extensible, Lightweight Javascript Browser Terminal Simulator!",
   "main": "dist/termly.min.js",
   "scripts": {
     "test": "mocha --compilers babel-core/register tests/",
