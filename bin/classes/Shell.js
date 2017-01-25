@@ -12,6 +12,9 @@ const Filesystem = require('./Filesystem')
 class Shell extends Interpreter{
   constructor({ filesystem = undefined, commands = undefined, user = 'root', hostname = 'my.host.me' } = {}) {
     super()
+
+    this.polyfills()
+
     /**
      * Create the virtual filesystem
      * @return reference to instance of @class Filesystem
@@ -29,9 +32,19 @@ class Shell extends Interpreter{
     }
   }
 
+  polyfills() {
+    if (!global.Promise) {
+      global.Promise = require('promise-polyfill').Promise
+    }
+    if (!global.fetch) {
+      global.fetch = require('whatwg-fetch')
+    }
+    return true
+  }
+
   /**
    * Pass control to Interpreter
-   * @return output as [String]
+   * @return [String] OR {Promise} to resolve from your wrapper.
    */
   run(cmd) {
     return this.exec(cmd)
