@@ -59,7 +59,7 @@ class Interpreter {
     //  X-check if command exist
     const command = this.ShellCommands[parsed[0]]
     if (!command) {
-      return `-error shell: Command ${parsed[0]} doesn't exist.\n`
+      return `-error shell: Command <${parsed[0]}> doesn't exist.\n`
     }
 
     //  get arguments array and execute command return error if throw
