@@ -17,7 +17,7 @@
     "commands",
     "fake"
   ],
-  "repository": "https://github.com/Kirkhammetz/browser-terminal.js",
+  "repository": "https://github.com/Kirkhammetz/termly.js",
   "author": "Simone Corsi",
   "license": "ISC",
   "devDependencies": {
