@@ -1,13 +1,11 @@
 {
-  "name": "browser-terminal.js",
+  "name": "termly.js",
   "version": "2.0.0",
   "description": "Simple Browser Terminal in pure js, usable for web presentation of CLI tools and whatever you want it to do!",
-  "main": "terminal.js",
+  "main": "dist/termly.min.js",
   "scripts": {
     "test": "mocha --compilers babel-core/register tests/",
-    "build": "npm run build:dev && npm run build:prod",
-    "build:dev": "gulp browserify",
-    "build:prod": "gulp browserify-production"
+    "build": "gulp"
   },
   "keywords": [
     "terminal",
@@ -35,9 +33,7 @@
     "utils-merge": "^1.0.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.8.0"
-  },
-  "dependencies": {
+    "watchify": "^3.8.0",
     "babel": "^6.5.2",
     "babel-core": "^6.21.0",
     "babel-polyfill": "^6.22.0",
