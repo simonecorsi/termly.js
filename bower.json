@@ -1,7 +1,7 @@
 {
-  "name": "browser-terminal.js",
-  "description": "Simple Browser Terminal in pure js for presentational purpose",
-  "main": "terminal.js",
+  "name": "termly.js",
+  "description": "Simple, Extensible, Lightweight Javascript Browser Terminal Simulator!",
+  "main": "dist/termly.min.js",
   "authors": [
     "Simone Corsi"
   ],
@@ -13,10 +13,16 @@
     "browser",
     "presentation",
     "mockup",
+    "demo",
+    "cli",
+    "prompt",
     "commands",
-    "fake"
+    "no depency",
+    "lightweight",
+    "js",
+    "vanilla"
   ],
-  "homepage": "https://github.com/Kirkhammetz/browser-terminal.js",
+  "homepage": "https://github.com/Kirkhammetz/termly.js",
   "ignore": [
     "**/.*",
     "node_modules",

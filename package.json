@@ -14,8 +14,14 @@
     "browser",
     "presentation",
     "mockup",
+    "demo",
+    "cli",
+    "prompt",
     "commands",
-    "fake"
+    "no depency",
+    "lightweight",
+    "js",
+    "vanilla"
   ],
   "repository": "https://github.com/Kirkhammetz/termly.js",
   "author": "Simone Corsi",

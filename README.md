@@ -12,7 +12,7 @@ It's been completly rewrite, it's not compatible with older versions
 #Preview
 
 You can view a working preview here while I write the docs :)
-[demo](https://kirkhammetz.github.io/browser-terminal.js/)
+[demo](https://kirkhammetz.github.io/termly.js/)
 
 # Install
 
