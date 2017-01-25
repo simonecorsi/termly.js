@@ -8,9 +8,9 @@ module.exports = {
   help: {
     name: 'help',
     type: 'builtin',
-    man: 'List of avaible commands',
+    man: 'List of available commands',
     fn: function() {
-      return `Commands avaible: ${Object.keys(this.shell.ShellCommands).join(', ')}`
+      return `Commands available: ${Object.keys(this.shell.ShellCommands).join(', ')}`
     }
   },
 
