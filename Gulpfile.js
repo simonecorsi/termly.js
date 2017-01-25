@@ -41,58 +41,24 @@ function map_error(err) {
   this.end()
 }
 
-function developBundler(bundler, name) {
+function bundleProduction(bundler, name) {
+  /** Github page docs **/
   return bundler.bundle()
     .on('error', map_error)
-    .pipe(source(name + '.js'))
-    .pipe(buffer())
-    .pipe(gulp.dest('./docs/js/'))
-    .pipe(rename(name + '.min.js'))
-    .pipe(sourcemaps.init({ loadMaps: true }))
-      // capture sourcemaps from transforms
-      .pipe(uglify())
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('./dev/')) // <<<<
-}
-
-function bundleProduction(bundler, name) {
-  /** dist/ Folder **/
-  bundler.bundle()
-    .on('error', map_error)
     .pipe(source('./bin/' + name + '.js'))
     .pipe(buffer())
     .pipe(rename(name + '.min.js'))
     .pipe(uglify())
-    .pipe(gulp.dest('dist/'))
-
-  /** Github page docs **/
-  bundler.bundle()
-    .on('error', map_error)
-    .pipe(source('./bin/' + name + '.js'))
-    .pipe(buffer())
-    .pipe(rename(name + '.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('docs/assets/js'))
+    .pipe(gulp.dest('assets/js'))
 }
-
-gulp.task('shell', function () {
-  let bundler = browserify('./bin/browser-shell.js', { debug: true }).transform(babelify, {/* options */ })
-  return developBundler(bundler, 'browser-shell')
-})
-
-gulp.task('terminal', function () {
-  let bundler = browserify('./bin/browser-terminal.js', { debug: true }).transform(babelify, {/* options */ })
-  return developBundler(bundler, 'browser-terminal')
-})
 
 // Without sourcemaps
-gulp.task('browserify-production', function () {
-  let shellBundle = browserify('./bin/browser-shell.js').transform(babelify, {/* options */ })
-  let terminalBundle = browserify('./bin/browser-terminal.js').transform(babelify, {/* options */ })
+gulp.task('build', function () {
+  let shellBundle = browserify('./bin/termly-shell.js').transform(babelify, {/* options */ })
+  let terminalBundle = browserify('./bin/termly-prompt.js').transform(babelify, {/* options */ })
 
-  bundleProduction(shellBundle, 'browser-shell')
-  bundleProduction(terminalBundle, 'browser-terminal')
+  bundleProduction(shellBundle, 'termly-shell')
+  bundleProduction(terminalBundle, 'termly-prompt')
 })
 
-gulp.task('default', ['browserify-production'])
-gulp.task('production', ['browserify-production'])
+gulp.task('default', ['build'])

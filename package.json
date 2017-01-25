@@ -8,7 +8,7 @@
     "build": "npm run build:dev && npm run build:prod",
     "build:dev": "gulp",
     "build:prod": "gulp production",
-    "start": "bundle exec jekyll serve"
+    "start": "bundle exec jekyll serve --config _config.dev.yml"
   },
   "keywords": [
     "terminal",
