@@ -73,6 +73,11 @@ class Terminal extends Shell{
     return this.generateRow()
   }
 
+  clear() {
+    this.container.innerHTML = ''
+    return this.generateRow()
+  }
+
   submitHandler(e) {
     e.stopPropagation()
     // RUN when ENTER is pressed
@@ -80,6 +85,9 @@ class Terminal extends Shell{
     if (event.which == 13 || event.keyCode == 13) {
       e.preventDefault()
       const command = e.target.value.trim()
+
+      if (command === 'clear') return this.clear()
+
       // EXEC
       const output = this.run(command)
       return this.generateOutput(output)

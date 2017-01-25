@@ -82,7 +82,7 @@ gulp.task('production-build', function () {
   let terminalBundle = browserify('./bin/termly-prompt.js').transform(babelify, {/* options */ })
 
   bundleProduction(shellBundle, 'termly')
-  bundleProduction(terminalBundle, 'termly-terminal')
+  bundleProduction(terminalBundle, 'termly-prompt')
 })
 
 gulp.task('default', ['shell', 'terminal', 'production-build'])
