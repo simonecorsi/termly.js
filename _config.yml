@@ -3,4 +3,4 @@ description: Simple, Extensible, Lightweight Browser Terminal Simulator!
 show_downloads: true
 google_analytics:
 theme: jekyll-theme-cayman
-baseurl: browser-terminal.js/
+baseurl: termly.js/

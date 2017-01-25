@@ -54,10 +54,10 @@ function bundleProduction(bundler, name) {
 
 // Without sourcemaps
 gulp.task('build', function () {
-  let shellBundle = browserify('./bin/termly-shell.js').transform(babelify, {/* options */ })
+  let shellBundle = browserify('./bin/termly.js').transform(babelify, {/* options */ })
   let terminalBundle = browserify('./bin/termly-prompt.js').transform(babelify, {/* options */ })
 
-  bundleProduction(shellBundle, 'termly-shell')
+  bundleProduction(shellBundle, 'termly')
   bundleProduction(terminalBundle, 'termly-prompt')
 })
 

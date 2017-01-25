@@ -1,14 +1,12 @@
 {
-  "name": "browser-terminal.js",
+  "name": "termly.js",
   "version": "2.0.0",
-  "description": "Simple, Extensible, Lightweight Browser Terminal Simulator, Vanilla Javascript no depency.",
-  "main": "./bin/classes/Shell.js",
+  "description": "Simple Browser Terminal in pure js, usable for web presentation of CLI tools and whatever you want it to do!",
+  "main": "dist/termly.min.js",
   "scripts": {
     "test": "mocha --compilers babel-core/register tests/",
-    "build": "npm run build:dev && npm run build:prod",
-    "build:dev": "gulp",
-    "build:prod": "gulp production",
-    "start": "bundle exec jekyll serve --config _config.dev.yml"
+    "start": "bundle exec jekyll serve --config _config.dev.yml",
+    "build": "gulp"
   },
   "keywords": [
     "terminal",
@@ -20,7 +18,7 @@
     "commands",
     "fake"
   ],
-  "repository": "https://github.com/Kirkhammetz/browser-terminal.js",
+  "repository": "https://github.com/Kirkhammetz/termly.js",
   "author": "Simone Corsi",
   "license": "ISC",
   "devDependencies": {
@@ -36,9 +34,7 @@
     "utils-merge": "^1.0.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.8.0"
-  },
-  "dependencies": {
+    "watchify": "^3.8.0",
     "babel": "^6.5.2",
     "babel-core": "^6.21.0",
     "babel-polyfill": "^6.22.0",
