@@ -1,6 +1,7 @@
 const { expect } = require('chai')
 const Command = require('../bin/classes/Command')
 const Shell = require('../bin/classes/Shell')
+const Parser = require('string-to-argv.js')
 
 describe('Command Class', () => {
   let command
@@ -17,10 +18,10 @@ describe('Command Class', () => {
     expect(() => new Command('mycommand')).to.throw(Error)
   })
 
-  it('should throw errror when calling exec if args are not an array', () => {
+  it('should throw errror when calling exec if args are not an Object (not an array)', () => {
     expect(() => command.exec('')).to.throw(Error)
     expect(() => command.exec(123)).to.throw(Error)
-    expect(() => command.exec({})).to.throw(Error)
+    expect(() => command.exec([])).to.throw(Error)
     expect(() => command.exec(() => {})).to.throw(Error)
   })
 
@@ -30,14 +31,29 @@ describe('Command Class', () => {
     expect(cmd.exec()).to.equal(cmd_output)
   })
 
-  it('should execute the function when arguments are passed', () => {
+  it('should execute the function passing the correct arguments', () => {
     const cmd = new Command({
       name: 'arguments',
       type: 'builtin',
       fn: args => args
     })
-    const out = cmd.exec(['first', 'second'])
-    expect(out).to.deep.equal(['first', 'second'])
+    const out = cmd.exec(new Parser('arguments first second'))
+    expect(out).to.have.property('command', cmd.name)
+    expect(out).to.have.property('_').that.is.a('array').that.eql([ 'first', 'second' ])
+  })
+
+  it('should execute the function with correct arguments [check flags]', () => {
+    const cmd = new Command({
+      name: 'arguments',
+      type: 'builtin',
+      fn: args => args
+    })
+    const out = cmd.exec(new Parser('arguments -p --string="asd" --path path second'))
+    expect(out).to.have.property('command', cmd.name)
+    expect(out).to.have.property('p', true)
+    expect(out).to.have.property('string', 'asd')
+    expect(out).to.have.property('path', 'path')
+    expect(out).to.have.property('_').that.is.a('array').that.eql([ 'second' ])
   })
 
   it('should command function must have this binded to Command Constructor', () => {
