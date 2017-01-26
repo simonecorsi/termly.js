@@ -1,4 +1,5 @@
 const Command = require('./Command')
+const Parser = require('string-to-argv.js')
 
 /**
  *
@@ -10,23 +11,6 @@ const Command = require('./Command')
  *
  */
 class Interpreter {
-
-  /**
-   * Parse Command
-   * String is splitted by spaces
-   * @return Array of args as in C
-   * ---
-   *   IDEA: Regexp every word is an argument, to proide something else you must enclose
-   *   it in single or double quotes.
-   *   To pass a json use single quotes since the json starndard requires double quotes in it
-   *   @return cmd.match(/[^\s"']+|"([^"]*)"|'([^']*)'/g)
-   * ---
-   */
-  parse(cmd) {
-    if (typeof cmd !== 'string') throw new Error('Command must be a string')
-    if (!cmd.length) throw new Error('Command is empty')
-    return cmd.split(' ')
-  }
 
   /**
    * Format Output
@@ -55,25 +39,27 @@ class Interpreter {
    */
   exec(cmd) {
 
-    //  Parse Command String: [0] = command name, [1+] = arguments
-    let parsed
+    /**
+     * CHANGED: Wrote a simple parser in another branch, then splitted into an npm module. using it here
+     * FIXME the parsed output comes as an object of flag options must change all command using the array
+     */
+    let argv
     try {
-      parsed = this.parse(cmd)
+      argv = new Parser(cmd)
     } catch (e) {
       return '-fatal command: ' + e.message || 'Some Error Occured'
     }
 
     //  X-check if command exist
-    const command = this.ShellCommands[parsed[0]]
+    const command = this.ShellCommands[argv.command]
     if (!command) {
-      return `-error shell: Command <${parsed[0]}> doesn't exist.\n`
+      return `-error shell: Command <${parsed.command}> doesn't exist.\n`
     }
 
     //  get arguments array and execute command return error if throw
-    const args = parsed.filter((e, i) => i > 0)
     let output
     try {
-      output = command.exec(args)
+      output = command.exec(argv)
     } catch (e) {
       return '-fatal command: ' + e.message
     }
