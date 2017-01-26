@@ -13,26 +13,12 @@ const Parser = require('string-to-argv.js')
 class Interpreter {
 
   /**
-   * Format Output
-   * return error if function is returned
-   * convert everything else to json.
-   * @return JSON parsed
+   * CHANGED: Changed to use Kirkhammetz/string-to-argv.js
+   * Keep separate for testing
    */
-  format(output) {
-    if (typeof output === 'function') {
-      return '-invalid command: Command returned invalid data type.'
-    }
-    if (output === undefined || typeof output === 'undefined') {
-      return '-invalid command: Command returned no data.'
-    }
-    return output
-    // try {
-    //   return JSON.stringify(output)
-    // } catch (e) {
-    //   return '-invalid command: Command returned invalid data type: ' + e.message
-    // }
+  parse(cmd) {
+    return new Parser(cmd)
   }
-
   /**
    * Exec Command
    * @return {String}
@@ -45,7 +31,7 @@ class Interpreter {
      */
     let argv
     try {
-      argv = new Parser(cmd)
+      argv = this.parse(cmd)
     } catch (e) {
       return '-fatal command: ' + e.message || 'Some Error Occured'
     }
@@ -66,6 +52,22 @@ class Interpreter {
 
     //  Format data and Return
     return this.format(output)
+  }
+
+  /**
+   * Format Output
+   * return error if function is returned
+   * convert everything else to json.
+   * @return JSON parsed
+   */
+  format(output) {
+    if (typeof output === 'function') {
+      return '-invalid command: Command returned invalid data type.'
+    }
+    if (output === undefined || typeof output === 'undefined') {
+      return '-invalid command: Command returned no data.'
+    }
+    return output
   }
 
   /*

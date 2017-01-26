@@ -2906,9 +2906,9 @@ string_decoder@~0.10.0, string_decoder@~0.10.x:
   version "0.10.31"
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
 
-string-to-argv.js:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/string-to-argv.js/-/string-to-argv.js-1.0.0.tgz#43ca558c71a26c0384f111a6249ae59c75943e97"
+string-to-argv.js@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/string-to-argv.js/-/string-to-argv.js-1.0.1.tgz#f143bb1f99779f73dba76f0719d9ed6208b7dc72"
 
 string-width@^1.0.1:
   version "1.0.2"

@@ -51,6 +51,6 @@
     "whatwg-fetch": "^2.0.2"
   },
   "dependencies": {
-    "string-to-argv.js": "^1.0.0"
+    "string-to-argv.js": "^1.0.1"
   }
 }
