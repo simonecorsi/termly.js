@@ -33,13 +33,13 @@ class Interpreter {
     try {
       argv = this.parse(cmd)
     } catch (e) {
-      return '-fatal command: ' + e.message || 'Some Error Occured'
+      return `-fatal command: ${e.message || 'Some Error Occured while parsing the command string.'}`
     }
 
     //  X-check if command exist
     const command = this.ShellCommands[argv.command]
     if (!command) {
-      return `-error shell: Command <${parsed.command}> doesn't exist.\n`
+      return `-invalid shell: Command <${parsed.command}> doesn't exist.\n`
     }
 
     //  get arguments array and execute command return error if throw
@@ -47,7 +47,7 @@ class Interpreter {
     try {
       output = command.exec(argv)
     } catch (e) {
-      return '-fatal command: ' + e.message
+      return `-fatal command: ${e.message}`
     }
 
     //  Format data and Return
