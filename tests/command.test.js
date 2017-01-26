@@ -62,12 +62,12 @@ describe('Command Class', () => {
   })
 })
 
-describe('Built-in commands tests', () => {
+describe('Built-in commands tests - ', () => {
   /**
    * Help
    * @type Command
    */
-  describe.only('Help Command', () => {
+  describe('Help Command', () => {
     const shell = new Shell()
     it('should return list of commands', () => {
       console.log(shell.exec('help'))
@@ -78,10 +78,10 @@ describe('Built-in commands tests', () => {
   * CD COMMAND
   * @type {Command}
   */
-  describe('Change Directory Integration Test', () => {
+  describe('Change Directory Integration Test:', () => {
     const shell = new Shell()
     it('should change directory', () => {
-      shell.exec('cd /etc')
+      console.log(shell.exec('cd /etc'))
       expect(shell.fs.cwd).to.eql([ '/', 'etc' ])
     })
 

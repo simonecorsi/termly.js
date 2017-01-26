@@ -57,9 +57,9 @@ module.exports = {
     name: 'cd',
     type: 'builtin',
     man: 'Change directory, pass absolute or relative path: eg. cd /etc, cd / cd/my/nested/dir',
-    fn: function cd(path) {
-      if (!path) throw new Error('-invalid No path provided.')
-      path = path.join()
+    fn: function cd(argv) {
+      if (!argv['_'].length) throw new Error('-invalid No path provided.')
+      const path = argv['_'].join()
       try{
         return this.shell.fs.changeDir(path)
       } catch(e) {
@@ -78,8 +78,8 @@ module.exports = {
     name: 'ls',
     type: 'builtin',
     man: 'list directory files, pass absolute/relative path, if empty list current directory',
-    fn: function ls(path = ['./'] ) {
-      path = path.join()
+    fn: function ls(argv = { _: ['./'] } ) {
+      let path = argv['_'].join()
       let list, responseString = ''
       try{
         list = this.shell.fs.listDir(path)
@@ -104,8 +104,8 @@ module.exports = {
     name: 'cat',
     type: 'builtin',
     man: 'Return file content, take one argument: file path (relative/absolute)',
-    fn: function(path = ['./']) {
-      path = path.join()
+    fn: function(argv = { _: ['./'] } ) {
+      let path = argv['_'].join()
       let file, responseString = ''
       try{
         file = this.shell.fs.readFile(path)
