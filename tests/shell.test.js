@@ -9,13 +9,17 @@ describe('Shell Class', () => {
   })
 
   it('should return error if command doesnt exist', () => {
-    expect(shellInstance.run('test')).to.match(/-error/)
+    expect(() => shellInstance.run('test')()).to.throw(Error)
   })
 
   it('should run the arguments command and have all arguments parsed returned', () => {
     const out = shellInstance.run('arguments first second')
-    expect(out[0]).to.equal('first')
-    expect(out[1]).to.equal('second')
+    expect(out).to.be.a('object')
+    expect(out).to.eql({
+      command: 'arguments',
+      _: ['first', 'second'],
+      raw: 'arguments first second'
+    })
   })
 
   it('should have initialized the builtin command with shell reference', () => {
