@@ -81,7 +81,7 @@ describe('Built-in commands tests - ', () => {
   describe('Change Directory Integration Test:', () => {
     const shell = new Shell()
     it('should change directory', () => {
-      console.log(shell.exec('cd /etc'))
+      shell.exec('cd /etc')
       expect(shell.fs.cwd).to.eql([ '/', 'etc' ])
     })
 

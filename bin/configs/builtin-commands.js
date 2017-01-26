@@ -137,14 +137,14 @@ module.exports = {
   /**
    * HTTP
    * Return Data from an HTTP request
-   * FIXME: NEED FIXS FOR FORM DATA WITH SPACES
+   * FIXME: NEED FIX TO WORK WITH THE NEW ARGV STRUCTURE
    * @return {string}
    */
   http: {
     name: 'http',
     type: 'builtin',
     man: 'Send http requests.\n syntax: http METHOD [property:data,] URL.\neg: http GET http://jsonplaceholder.typicode.com/\nhttp POST title:MyTitle http://jsonplaceholder.typicode.com/posts',
-    fn: function http(args = []) {
+    fn: function http(args = {}) {
       if (!args || !args.length || args.length < 2) throw new Error(`http: no parameters provided, provide URL and/or method \n help: ${this.shell.ShellCommands['http'].man}`)
 
       // Get Method and URL
