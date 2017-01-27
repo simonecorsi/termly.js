@@ -2,7 +2,7 @@
 ## Simple, Extensible, Lightweight Browser Terminal Simulator!
 
 <p align="center">
-![Alt](/termly.gif?raw=true "Termly.js")
+  <img src="/termly.gif?raw=true" align="center" />
 </p>
 
 #Preview
