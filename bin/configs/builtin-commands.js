@@ -126,9 +126,9 @@ module.exports = {
     name: 'man',
     type: 'builtin',
     man: 'Command manual, takes one argument, command name',
-    fn: function man(args) {
-      if (!args || !args[0]) throw new Error('man: no command provided.')
-      let command = args[0]
+    fn: function man(args = {}) {
+      if (!args['_'][0]) throw new Error('man: no command provided.')
+      let command = args['_'][0]
       if (!this.shell.ShellCommands[command]) throw new Error('command doesn\'t exist.')
       if (!this.shell.ShellCommands[command].man) throw new Error('no manual entry for this command.')
       return this.shell.ShellCommands[command].man
@@ -146,6 +146,7 @@ module.exports = {
     type: 'builtin',
     man: 'Send http requests.\n syntax: http METHOD [property:data,] URL.\neg: http GET http://jsonplaceholder.typicode.com/\nhttp POST title:MyTitle http://jsonplaceholder.typicode.com/posts',
     fn: function http(args = {}) {
+      console.log(args)
       if (!args || !args.length || args.length < 2) throw new Error(`http: no parameters provided, provide URL and/or method \n help: ${this.shell.ShellCommands['http'].man}`)
 
       // Get Method and URL

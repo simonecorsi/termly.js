@@ -49,6 +49,7 @@ class Terminal extends Shell{
     let prevInput = document.querySelector('.terminal-input')
     if (prevInput) {
       prevInput.removeEventListener('keyup', this.submitHandler)
+      prevInput.removeEventListener('input', this.resizeHandler)
     }
 
     const div = document.createElement('div')
@@ -60,6 +61,7 @@ class Terminal extends Shell{
     // add new row and focus it
     this.container.appendChild(div)
     let input = this.container.querySelector('.current .terminal-input')
+    input.addEventListener('input', e => this.resizeHandler(e))
     input.addEventListener('keyup', e => this.submitHandler(e))
     input.focus()
 
@@ -78,10 +80,12 @@ class Terminal extends Shell{
     return this.generateRow()
   }
 
-  submitHandler(e) {
+  resizeHandler(e) {
     e.stopPropagation()
-    // RUN when ENTER is pressed
-    e.target.size = e.target.value.length + 2 || 3
+    return e.target.size = e.target.value.length + 2 || 3
+  }
+
+  submitHandler(e) {
     if (event.which == 13 || event.keyCode == 13) {
       e.preventDefault()
       const command = e.target.value.trim()
