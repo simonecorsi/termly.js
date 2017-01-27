@@ -2,6 +2,11 @@
 ## Simple, Extensible, Lightweight Browser Terminal Simulator!
 
 <p align="center">
+	<h4>Using inside a nice wrapper</h4>
+  <img src="/termly.gif?raw=true" align="center" />
+</p>
+<p align="center">
+	<h4>Or calling directly to the class and building your own wrapper</h4>
   <img src="/termly.gif?raw=true" align="center" />
 </p>
 
