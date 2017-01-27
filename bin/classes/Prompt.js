@@ -49,7 +49,6 @@ class Terminal extends Shell{
 
     let prevInput = document.querySelector('.terminal-input')
     if (prevInput) {
-      prevInput.removeEventListener('keyup', this.submitHandler)
       prevInput.removeEventListener('input', this.resizeHandler)
     }
 
@@ -62,7 +61,10 @@ class Terminal extends Shell{
     // add new row and focus it
     this.container.appendChild(div)
     let input = this.container.querySelector('.current .terminal-input')
-    input.addEventListener('input', e => this.resizeHandler(e))
+    let currentRow = this.container.querySelector('.current.terminal-row')
+    let currentPrompt = currentRow.querySelector('.terminal-info')
+    let inputWidth = currentRow.offsetWidth - currentPrompt.offsetWidth - 20
+    input.style.width = inputWidth + "px"
     input.addEventListener('keyup', e => this.submitHandler(e))
     input.focus()
 
@@ -79,11 +81,6 @@ class Terminal extends Shell{
   clear() {
     this.container.innerHTML = ''
     return this.generateRow()
-  }
-
-  resizeHandler(e) {
-    e.stopPropagation()
-    return e.target.size = e.target.value.length + 2 || 3
   }
 
   submitHandler(e) {
