@@ -5,6 +5,7 @@
   "main": "dist/termly.min.js",
   "scripts": {
     "test": "mocha --compilers babel-core/register tests/",
+    "start": "bundle exec jekyll serve --config _config.dev.yml",
     "build": "NODE_ENV=production webpack -p",
     "build:dev": "webpack -w"
   },
@@ -49,14 +50,13 @@
     "gulp-util": "^3.0.8",
     "mocha": "^3.2.0",
     "promise-polyfill": "^6.0.2",
-    "string-to-argv.js": "^1.1.1",
+    "string-to-argv.js": "^1.1.2",
     "uglify-js": "^2.6.4",
     "utils-merge": "^1.0.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.8.0",
-    "string-to-argv.js": "1.1.2"    
-		"webpack": "beta",
+    "webpack": "beta",
     "whatwg-fetch": "^2.0.2"
-  },
+  }
 }
