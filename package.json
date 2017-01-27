@@ -55,10 +55,8 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.8.0",
-    "webpack": "beta",
+    "string-to-argv.js": "1.1.2"    
+		"webpack": "beta",
     "whatwg-fetch": "^2.0.2"
   },
-  "dependencies": {
-    "string-to-argv.js": "1.1.2"
-  }
 }
