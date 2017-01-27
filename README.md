@@ -1,8 +1,8 @@
 #Termly.js
 ## Simple, Extensible, Lightweight Browser Terminal Simulator!
 
-<p style="text-align:center">
-![Alt text](/termly.gif?raw=true "Termly.js")
+<p align="center">
+![Alt](/termly.gif?raw=true "Termly.js")
 </p>
 
 #Preview
