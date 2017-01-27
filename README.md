@@ -7,7 +7,7 @@
 </p>
 <p align="center">
 	<h4>Or calling directly to the class and building your own wrapper</h4>
-  <img src="/termly.gif?raw=true" align="center" />
+  <img src="/console.gif?raw=true" align="center" />
 </p>
 
 #Preview
