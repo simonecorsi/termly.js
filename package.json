@@ -5,7 +5,8 @@
   "main": "dist/termly.min.js",
   "scripts": {
     "test": "mocha --compilers babel-core/register tests/",
-    "build": "NODE_ENV=production webpack -p"
+    "build": "NODE_ENV=production webpack -p",
+    "build:dev": "webpack -w"
   },
   "keywords": [
     "terminal",

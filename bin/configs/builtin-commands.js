@@ -79,6 +79,7 @@ module.exports = {
     type: 'builtin',
     man: 'list directory files, pass absolute/relative path, if empty list current directory',
     fn: function ls(argv = { _: ['./'] } ) {
+      if (!argv['_'].length) argv['_'].push('.')
       let path = argv['_'].join()
       let list, responseString = ''
       try{

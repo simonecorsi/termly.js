@@ -1,6 +1,6 @@
 const Command = require('./Command')
 const Parser = require('string-to-argv.js')
-console.log(Parser)
+
 /**
  *
  * Interpreter
@@ -14,7 +14,7 @@ class Interpreter {
 
   /**
    * CHANGED: Changed to use Kirkhammetz/string-to-argv.js
-   * Keep separate for testing
+   * Keep this function separate for testing
    */
   parse(cmd) {
     return new Parser(cmd)
@@ -27,7 +27,6 @@ class Interpreter {
 
     /**
      * CHANGED: Wrote a simple parser in another branch, then splitted into an npm module. using it here
-     * FIXME the parsed output comes as an object of flag options must change all command using the array
      */
     let argv
     try {
