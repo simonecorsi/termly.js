@@ -10,7 +10,11 @@
   </div>
   <script src='./termly-prompt.js'></script>
   <script>
-    var shell = new TermlyPrompt('#container')
+    var shell = new TermlyPrompt('#container',{
+      filesystem: {
+        test: ["Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, laborum.", "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, laborum.", "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, laborum.", "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, laborum."]
+      }
+    })
   </script>
 </body>
 </html>

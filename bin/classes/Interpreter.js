@@ -66,6 +66,9 @@ class Interpreter {
     if (output === undefined || typeof output === 'undefined') {
       return '-invalid command: Command returned no data.'
     }
+    if (Array.isArray(output)) {
+      output = output.join("\n")
+    }
     return output
   }
 
