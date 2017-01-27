@@ -1,6 +1,6 @@
 const Command = require('./Command')
 const Parser = require('string-to-argv.js')
-
+console.log(Parser)
 /**
  *
  * Interpreter

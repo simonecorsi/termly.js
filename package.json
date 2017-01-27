@@ -5,7 +5,7 @@
   "main": "dist/termly.min.js",
   "scripts": {
     "test": "mocha --compilers babel-core/register tests/",
-    "build": "gulp"
+    "build": "NODE_ENV=production webpack -p"
   },
   "keywords": [
     "terminal",
@@ -29,9 +29,14 @@
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-transform-object-rest-spread": "^6.22.0",
     "babel-polyfill": "^6.22.0",
     "babel-preset-es2015": "^6.18.0",
-    "babel-preset-stage-3": "^6.17.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "babel-preset-stage-1": "^6.22.0",
+    "babel-preset-stage-2": "^6.22.0",
+    "babel-preset-stage-3": "^6.22.0",
     "babelify": "^7.3.0",
     "browserify": "^13.3.0",
     "chai": "^3.5.0",
@@ -43,14 +48,16 @@
     "gulp-util": "^3.0.8",
     "mocha": "^3.2.0",
     "promise-polyfill": "^6.0.2",
+    "string-to-argv.js": "^1.1.1",
     "uglify-js": "^2.6.4",
     "utils-merge": "^1.0.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.8.0",
+    "webpack": "beta",
     "whatwg-fetch": "^2.0.2"
   },
   "dependencies": {
-    "string-to-argv.js": "^1.0.1"
+    "string-to-argv.js": "1.1.2"
   }
 }
