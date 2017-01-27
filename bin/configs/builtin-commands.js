@@ -138,47 +138,47 @@ module.exports = {
   /**
    * HTTP
    * Return Data from an HTTP request
-   * FIXME: NEED FIX TO WORK WITH THE NEW ARGV STRUCTURE
    * @return {string}
    */
   http: {
     name: 'http',
     type: 'builtin',
-    man: 'Send http requests.\n syntax: http METHOD [property:data,] URL.\neg: http GET http://jsonplaceholder.typicode.com/\nhttp POST title:MyTitle http://jsonplaceholder.typicode.com/posts',
+    man: 'Send http requests.\n syntax: http [OPTIONS FLAGS] URL.\neg: http -m GET http://jsonplaceholder.typicode.com/\neg: http -m POST title:MyTitle http://jsonplaceholder.typicode.com/posts\n\
+    options:\n\
+    \t-m --method POST,GET,PUT,DELETE\n \
+    \t--body must be an object, and MUST use single quoets inside eg: --body="{ \'data\': \'1\' }"\n \
+    ',
     fn: function http(args = {}) {
-      console.log(args)
-      if (!args || !args.length || args.length < 2) throw new Error(`http: no parameters provided, provide URL and/or method \n help: ${this.shell.ShellCommands['http'].man}`)
-
+      if (!args['_'].length) throw new Error(`http: no URL provided, provide URL and/or method \n help: ${this.shell.ShellCommands['http'].man}`)
       // Get Method and URL
-      let method, url
-      method = args[0].toUpperCase()
-      url = args[args.length - 1]
+
+      let method = args.method || args.m || 'GET'
+      let url = args._[0]
+      console.log(args, url)
 
       /*
        * Build Payload
-       * If args > 2 there are values in beetween method and url
-       * format prop:value
-       * FIXME Space not allowed, must change how commands arguments are parsed
+       * @NB to pass data use a verbose flag, --body="{ 'data': 'ok' }"
+       *     use the single quotes so we can parse it here.
        */
-      let payload = {}
-      if (args.length > 2) {
-        args.map((e, i, array) => {
-          if (i != 0 && i !== args.length - 1) {
-            let parse = e.split(':')
-            payload[parse[0]] = parse[1]
-          }
-        })
+      let body
+      if (args.body) {
+        try {
+          // nesting of the doom :3
+          body = JSON.stringify(JSON.parse(args.body.replace(/\'/g, '"')))
+        } catch (e) {
+          throw new Error('Body provided is not a valid JSON')
+        }
       }
       let request = {
         method,
         headers: { "Content-Type": "application/json" },
       }
-      if (method !== 'GET') request.body = JSON.stringify(payload)
+      if (method !== 'GET') request.body = body
       return fetch(url, request).then((res) => {
         if (res.ok) return res.json()
         throw new Error(`Request Failed (${res.status || 500}): ${res.statusText || 'Some Error Occured.'}`)
       })
     },
   },
-
 }

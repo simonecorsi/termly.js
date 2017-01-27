@@ -44,6 +44,7 @@ class Terminal extends Shell{
     let current = document.querySelector('.current.terminal-row')
     if (current) {
       current.classList.remove('current')
+      current.querySelector('input').disabled = true
     }
 
     let prevInput = document.querySelector('.terminal-input')
