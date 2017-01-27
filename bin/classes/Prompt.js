@@ -72,6 +72,9 @@ class Terminal extends Shell{
   }
 
   generateOutput(out = '') {
+    if (Array.isArray(out)) {
+      out = out.join("\n")
+    }
     const pre = document.createElement('pre')
     pre.textContent = out
     this.container.appendChild(pre)
