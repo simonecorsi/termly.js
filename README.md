@@ -1,6 +1,8 @@
 #Termly.js
 ## Simple, Extensible, Lightweight Browser Terminal Simulator!
 
+Need to showcase your new shiny CLI tool you just released? Why not doing it interactively!
+
 <p align="center">
 	<h4>Using inside a nice wrapper</h4>
   <img src="/termly.gif?raw=true" align="center" />
