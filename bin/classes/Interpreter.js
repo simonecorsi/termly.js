@@ -1,4 +1,5 @@
 const Command = require('./Command')
+const Parser = require('string-to-argv.js')
 
 /**
  *
@@ -12,20 +13,44 @@ const Command = require('./Command')
 class Interpreter {
 
   /**
-   * Parse Command
-   * String is splitted by spaces
-   * @return Array of args as in C
-   * ---
-   *   IDEA: Regexp every word is an argument, to proide something else you must enclose
-   *   it in single or double quotes.
-   *   To pass a json use single quotes since the json starndard requires double quotes in it
-   *   @return cmd.match(/[^\s"']+|"([^"]*)"|'([^']*)'/g)
-   * ---
+   * CHANGED: Changed to use Kirkhammetz/string-to-argv.js
+   * Keep this function separate for testing
    */
   parse(cmd) {
-    if (typeof cmd !== 'string') throw new Error('Command must be a string')
-    if (!cmd.length) throw new Error('Command is empty')
-    return cmd.split(' ')
+    return new Parser(cmd)
+  }
+  /**
+   * Exec Command
+   * @return {String}
+   */
+  exec(cmd) {
+
+    /**
+     * CHANGED: Wrote a simple parser in another branch, then splitted into an npm module. using it here
+     */
+    let argv
+    try {
+      argv = this.parse(cmd)
+    } catch (e) {
+      return `-fatal command: ${e.message || 'Some Error Occured while parsing the command string.'}`
+    }
+
+    //  X-check if command exist
+    const command = this.ShellCommands[argv.command]
+    if (!command) {
+      return `-invalid shell: Command <${argv.command}> doesn't exist.\n`
+    }
+
+    //  get arguments array and execute command return error if throw
+    let output
+    try {
+      output = command.exec(argv)
+    } catch (e) {
+      return `-fatal command: ${e.message}`
+    }
+
+    //  Format data and Return
+    return this.format(output)
   }
 
   /**
@@ -42,44 +67,6 @@ class Interpreter {
       return '-invalid command: Command returned no data.'
     }
     return output
-    // try {
-    //   return JSON.stringify(output)
-    // } catch (e) {
-    //   return '-invalid command: Command returned invalid data type: ' + e.message
-    // }
-  }
-
-  /**
-   * Exec Command
-   * @return {String}
-   */
-  exec(cmd) {
-
-    //  Parse Command String: [0] = command name, [1+] = arguments
-    let parsed
-    try {
-      parsed = this.parse(cmd)
-    } catch (e) {
-      return '-fatal command: ' + e.message || 'Some Error Occured'
-    }
-
-    //  X-check if command exist
-    const command = this.ShellCommands[parsed[0]]
-    if (!command) {
-      return `-error shell: Command <${parsed[0]}> doesn't exist.\n`
-    }
-
-    //  get arguments array and execute command return error if throw
-    const args = parsed.filter((e, i) => i > 0)
-    let output
-    try {
-      output = command.exec(args)
-    } catch (e) {
-      return '-fatal command: ' + e.message
-    }
-
-    //  Format data and Return
-    return this.format(output)
   }
 
   /*

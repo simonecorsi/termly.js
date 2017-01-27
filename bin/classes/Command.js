@@ -2,7 +2,7 @@
  * Command Class
  * @param name [String], fn [Function]
  *
- * don't pass arrow function if you want to use this inside your command function to access various shared shell object
+ * @NB don't pass arrow function if you want to use [this] inside your command function to access various shared shell circular references
  */
 class Command {
   constructor({ name, fn, type = 'usr', shell = undefined, man = ''} = {}){
@@ -25,13 +25,10 @@ class Command {
 
   /**
    * Dispatch Command Execution
-   *
-   * @tip don't use arrow function in you command if you want the arguments
-   * neither super and arguments get binded in AF.
    */
-  exec(args = []) {
-    if (!Array.isArray(args)) throw Error('Command exec args must be in an array')
-    if (args.length) return this.fn(args)
+  exec(argv = {}) {
+    if (typeof argv !== 'object' || Array.isArray(argv)) throw Error('Command exec ARGV Must be an [Object]')
+    if (Object.keys(argv).length) return this.fn(argv)
     return this.fn()
   }
 }
