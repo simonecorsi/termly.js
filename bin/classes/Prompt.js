@@ -71,14 +71,16 @@ class Terminal extends Shell{
     return input
   }
 
-  generateOutput(out = '') {
+  generateOutput(out = '', newLine = true) {
     if (Array.isArray(out)) {
       out = out.join("\n")
     }
     const pre = document.createElement('pre')
     pre.textContent = out
     this.container.appendChild(pre)
-    return this.generateRow()
+    if (newLine) {
+      return this.generateRow()
+    }
   }
 
   clear() {
@@ -97,6 +99,7 @@ class Terminal extends Shell{
       const output = this.run(command)
       // if is a {Promise} resolve it ad parse as json
       if (output['then']) {
+        this.generateOutput('Pending request...', false)
         return output.then(res => {
           if (typeof res === 'object') {
             try {
