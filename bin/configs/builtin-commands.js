@@ -154,7 +154,6 @@ module.exports = {
 
       let method = args.method || args.m || 'GET'
       let url = args._[0]
-      console.log(args, url)
 
       /*
        * Build Payload
@@ -167,6 +166,7 @@ module.exports = {
           // nesting of the doom :3
           body = JSON.stringify(JSON.parse(args.body.replace(/\'/g, '"')))
         } catch (e) {
+          console.log(e)
           throw new Error('Body provided is not a valid JSON')
         }
       }
@@ -178,7 +178,7 @@ module.exports = {
       return fetch(url, request).then((res) => {
         if (res.ok) return res.json()
         throw new Error(`Request Failed (${res.status || 500}): ${res.statusText || 'Some Error Occured.'}`)
-      })
+      }).catch(err => {throw new Error(`-fetch error response returned but it was not a valid JSON. Cannot Parse.`)})
     },
   },
 }
