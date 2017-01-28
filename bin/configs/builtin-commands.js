@@ -143,7 +143,7 @@ module.exports = {
   http: {
     name: 'http',
     type: 'builtin',
-    man: 'Send http requests.\n syntax: http [OPTIONS FLAGS] URL.\neg: http -m GET http://jsonplaceholder.typicode.com/\neg: http -m POST title:MyTitle http://jsonplaceholder.typicode.com/posts\n\
+    man: 'Send HTTP requests.\n syntax: http [OPTIONS FLAGS] URL.\neg: http -m GET http://jsonplaceholder.typicode.com/\n\
     options:\n\
     \t-m --method POST,GET,PUT,DELETE\n \
     \t--body must be an object, and MUST use single quoets inside eg: --body="{ \'data\': \'1\' }"\n \
