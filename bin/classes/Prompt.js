@@ -89,7 +89,7 @@ class Terminal extends Shell{
   }
 
   submitHandler(e) {
-    if (event.which == 13 || event.keyCode == 13) {
+    if (e.which == 13 || e.keyCode == 13) {
       e.preventDefault()
       const command = e.target.value.trim()
 

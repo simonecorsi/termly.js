@@ -1,6 +1,23 @@
 const path = require('path')
 const webpack = require('webpack')
 
+let plugins = []
+
+// Source maps still broken with uglifyjs
+if (process.env.NODE_ENV === 'production') {
+  plugins = [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production'),
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false },
+      comments: false,
+      minimize: false
+    })
+  ]
+}
 
 module.exports = {
   context: path.resolve(__dirname, './bin'),
@@ -27,16 +44,7 @@ module.exports = {
     }]
   },
 
-  plugins:[
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production'),
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false },
-      comments: false,
-      minimize: false
-    })
-  ],
+  plugins,
+
+  devtool: process.env.NODE_ENV === 'dev' ? 'source-map' : false
 }
