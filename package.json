@@ -1,6 +1,6 @@
 {
   "name": "termly.js",
-  "version": "2.3.5",
+  "version": "2.3.6",
   "description": "Simple, Extensible, Lightweight Javascript Browser Terminal Simulator!",
   "main": "dist/termly.min.js",
   "scripts": {
