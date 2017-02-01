@@ -46,7 +46,7 @@ module.exports = {
     name: 'arguments',
     type: 'builtin',
     man: 'Return argument passed, used for testing purpose',
-    fn: args => args
+    fn: args => JSON.stringify(args, null, 2)
   },
 
   /**

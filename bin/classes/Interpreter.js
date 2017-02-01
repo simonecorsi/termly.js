@@ -46,7 +46,7 @@ class Interpreter {
     try {
       output = command.exec(argv)
     } catch (e) {
-      return `-fatal command: ${e.message}`
+      return `-fatal ${argv.command}: ${e.message}`
     }
 
     //  Format data and Return

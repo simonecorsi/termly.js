@@ -13,7 +13,7 @@ var Shell = require('./Shell')
  *  - user {String}
  *  - hostname {String}
  */
-class Terminal extends Shell{
+class Prompt extends Shell{
   constructor(selector = undefined, options = {}) {
     super(options) // must pass option here
 
@@ -116,4 +116,4 @@ class Terminal extends Shell{
   }
 }
 
-module.exports = Terminal
+module.exports = Prompt

@@ -15,6 +15,11 @@ class Shell extends Interpreter{
 
     this.polyfills()
 
+    this.Classes = {
+      Command: require('./Command'),
+      File: require('./File')
+    }
+
     /**
      * Create the virtual filesystem
      * @return reference to instance of @class Filesystem
@@ -51,7 +56,7 @@ class Shell extends Interpreter{
   }
 }
 
-Object.defineProperty(Shell.prototype, 'fs', { writable: true, enumerable: false })
-Object.defineProperty(Shell.prototype, 'ShellCommands', { writable: true, enumerable: false })
+// Object.defineProperty(Shell.prototype, 'fs', { writable: true, enumerable: false })
+// Object.defineProperty(Shell.prototype, 'ShellCommands', { writable: true, enumerable: false })
 
 module.exports = Shell
