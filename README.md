@@ -18,15 +18,15 @@ Why not doing it interactively!
 
 ## Table of Content
 
-+ [General Info](#General-and-why)
-+ [Installing](#Installing)
-+ [Getting Started](#Getting-Started)
-+ [Basic Usage](#Basic-Usage)
-+ [Options](#Options)
-	+ [Filesystem Breakdown](#Filesystem-Object-Breakdown)
-	+ [Commands Breakdown](#Commands-Object-Breakdown)
-+ [Advanced Info](#Advanced-Usage)
-+ [Developers](#Developers)
++ [General Info](#general-and-why)
++ [Installing](#installing)
++ [Getting Started](#getting-started)
++ [Basic Usage](#basic-usage)
++ [Options](#options)
+	+ [Filesystem Breakdown](#filesystem-object-breakdown)
+	+ [Commands Breakdown](#commands-object-breakdown)
++ [Advanced Info](#advanced-usage)
++ [Developers](#developers)
 
 ## General and why
 
