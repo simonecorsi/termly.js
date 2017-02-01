@@ -1,20 +1,11 @@
 # Termly.js
 ### Simple, Extensible, Hackable and Lightweight Browser Terminal Simulator!
 
-Want to showcase your new shiny CLI Tool you just released?\
-Want to write HowTos on how some commands behaves?\
-Want to create a simulated sandbox of linux-like commands to help people learn?\
-You want to have fun (as I had) making your personal website readable from a fake terminal?\
+Want to showcase your new shiny CLI Tool you just released?
+Want to write HowTos on how some commands behaves?
+Want to create a simulated sandbox of linux-like commands to help people learn?
+You want to have fun (as I had) making your personal website readable from a fake terminal?
 Why not doing it interactively!
-
-<div style="text-align:center" markdown="1">
-	<h3>Using within a nice terminal css wrapper</h3>
-  <img src="/termly.gif?raw=true" align="center" />
-</div>
-<div style="text-align:center" markdown="1">
-	<h3>Using directly the main shell class and writing your own terminal wrapper</h3>
-  <img src="/console.gif?raw=true" align="center" />
-</div>
 
 ## Table of Content
 
@@ -23,8 +14,8 @@ Why not doing it interactively!
 + [Getting Started](#getting-started)
 + [Basic Usage](#basic-usage)
 + [Options](#options)
-	+ [Filesystem Breakdown](#filesystem-object-breakdown)
-	+ [Commands Breakdown](#commands-object-breakdown)
+  + [Filesystem Breakdown](#filesystem-object-breakdown)
+  + [Commands Breakdown](#commands-object-breakdown)
 + [Advanced Info](#advanced-usage)
 + [Developers](#developers)
 
@@ -41,7 +32,7 @@ Get the zip [Package](https://github.com/Kirkhammetz/termly.js/archive/master.zi
 
 ```sh
 npm install termly.js
-#	OR
+# OR
 yarn add termly.js
 # OR
 bower install termly.js
@@ -73,8 +64,8 @@ You can attach Termly.js to a DOM container and have it do the work of creating 
 ```html
 <script src='dist/termly-prompt.min.js'></script>
 <script>
-	// Documentation for options in the next section
-	var shell = new TermlyPrompt('#container', { /* options object */ })
+  // Documentation for options in the next section
+  var shell = new TermlyPrompt('#container', { /* options object */ })
 </script>
 ```
 *Keep in mind that the wrapper, while working and doing his job well, is very basic in doing it, it doesn't care about user experience or interface. This bring us to the next point the underling Shell Class.*
@@ -87,10 +78,10 @@ A more advanced approach to build something custom that suites your needs would 
 ```html
 <script src='dist/termly.min.js'></script>
 <script>
-	// Documentation for options in the next section
-	var shell = new Termly('#container', { /* options object */ })
-	shell.run('help')
-	//> 'Commands available: help, whoami, about, arguments, cd, ls, cat, man, http'
+  // Documentation for options in the next section
+  var shell = new Termly('#container', { /* options object */ })
+  shell.run('help')
+  //> 'Commands available: help, whoami, about, arguments, cd, ls, cat, man, http'
 </script>
 ```
 'Feeding' a command to the shell will return the command output in various format (String, Array, Object, Promise), and you will have to handle them in the way you want.
@@ -121,13 +112,13 @@ Termly.js filesystem is build from a plain javascript object literal and every n
 you can then simply pass the filesystem option
 ```js
 var myFilesystem = {
-	etc: {
-		'file.1': 'My Content',
-		anotherFile: ['A', 'List', 'Type', 'Of', 'file'],
-		apache2: {
-			'apache2.conf': 'Not what you were hoping for',
-		},
-	},
+  etc: {
+  'file.1': 'My Content',
+  anotherFile: ['A', 'List', 'Type', 'Of', 'file'],
+  apache2: {
+  'apache2.conf': 'Not what you were hoping for',
+  },
+  },
 }
 var shell = new TermlyPrompt('#container', { filesystem: myFilesystem })
 ```
@@ -143,17 +134,17 @@ Termly.js have a basic set of commands that you can extends at instantiation  us
 #### Command Syntax
 ```js
  var customCommands = {
-	 help: { // keep it equal to name till I change it
-	 	name: 'help', // keep it equal to the key till I change it
-	 	type: 'builtin', // OPTIONAL default to 'usr' if not passed
-	 	man: 'List of available commands', // Manual Entry for the command OPTIONAL
-	 	fn: function help(ARGV) {
-			// Here is where the action goes, do what you want and return a value
-			// (more on context and arguments below)
-	 		return `Return the value of the command`
-	 	},
-	 },
-	 // ...more commands
+   help: { // keep it equal to name till I change it
+   	name: 'help', // keep it equal to the key till I change it
+   	type: 'builtin', // OPTIONAL default to 'usr' if not passed
+   	man: 'List of available commands', // Manual Entry for the command OPTIONAL
+   	fn: function help(ARGV) {
+      // Here is where the action goes, do what you want and return a value
+      // (more on context and arguments below)
+   		return `Return the value of the command`
+   	},
+   },
+   // ...more commands
  }
  var shell = new TermlyPrompt('#container', { commands: customCommands })
 ```
@@ -181,9 +172,10 @@ You can access the shell reference in the body function using `this.shell`.
 The arguments in the command input string are passed to each command (more on how are parsed later), the parser get a string in a linux-like format and parse in a more usable way. That mean that you can pass flags to your command and get it parsed as an object as the first argument of the `fn` of your command, you can test this using the buildin `arguments` command that output you command string as a parsed object.  
 
 **ARGV object syntax**
+
 |key|use|
 |---|---|
-|raw| Is the Raw command string parsed|
+|raw|Is the Raw command string parsed|
 |command| Is the command name|
 |_| Array of arguments which are not option flags ordered as seen |
 |flag| flag value|
@@ -259,32 +251,35 @@ Mind that every command sent have a returned value, I didn't implement node Even
 The shell come bundled with a polyfill for the fetch method and one for promise, I didn't want to bundle a full HTTP library to keep it lightweight and simple, anyway if you use the Shell class and you do HTTP calls in one of you command you must check the return and if it is a promise await it.
 Or implement an EventEmitter in the Shell Class and do something more fine-tuned.
 
-## Developers
+## Developers
 
 #### Project Structure
 
 **Classes Inheritance**
+
 |main|Class|Parent|
 |---|---|---|
 |true|Prompt|Shell|
 |true|Shell|Interpreter|
-||Interpreter||
-||Filesystem||
-||File||
-||Command||
+| |Interpreter| |
+| |Filesystem| |
+| |File| |
+| |Command| |
 
 The Main Class is `Shell.js`, `Prompt.js` is the DOM wrapper which inherits from it, thus making two different bundle.
 
 `Shell` class have in it **references** to other class for your usage
 + Classes
-	+ Command
-	+ File
+  + Command
+  + File
 + fs: is a reference to the Filesystem instantiated with the shell and all its methods
 
 `Command` class have a `shell` reference to navigate around in `this.shell`, it's passed when command are instantiated, also commands bind the this context of the function to the command class making it access the shell reference.
 
 #### Methods & Properties
-#####Shell
+
+##### Shell
+
 - `@method run` the shell expose this method that gets a string and pass it to the interpreter
 
 - `@property ShellCommands` Commands Generated list, that's where execute will check for commands to execute
@@ -292,13 +287,15 @@ The Main Class is `Shell.js`, `Prompt.js` is the DOM wrapper which inherits from
 - `@property user` fake user
 - `@property hostname` fake hostname
 
-#####Interpreter
+##### Interpreter
+
 - `@method exec` Get the command string from the shell `run` method, check for error to throw, send command to be parsed by `parse()`, find the command if exist and call its execute function, returning the output
 - `@method parse` Get a command string, pass it to the Parser module and return an `{Object}`
 - `@method format` Check if command output is a valid format, and return it, more checks or transformation can be done here
 - `@method registerCommands` this is called at instantiation passing all the commands builtin + user custom ones returning an object with all the commands which is in
 
-#####Filesystem
+##### Filesystem
+
 - `@property shell` the main shell instance reference
 - `@property FileSystem` The generated fake Filesystem
 - `@property cwd` current workign directory in array format
@@ -316,7 +313,8 @@ The Main Class is `Shell.js`, `Prompt.js` is the DOM wrapper which inherits from
 - `@method readFile` builtin to read file value content, used by CAT command
 - `@method getCurrentDirectory` return the current working dir as a string
 
-#####File
+##### File
+
 - `@property uid` fake uid generated at instantiation
 - `@property name` file name
 - `@property type` file type, file|dir
@@ -327,7 +325,8 @@ The Main Class is `Shell.js`, `Prompt.js` is the DOM wrapper which inherits from
 
 - `@method genUid` generate random UID just for the sake of it
 
-#####Command
+##### Command
+
 
 - `@method exec` execute command function passing arguments if the caller commands has any
 
