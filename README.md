@@ -1,11 +1,20 @@
 # Termly.js
 ### Simple, Extensible, Hackable and Lightweight Browser Terminal Simulator!
 
-Want to showcase your new shiny CLI Tool you just released?\
-Want to write HowTos on how some commands behaves?\
-Want to create a simulated sandbox of linux-like commands to help people learn?\
-You want to have fun (as I had) making your personal website readable from a fake terminal?\
-Why not doing it interactively!\
+Want to showcase your new shiny CLI Tool you just released? \
+Want to write HowTos on how some commands behaves? \
+Want to create a simulated sandbox of linux-like commands to help people learn? \
+You want to have fun (as I had) making your personal website readable from a fake terminal? \
+Why not doing it interactively! \
+
+<div align="center">
+        <h4>Using inside a nice wrapper</h4>
+  <img src="/termly.gif?raw=true" align="center" />
+</div>
+<div align="center">
+        <h4>Or calling directly to the class and building your own wrapper</h4>
+  <img src="/console.gif?raw=true" align="center" />
+</div>
 
 ## Table of Content
 
