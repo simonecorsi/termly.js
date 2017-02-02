@@ -3,17 +3,7 @@ layout: default
 title: "Termly.js - Documentations"
 ---
 
-Want to showcase your new shiny CLI Tool you just released?
-
-Want to write HowTos on how some commands behaves?
-
-Want to create a simulated sandbox of linux-like commands to help people learn?
-
-You want to have fun (as I had) making your personal website readable from a fake terminal?
-
-Why not doing it interactively!
-
-## Table of Content
+## Documentation
 
 + [General Info](#general-and-why)
 + [Installing](#installing)
@@ -26,6 +16,12 @@ Why not doing it interactively!
 + [Developers](#developers)
 
 ## General and why
+
+Want to showcase your new shiny CLI Tool you just released? <br />
+Want to write HowTos on how some commands behaves?<br />
+Want to create a simulated sandbox of linux-like commands to help people learn?<br />
+You want to have fun (as I had) making your personal website readable from a fake terminal?<br />
+Why not doing it interactively!
 
 Termly.js has no dependencies, is vanilla javascript and is lightweight `~11kb minified/gzipped` (with fetch/promise polyfill, otherwise less), it is transpiled with Babel to get the best possible browser support thus making it usable *almost* everywhere. You can use it as it is or hack it and rebuild it (Devs Info below).
 
