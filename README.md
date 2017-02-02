@@ -9,11 +9,11 @@ Doit interactively! <br />
 
 <div align="center">
   <h4>Use inside a nice wrapper</h4>
-  <img src="/termly.gif?raw=true" align="center" />
+  <img src="https://github.com/Kirkhammetz/termly.js/blob/statics/termly.gif?raw=true" align="center" />
 </div>
 <div align="center">
   <h4>Or calling directly to the class and building your own wrapper</h4>
-  <img src="/console.gif?raw=true" align="center" />
+  <img src="https://github.com/Kirkhammetz/termly.js/blob/statics/console.gif?raw=true" align="center" />
 </div>
 
 
