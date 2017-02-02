@@ -28,13 +28,15 @@ Doit interactively! <br />
   + [Commands Breakdown](#commands-object-breakdown)
 + [Advanced Info](#advanced-usage)
 + [Developers](#developers)
+  + [Build Sources](#source-build)
+  + [Running Tests](#running-the-tests)
   + [Possible New Features](#possible-useful-new-features)
   + [Project Structure](#project-structure)
-  + [Methods&Properties](#methods-properties)
+  + [Classes, Methods & Properties](#classes-methods-properties)
 
 ## General
 
-Termly.js has no dependencies, is vanilla Javascript and is lightweight `~11kb minified/gzipped` (with fetch/promise polyfill, otherwise less), it is transpiled with Babel to get the best possible browser support thus making it usable *almost* everywhere. <br />
+Termly.js has no dependencies, is vanilla Javascript and is lightweight `~11kb minified/gzipped` (with fetch/promise polyfill, otherwise less), it is transpiled with Babel6 to get the best possible browser support thus making it usable *almost* everywhere. <br />
 You can use it as it is or hack it and rebuild it (Devs Infos below).
 
 ## Installing
@@ -279,6 +281,31 @@ Or implement an EventEmitter in the Shell Class and do something more fine-tuned
 
 ## Developers
 
+#### Source Build
+
+The sources are written using ES6 Classes and built with babel bundled with webpack2. <br />
+
+```bash
+  # Up&Running
+  npm install
+
+  # or yarn if you use it, there is a lockfile for that
+  yarn
+
+  #build with watcher for develop
+  npm run build:dev
+
+  #build for production
+  npm run build
+```
+
+#### Running the tests
+
+Tests are done with Mocha/Chai using expect, you can run them with
+```bash
+npm test
+```
+
 #### Possible useful new features
 
 - Attach an EventEmitter to the Shell
@@ -287,7 +314,7 @@ Or implement an EventEmitter in the Shell Class and do something more fine-tuned
   - Stream commands output instead of instant result
 - Add LocalStorage manipulation to persist user fake filesystem and commands
 
-#### Project Structure
+### Project Structure
 
 **Classes Inheritance**
 
@@ -310,9 +337,9 @@ The Main Class is `Shell.js`, `Prompt.js` is the DOM wrapper which inherits from
 
 `Command` class have a `shell` reference to navigate around in `this.shell`, it's passed when command are instantiated, also commands bind the this context of the function to the command class making it access the shell reference.
 
-#### Methods & Properties
+### Classes Methods & Properties
 
-##### Shell
+##### Shell Class
 
 - `@method run` the shell expose this method that gets a string and pass it to the interpreter
 
@@ -321,14 +348,15 @@ The Main Class is `Shell.js`, `Prompt.js` is the DOM wrapper which inherits from
 - `@property user` fake user
 - `@property hostname` fake hostname
 
-##### Interpreter
+##### Interpreter Class
 
-- `@method exec` Get the command string from the shell `run` method, check for error to throw, send command to be parsed by `parse()`, find the command if exist and call its execute function, returning the output upstream
+- `@method exec` Get the command string from the shell `run` method, check for error to throw, send command to be parsed by `parse()`, find the command if exist and call its execute function, returning the output upstream.
+
 - `@method parse` Get a command string, pass it to the Parser module and return an `{Object}`
 - `@method format` Check if command output is a valid format, and return it, more checks or transformation can be done here
 - `@method registerCommands` this is called at instantiation passing all the commands builtin + user custom ones returning an object with all the commands which is in
 
-##### Filesystem
+##### Filesystem Class
 
 - `@property shell` the main shell instance reference
 - `@property FileSystem` The generated fake Filesystem
@@ -347,7 +375,7 @@ The Main Class is `Shell.js`, `Prompt.js` is the DOM wrapper which inherits from
 - `@method readFile` builtin to read file value content, used by CAT command
 - `@method getCurrentDirectory` return the current working dir as a string
 
-##### File
+##### File Class
 
 - `@property uid` fake uid generated at instantiation
 - `@property name` file name
@@ -359,8 +387,7 @@ The Main Class is `Shell.js`, `Prompt.js` is the DOM wrapper which inherits from
 
 - `@method genUid` generate random UID just for the sake of it
 
-##### Command
-
+##### Command Class
 
 - `@method exec` execute command function passing arguments if the caller commands has any
 
@@ -369,16 +396,6 @@ The Main Class is `Shell.js`, `Prompt.js` is the DOM wrapper which inherits from
 - `@property type` fake type
 - `@property man` manual entry used by MAN command
 - `@property shell` shell instance reference
-
-#### Running the tests
-
-Tests are done with Mocha/Chai using expect, you can run them with `npm test`.
-
-#### Source Build
-
-The sources are written using ES6 Classes and built with babel bundled with webpack2. <br />
-You can build it using `npm run build` which will run with production flag set <br />
-or `npm run build:dev` which will run with a watcher for file changes a no production flag
 
 ## Built Using
 
