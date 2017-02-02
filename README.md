@@ -5,20 +5,21 @@ Want to showcase your new shiny CLI Tool you just released? <br />
 Want to write HowTos on how some commands behaves? <br />
 Want to create a simulated sandbox of linux-like commands to help people learn? <br />
 You want to have fun (as I had) making your personal website readable from a fake terminal? <br />
-Why not doing it interactively! <br />
+Doit interactively! <br />
 
 <div align="center">
-        <h4>Using inside a nice wrapper</h4>
+  <h4>Use inside a nice wrapper</h4>
   <img src="/termly.gif?raw=true" align="center" />
 </div>
 <div align="center">
-        <h4>Or calling directly to the class and building your own wrapper</h4>
+  <h4>Or calling directly to the class and building your own wrapper</h4>
   <img src="/console.gif?raw=true" align="center" />
 </div>
 
-## Table of Content
 
-+ [General Info](#general-and-why)
+## Documentation
++ [Full Docs and Demo](https://kirkhammetz.github.io/termly.js/)
++ [General Info](#general)
 + [Installing](#installing)
 + [Getting Started](#getting-started)
 + [Basic Usage](#basic-usage)
@@ -27,13 +28,14 @@ Why not doing it interactively! <br />
   + [Commands Breakdown](#commands-object-breakdown)
 + [Advanced Info](#advanced-usage)
 + [Developers](#developers)
+  + [Possible New Features](#possible-useful-new-features)
+  + [Project Structure](#project-structure)
+  + [Methods&Properties](#methods-properties)
 
-## General and why
+## General
 
-Termly.js has no dependencies, is vanilla javascript and is lightweight `~11kb minified/gzipped` (with fetch/promise polyfill, otherwise less), it is transpiled with Babel to get the best possible browser support thus making it usable *almost* everywhere. You can use it as it is or hack it and rebuild it (Devs Info below).
-
-**Why?** I did the first version as a joke for other Devs landing on my personal website to have something cool to do on it other than looking at boring list of skills and projects, someday I got caught in a refactoring spree and wanted to rewrite it to be more usable and extensible since I'm seeing a lot of people releasing cool and useful CLI Tools and it can somehow be helpful to show people not used to the terminal how to use your Tool or the terminal in general, may be helpful to someone who knows!
-
+Termly.js has no dependencies, is vanilla Javascript and is lightweight `~11kb minified/gzipped` (with fetch/promise polyfill, otherwise less), it is transpiled with Babel to get the best possible browser support thus making it usable *almost* everywhere. <br />
+You can use it as it is or hack it and rebuild it (Devs Infos below).
 
 ## Installing
 
@@ -47,10 +49,25 @@ yarn add termly.js
 bower install termly.js
 ```
 
-then in the `dist/` folder use either `termly.min.js` or `termly-prompt.min.js`, more on the difference below.
-
-
 ## Getting Started
+
+You can get the builded and minified scripts
+```html
+  <!-- Get the Shell only package -->
+  <script src="node_modules/termly.js/dist/termly.min.js"></script>
+  <!-- Get the Shell + a Prompt I/O wrapper -->
+  <script src="node_modules/termly.js/dist/termly-prompt.min.js"></script>
+```
+
+Or get directly from the sources (Babel+Bundler workflow)
+```js
+  // @NB ES6 Classes are exported
+  const shell = require('termly.js') // Shell only
+  // OR
+  const shell = require('termly.js/bin/termly-prompt') // Init with a Prompt IO Wrapper
+```
+
+**More on the different bundles**
 
 Termly.js comes in two flavor:
 
@@ -158,7 +175,7 @@ Termly.js have a basic set of commands that you can extends at instantiation  us
  var shell = new TermlyPrompt('#container', { commands: customCommands })
 ```
 **NB**
-The property keys names the command, that's counter intuitive and may be changed. The key is used as the name when generating the inner commands list, which is a decorated object but starts as the options one, so the key/value pair is CommandName/CommandObject\
+The property keys names the command, that's counter intuitive and may be changed. The key is used as the name when generating the inner commands list, which is a decorated object but starts as the options one, so the key/value pair is CommandName/CommandObject <br />
 *eg*: as below is the key (help) that names the command, not the name property.
 
 <br />
@@ -242,7 +259,7 @@ cmd -z -c -v -flag1 123 -p -f test --depth=0 -s --string=noquotes --flagstring="
 
 Commands are parsed by a tinny parser I wrote for this project and was recently splitted into his own module, for testing and reusability, if you want to know more on how it work you can find it [HERE](https://github.com/Kirkhammetz/string-to-argv.js), you can use it standalone in case you need it.
 
-But basically everything which starts with "-" or "--" is a flag, if no value after the flag, it's a boolean True flag, if there is a value the values is parsed as a string, if you need to pass a string with space you have to use the syntax `flat="stringed content"`, everything else is a standalone value passed to the `_` array. **NB** nested quotes don't work, I just write that plain simple.\
+But basically everything which starts with "-" or "--" is a flag, if no value after the flag, it's a boolean True flag, if there is a value the values is parsed as a string, if you need to pass a string with space you have to use the syntax `flat="stringed content"`, everything else is a standalone value passed to the `_` array. **NB** nested quotes don't work, I just write that plain simple. <br />
 
 You now may be asking if you can write a json in a quoted string, yes you can but you have to write it as an object literal using string quotes and then parse it in your command, like in the [http](https://github.com/Kirkhammetz/termly.js/blob/master/bin/configs/builtin-commands.js#L167) builtin command.
 
@@ -261,6 +278,14 @@ The shell come bundled with a polyfill for the fetch method and one for promise,
 Or implement an EventEmitter in the Shell Class and do something more fine-tuned.
 
 ## Developers
+
+#### Possible useful new features
+
+- Attach an EventEmitter to the Shell
+  - send signals
+  - prompt get result from an event
+  - Stream commands output instead of instant result
+- Add LocalStorage manipulation to persist user fake filesystem and commands
 
 #### Project Structure
 
@@ -292,13 +317,13 @@ The Main Class is `Shell.js`, `Prompt.js` is the DOM wrapper which inherits from
 - `@method run` the shell expose this method that gets a string and pass it to the interpreter
 
 - `@property ShellCommands` Commands Generated list, that's where execute will check for commands to execute
-- `@property fs` The Virtual Filesystem generated reference
+- `@property fs` Filesystem Class reference, this hold the Virtual Filesystem generated too
 - `@property user` fake user
 - `@property hostname` fake hostname
 
 ##### Interpreter
 
-- `@method exec` Get the command string from the shell `run` method, check for error to throw, send command to be parsed by `parse()`, find the command if exist and call its execute function, returning the output
+- `@method exec` Get the command string from the shell `run` method, check for error to throw, send command to be parsed by `parse()`, find the command if exist and call its execute function, returning the output upstream
 - `@method parse` Get a command string, pass it to the Parser module and return an `{Object}`
 - `@method format` Check if command output is a valid format, and return it, more checks or transformation can be done here
 - `@method registerCommands` this is called at instantiation passing all the commands builtin + user custom ones returning an object with all the commands which is in
@@ -307,7 +332,7 @@ The Main Class is `Shell.js`, `Prompt.js` is the DOM wrapper which inherits from
 
 - `@property shell` the main shell instance reference
 - `@property FileSystem` The generated fake Filesystem
-- `@property cwd` current workign directory in array format
+- `@property cwd` current working directory in array format
 
 - `@method initFs` get the Filesystem object and delegate it's creation, then returning it to the caller
 - `@method buildVirtualFs` traverse the object and recreate the FS using the File Class
@@ -351,8 +376,8 @@ Tests are done with Mocha/Chai using expect, you can run them with `npm test`.
 
 #### Source Build
 
-The sources are written using ES6 Classes and built with babel bundled with webpack2.\
-You can build it using `npm run build` which will run with production flag set\
+The sources are written using ES6 Classes and built with babel bundled with webpack2. <br />
+You can build it using `npm run build` which will run with production flag set <br />
 or `npm run build:dev` which will run with a watcher for file changes a no production flag
 
 ## Built Using
@@ -364,7 +389,9 @@ or `npm run build:dev` which will run with a watcher for file changes a no produ
 
 ## Contributing
 
-Fell free to let me know if there are any issue.
+Actually this fits my needs and it works as expected. But if you have nice ideas and you want to contribute get your copy and fiddle with!
+
+If there are any issue let me know, I'll give it a look when I can.
 
 ## Authors
 
@@ -372,13 +399,13 @@ Fell free to let me know if there are any issue.
 
 ## Acknowledgments
 
-Got some inspiration from [minimist](https://github.com/substack/minimist) module but that has more functions that I needed, kudos btw :)
+[minimist](https://github.com/substack/minimist) Got inspiration to write my command parser
 
-Promise Polyfill https://github.com/taylorhakes/promise-polyfill
+[Promise Polyfill](https://github.com/taylorhakes/promise-polyfill)
 
-Fetch API Polyfill https://github.com/github/fetch
+[Fetch API Polyfill](https://github.com/github/fetch)
 
-Some CSS I got here and there for the demo, I really don't remember where sorry :(
+Some CSS I got here and there for the demo because I get bored styling, I really don't remember from who sorry :( Thank you anyway
 
 ## License
 
