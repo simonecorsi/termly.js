@@ -64,7 +64,7 @@ Or get directly from the sources (Babel+Bundler workflow)
 // @NB ES6 Classes are exported
 const shell = require('termly.js') // Shell only
 // OR
-const shell = require('termly.js/bin/termly-prompt') // Init with a Prompt IO Wrapper
+const shell = require('termly.js/bin/classes/Prompt') // Init with a Prompt IO Wrapper
 ```
 
 **More on the different bundles**
