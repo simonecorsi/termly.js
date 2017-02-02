@@ -35,9 +35,12 @@ pre{
 
 .main-content{
   h1,h2,h3,h4,h5,h6{
-    font-family: $Courier;
-    color: $primary;
+    // font-family: $Courier;
+    color: $secondary;
     font-weight: bold;
+  }
+  a{
+    color: $primary;
   }
 }
 
