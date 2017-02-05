@@ -50,6 +50,7 @@ class Prompt extends Shell{
     let prevInput = document.querySelector('.terminal-input')
     if (prevInput) {
       prevInput.removeEventListener('input', this.resizeHandler)
+      prevInput.blur()
     }
 
     const div = document.createElement('div')
@@ -66,7 +67,7 @@ class Prompt extends Shell{
     let inputWidth = currentRow.offsetWidth - currentPrompt.offsetWidth - 20
     input.style.width = inputWidth + "px"
     input.addEventListener('keyup', e => this.submitHandler(e))
-    input.focus()
+    input.select()
 
     return input
   }
