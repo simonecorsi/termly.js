@@ -1,40 +1,36 @@
-# Termly.js
-### Simple, Extensible, Hackable and Lightweight Browser Terminal Simulator!
+# Demo
 
-Want to showcase your new shiny CLI Tool you just released? <br />
-Want to write HowTos on how some commands behaves? <br />
-Want to create a simulated sandbox of linux-like commands to help people learn? <br />
-You want to have fun (as I had) making your personal website readable from a fake terminal? <br />
-Doit interactively! <br />
-
-<div align="center">
-  <h4>Use inside a nice wrapper</h4>
-  <img src="https://github.com/Kirkhammetz/termly.js/blob/statics/termly.gif?raw=true" align="center" />
+<div id="terminal-wrapper">
+  <div class="terminal-topbar">
+    <span class="button red"></span>
+    <span class="button yellow"></span>
+    <span class="button green"></span>
+  </div>
+  <div id="terminal-container">
+    <div class="session">
+      <h1>Welcome to Termly.js</h1>
+      \* Simple, Extensible, Lightweight Javascript Browser Terminal Simulator!<br>
+      \*<br>
+      \* Type help for list of commands<br>
+      \* Type man &lt;command&gt; for extra info<br>
+      \* source: <a href="https://github.com/Kirkhammetz/termly.js" style="color:white !important; text-decoration: underline;">View on Github</a><br>
+      \*
+    </div>
+  </div>
 </div>
-<div align="center">
-  <h4>Or calling directly to the class and building your own wrapper</h4>
-  <img src="https://github.com/Kirkhammetz/termly.js/blob/statics/console.gif?raw=true" align="center" />
-</div>
 
+# About and why
 
-## Documentation
-+ [Full Docs and Demo](https://kirkhammetz.github.io/termly.js/)
-+ [General Info](#general)
-+ [Installing](#installing)
-+ [Getting Started](#getting-started)
-+ [Basic Usage](#basic-usage)
-+ [Options](#options)
-  + [Filesystem Breakdown](#filesystem-object-breakdown)
-  + [Commands Breakdown](#commands-object-breakdown)
-+ [Advanced Info](#advanced-usage)
-+ [Developers](#developers)
-  + [Build Sources](#source-build)
-  + [Running Tests](#running-the-tests)
-  + [Possible New Features](#possible-useful-new-features)
-  + [Project Structure](#project-structure)
-  + [Classes, Methods & Properties](#classes-methods-properties)
+Want to showcase how your new shiny CLI Tool works? <br />
+Want to write HowTos on how commands behaves?<br />
+Want to create a simulated sandbox of linux-like commands to help people learn?<br />
+Want to show how basic server's setup/maintenance is done? <br />
+Want to prank non-techy friends into believing you are hacking them like a little mr.Robot? <br />
+Want to some insights on what your PM reaction would be after executing `rm -rf *` on what he believe is your production server? <br />
 
-## General
+Do it interactively with Termly.js! here are multiple possible use cases, I built the first version as a joke for Devs landing on my personal page to have a funny way to read it, looking around for a terminal simulator I didn't find something that fits my needs and was extensible for reusability, so here it is, have fun with it, build something cool :)
+
+# General
 
 Termly.js has no dependencies, is vanilla Javascript and is lightweight `~11kb minified/gzipped` (with fetch/promise polyfill, otherwise less), it is transpiled with Babel6 to get the best possible browser support thus making it usable *almost* everywhere. <br />
 You can use it as it is or hack it and rebuild it (Devs Infos below).
@@ -54,19 +50,21 @@ bower install termly.js
 ## Getting Started
 
 You can get the builded and minified scripts
+
 ```html
-  <!-- Get the Shell only package -->
-  <script src="node_modules/termly.js/dist/termly.min.js"></script>
-  <!-- Get the Shell + a Prompt I/O wrapper -->
-  <script src="node_modules/termly.js/dist/termly-prompt.min.js"></script>
+<!-- Get the Shell only package -->
+<script src="node_modules/termly.js/dist/termly.min.js"></script>
+<!-- Get the Shell + a Prompt I/O wrapper -->
+<script src="node_modules/termly.js/dist/termly-prompt.min.js"></script>
 ```
 
 Or get directly from the sources (Babel+Bundler workflow)
+
 ```js
-  // @NB ES6 Classes are exported
-  const shell = require('termly.js') // Shell only
-  // OR
-  const shell = require('termly.js/bin/termly-prompt') // Init with a Prompt IO Wrapper
+// @NB ES6 Classes are exported
+const shell = require('termly.js') // Shell only
+// OR
+const shell = require('termly.js/bin/classes/Prompt') // Init with a Prompt IO Wrapper
 ```
 
 **More on the different bundles**
@@ -88,7 +86,8 @@ Both the Shell and the Prompt wrapper can get parameters at instantiation whose 
 
 **Using the Prompt Wrapper**
 
-You can attach Termly.js to a DOM container and have it do the work of creating and setting up input/output field and handlers and only care of styling it, :
+You can attach Termly.js to a DOM container and have it do the work of creating and setting up input/output field and handlers and only care of styling it:
+
 ```html
 <script src='dist/termly-prompt.min.js'></script>
 <script>
@@ -96,6 +95,7 @@ You can attach Termly.js to a DOM container and have it do the work of creating 
   var shell = new TermlyPrompt('#container', { /* options object */ })
 </script>
 ```
+
 *Keep in mind that the wrapper, while working and doing his job well, is very basic in doing it, it doesn't care about user experience or interface. This bring us to the next point the underling Shell Class.*
 
 <br />
@@ -103,6 +103,7 @@ You can attach Termly.js to a DOM container and have it do the work of creating 
 **Using the Shell Class**
 
 A more advanced approach to build something custom that suites your needs would be to use Termly.js Shell Class, thus extending it with a wrapper and handle yourself all the DOM Input/Output in the way you desire it to behave.
+
 ```html
 <script src='dist/termly.min.js'></script>
 <script>
@@ -112,11 +113,12 @@ A more advanced approach to build something custom that suites your needs would 
   //> 'Commands available: help, whoami, about, arguments, cd, ls, cat, man, http'
 </script>
 ```
+
 'Feeding' a command to the shell will return the command output in various format (String, Array, Object, Promise), and you will have to handle them in the way you want.
 
 <br />
 
-## Options
+# Options
 
 Both Termly.js constructors can take an Option object with the following:
 
@@ -129,7 +131,7 @@ Both Termly.js constructors can take an Option object with the following:
 
 <br />
 
-## Filesystem Object Breakdown
+## Filesystem
 
 Termly.js filesystem is build from a plain javascript object literal and every node is parsed in a `file` OR `directory` using those simple rules:
 
@@ -138,6 +140,7 @@ Termly.js filesystem is build from a plain javascript object literal and every n
 - **Discarted**: the node's value is `{Function}`
 
 you can then simply pass the filesystem option
+
 ```js
 var myFilesystem = {
   etc: {
@@ -153,36 +156,34 @@ var shell = new TermlyPrompt('#container', { filesystem: myFilesystem })
 
 <br />
 
-## Commands Object Breakdown
+## Commands
 
 Termly.js have a basic set of commands that you can extends at instantiation  using a plain javascript Object Literal with each property being another object with the command behavior, passing a command with the same key/name of a builtin override it that's intended.
 
 <br />
 
-#### Command Syntax
 ```js
- var customCommands = {
-   help: { // keep it equal to name till I change it
-   	name: 'help', // keep it equal to the key till I change it
-   	type: 'builtin', // OPTIONAL default to 'usr' if not passed
-   	man: 'List of available commands', // Manual Entry for the command OPTIONAL
-   	fn: function help(ARGV) {
+var customCommands = {
+  help: { // keep it equal to name till I change it
+    name: 'help', // keep it equal to the key till I change it
+    type: 'builtin', // OPTIONAL default to 'usr' if not passed
+    man: 'List of available commands', // Manual Entry for the command OPTIONAL
+    fn: function help(ARGV) {
       // Here is where the action goes, do what you want and return a value
       // (more on context and arguments below)
-   		return `Return the value of the command`
-   	},
-   },
-   // ...more commands
- }
- var shell = new TermlyPrompt('#container', { commands: customCommands })
+      return `Return the value of the command`
+    },
+  },
+  // ...more commands
+}
+var shell = new TermlyPrompt('#container', { commands: customCommands })
 ```
+
 **NB**
 The property keys names the command, that's counter intuitive and may be changed. The key is used as the name when generating the inner commands list, which is a decorated object but starts as the options one, so the key/value pair is CommandName/CommandObject <br />
 *eg*: as below is the key (help) that names the command, not the name property.
 
-<br />
-
-#### Command Function Execution
+### Exec Function
 
 Every time the shell gets a command input (and the command exist) the `fn` of the command get executed, what return is handled back to the shell which check for errors or return the value. If no value is returned a message of Exit with no value is outputted.
 
@@ -195,7 +196,7 @@ You can access the shell reference in the body function using `this.shell`.
 
 <br />
 
-#### Command Function Arguments Object
+## Arguments
 
 The arguments in the command input string are passed to each command (more on how are parsed later), the parser get a string in a linux-like format and parse in a more usable way. That mean that you can pass flags to your command and get it parsed as an object as the first argument of the `fn` of your command, you can test this using the buildin `arguments` command that output you command string as a parsed object.  
 
@@ -257,7 +258,7 @@ cmd -z -c -v -flag1 123 -p -f test --depth=0 -s --string=noquotes --flagstring="
 #> }
 ```
 
-#### More on how commands are parsed
+# Input Parser
 
 Commands are parsed by a tinny parser I wrote for this project and was recently splitted into his own module, for testing and reusability, if you want to know more on how it work you can find it [HERE](https://github.com/Kirkhammetz/string-to-argv.js), you can use it standalone in case you need it.
 
@@ -265,7 +266,7 @@ But basically everything which starts with "-" or "--" is a flag, if no value af
 
 You now may be asking if you can write a json in a quoted string, yes you can but you have to write it as an object literal using string quotes and then parse it in your command, like in the [http](https://github.com/Kirkhammetz/termly.js/blob/master/bin/configs/builtin-commands.js#L167) builtin command.
 
-## Advanced Usage
+# Advanced Usage
 
 Both the Prompt Wrapper and the Shell expose some reference to all the other classes used so you can Extends it how you want it.
 Commands as said before receive a reference to the shell so you can fiddle with it and create more advanced commands, even create command that create commands who create commands, command-ception.
@@ -279,9 +280,9 @@ Mind that every command sent have a returned value, I didn't implement node Even
 The shell come bundled with a polyfill for the fetch method and one for promise, I didn't want to bundle a full HTTP library to keep it lightweight and simple, anyway if you use the Shell class and you do HTTP calls in one of you command you must check the return and if it is a promise await it.
 Or implement an EventEmitter in the Shell Class and do something more fine-tuned.
 
-## Developers
+# Developers
 
-#### Source Build
+## Source Build
 
 The sources are written using ES6 Classes and built with babel bundled with webpack2. <br />
 
@@ -299,22 +300,15 @@ The sources are written using ES6 Classes and built with babel bundled with webp
   npm run build
 ```
 
-#### Running the tests
+## Running the tests
 
 Tests are done with Mocha/Chai using expect, you can run them with
+
 ```bash
 npm test
 ```
 
-#### Possible useful new features
-
-- Attach an EventEmitter to the Shell
-  - send signals
-  - prompt get result from an event
-  - Stream commands output instead of instant result
-- Add LocalStorage manipulation to persist user fake filesystem and commands
-
-### Project Structure
+## Project Structure
 
 **Classes Inheritance**
 
@@ -397,24 +391,32 @@ The Main Class is `Shell.js`, `Prompt.js` is the DOM wrapper which inherits from
 - `@property man` manual entry used by MAN command
 - `@property shell` shell instance reference
 
-## Built Using
+# Possible new Features
+
+- Attach an EventEmitter to the Shell
+  - send signals
+  - prompt get result from an event
+  - Stream commands output instead of instant result
+- Add LocalStorage manipulation to persist user fake filesystem and commands
+
+# Built Using
 
 * [Babel](https://babeljs.io/) - For ES2015 transpilation
 * [Webpack](https://webpack.js.org/) - Bundling
 * [Mocha](https://mochajs.org/) - Testing
 * [Chai](http://chaijs.com/) - Testing
 
-## Contributing
+# Contributing
 
 Actually this fits my needs and it works as expected. But if you have nice ideas and you want to contribute get your copy and fiddle with!
 
 If there are any issue let me know, I'll give it a look when I can.
 
-## Authors
+# Authors
 
 * **Simone Corsi** - *Initial work* - [Kirkhammetz](https://github.com/Kirkhammetz)
 
-## Acknowledgments
+# Acknowledgments
 
 [minimist](https://github.com/substack/minimist) Got inspiration to write my command parser
 
@@ -424,6 +426,6 @@ If there are any issue let me know, I'll give it a look when I can.
 
 Some CSS I got here and there for the demo because I get bored styling, I really don't remember from who sorry :( Thank you anyway
 
-## License
+# License
 
 This project is licensed under the GNU GPL v3 License - see the [LICENSE.md](LICENSE.md) file for details

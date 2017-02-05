@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Termly.js - Simple, Extensible, Lightweight Javascript Browser Terminal Simulator!</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+  <link rel="stylesheet" href="//unpkg.com/docsify/themes/vue.css">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  <meta name="language" content="english">
+  <meta http-equiv="content-type" content="text/html">
+  <meta name="author" content="Simone Corsi">
+  <meta name="designer" content="Simone Corsi">
+  <meta name="publisher" content="Simone Corsi">
+
+  <meta name="description" content="Termly.js is a tiny terminal simulator for the browser that has no dependencies, you can extends it's capabilities by creating you custom sets of commands and your fake filesystem to make it do what you need!">
+  <meta name="keywords" content="terminal,javascript,simulator,browser,presentation,mockup,demo,cli,prompt,commands,no depency,lightweight,js,vanilla,Hackable,Web">
+  <meta name=”robots” content=”index,follow”>
+  <meta name="robots" content="NOODP">
+
+  <meta property="og:url" content="https://kirkhammetz.github.io/termly.js/" />
+  <meta property="og:title" content="Termly.js" />
+  <meta property="og:description" content="Simple, Extensible, Hackable and Lightweight Browser Terminal Simulator!" />
+  <meta property="og:image" content="https://kirkhammetz.github.io/termly.js/images/termlyjs-preview.png?ver=1.1.1" />
+
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    window.$docsify = {
+      coverpage: true
+    }
+  </script>
+  <script
+    src="//unpkg.com/docsify/lib/docsify.js"
+    data-router
+    data-repo="https://github.com/Kirkhammetz/termly.js"
+    data-name="Termly.js">
+  </script>
+  <script src="/dist/termly-prompt.min.js" charset="utf-8"></script>
+  <script>
+    var shell = new TermlyPrompt('#terminal-container')
+  </script>
+</body>
+</html>

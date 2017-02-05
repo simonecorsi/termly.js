@@ -1,0 +1,126 @@
+@import "animation";
+
+$black: #333;
+$terminal-black: #30353A;
+$terminal-white: #E0E8F0;
+$white: #fff;
+$primary: #C02B2B;
+$primary-dark: darken($primary,10%);
+$secondary: #C06F2B;
+$secondary-dark: darken($secondary,10%);
+$red:#E75448;
+$green:#2ecc71;
+$yellow:#f39c12;
+$gradient: linear-gradient(-120deg, $secondary, $primary);
+// $secondary: #043227;
+// $secondary-dark: #097168;
+// $middle: #ffcc88;
+// $primary: #fa482e;
+// $primary-light: #f4a32e;
+$Courier: 'Courier new', 'Courier', sans-serif;
+$SansSerif: 'Open Sans', 'Helvetica', 'Helvetica Neue', 'Arial', sans-serif;
+
+body{
+  font-family: $SansSerif;
+}
+
+pre{
+  white-space: pre-wrap;
+}
+
+img{
+  max-width: 100%;
+}
+
+.main-content{
+  h1,h2,h3,h4,h5,h6{
+    // font-family: $Courier;
+    color: $secondary;
+    font-weight: bold;
+  }
+  a{
+    color: $primary;
+  }
+}
+
+#terminal-wrapper{
+  * { color: white; }
+  pre { background: transparent; }
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  top: 0px;
+  @media screen and (min-width: 501px) {
+    animation: bounceIn ease-out .25s;
+    animation-iteration-count: 1;
+    transform-origin: 50% 50%;
+    animation-fill-mode:forwards; /*when the spec is finished*/
+    -webkit-animation: bounceIn ease-out .25s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-transform-origin: 50% 50%;
+    -webkit-animation-fill-mode:forwards; /*Chrome 16+, Safari 4+*/
+    -moz-animation: bounceIn ease-out .25s;
+    -moz-animation-iteration-count: 1;
+    -moz-transform-origin: 50% 50%;
+    -moz-animation-fill-mode:forwards; /*FF 5+*/
+    -o-animation: bounceIn ease-out .25s;
+    -o-animation-iteration-count: 1;
+    -o-transform-origin: 50% 50%;
+    -o-animation-fill-mode:forwards; /*Not implemented yet*/
+    -ms-animation: bounceIn ease-out .25s;
+    -ms-animation-iteration-count: 1;
+    -ms-transform-origin: 50% 50%;
+    -ms-animation-fill-mode:forwards; /*IE 10+*/
+  }
+  .terminal-topbar {
+    background: $terminal-white;
+    height: 30px;
+    border-radius: 8px 8px 0 0;
+    padding-left: 10px;
+    text-align: right;
+    .button{
+      height: 15px;
+      width: 15px;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 7px;
+      &.red{ background: $red; }
+      &.green{ background: $green; }
+      &.yellow{ background: $yellow; }
+    }
+  }
+  #terminal-container{
+    & * {
+      font-size: 14px;
+      letter-spacing: 1px;
+      @media screen and (max-width: 500px) {
+        font-size: 11px;
+      }
+    }
+    background: $terminal-black;
+    font-family: $Courier;
+    text-align: left;
+    padding: 10px;
+    height: 360px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    @media screen and (max-width: 500px) {
+      height: 200px;
+    }
+
+    h1{
+      font-size: 16px;
+      letter-spacing: 3px;
+    }
+    input.terminal-input{
+      padding: 0 5px;
+      border:none;
+      outline:none;
+      background: transparent;
+      color: white;
+      position: relative;
+    }
+  }
+}
