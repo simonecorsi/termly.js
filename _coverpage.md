@@ -2,14 +2,14 @@
 
 <!-- # Termly.js <small>2.4.0</small> -->
 
-> Simple, Extensible, Hackable and Lightweight Javascript Browser Terminal Simulator!
+> Simple, Extensible, Hackable Terminal Simulator for the Browser!
 
-- Simple and lightweight (~11kb gzipped)
+- Lightweight (~11kb gzipped)
 - No Depencies
 - Vanilla Javascript
 
 
-[GitHub](https://github.com/QingWei-Li/docsify/)
+[GitHub](https://github.com/Kirkhammetz/termly.js)
 [Demo](#demo)
 
 <!-- background color -->

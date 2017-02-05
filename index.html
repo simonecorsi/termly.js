@@ -42,7 +42,13 @@
   </script>
   <script src="/dist/termly-prompt.min.js" charset="utf-8"></script>
   <script>
-    var shell = new TermlyPrompt('#terminal-container')
+    // that's bad but it's the fastest hack.
+    var shell = null
+    var bad = setInterval(function(){
+      var shell = new TermlyPrompt('#terminal-container')
+      if(shell) clearInterval(bad)
+      else console.log(shell)
+    }, 10)
   </script>
 </body>
 </html>

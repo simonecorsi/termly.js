@@ -55,21 +55,31 @@
   -ms-animation-fill-mode: forwards;
   /*IE 10+*/ }
 
-body {
-  font-family: "Open Sans", "Helvetica", "Helvetica Neue", "Arial", sans-serif; }
+.github-corner svg {
+  fill: #333 !important; }
 
-pre {
-  white-space: pre-wrap; }
+.active a, p a {
+  color: #C02B2B !important; }
 
-img {
-  max-width: 100%; }
+.anchor:hover {
+  border-color: #C02B2B !important; }
 
-.main-content h1, .main-content h2, .main-content h3, .main-content h4, .main-content h5, .main-content h6 {
-  color: #C06F2B;
-  font-weight: bold; }
+section.cover {
+  color: #fff !important; }
+  section.cover p {
+    opacity: .8 !important; }
 
-.main-content a {
-  color: #C02B2B; }
+section.cover .cover-main p:last-child a {
+  border-color: #333 !important;
+  color: #333 !important; }
+  section.cover .cover-main p:last-child a:hover {
+    color: #fff !important; }
+
+section.cover .cover-main p:last-child a:last-child {
+  background-color: #333 !important;
+  color: #fff !important; }
+  section.cover .cover-main p:last-child a:last-child:hover {
+    color: #fff !important; }
 
 #terminal-wrapper {
   max-width: 900px;
@@ -128,7 +138,7 @@ img {
         background: #f39c12; }
   #terminal-wrapper #terminal-container {
     background: #30353A;
-    font-family: "Courier new", "Courier", sans-serif;
+    font-family: "Courier new", "Courier", monospace;
     text-align: left;
     padding: 10px;
     height: 360px;

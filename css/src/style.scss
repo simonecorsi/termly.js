@@ -4,42 +4,54 @@ $black: #333;
 $terminal-black: #30353A;
 $terminal-white: #E0E8F0;
 $white: #fff;
+
 $primary: #C02B2B;
 $primary-dark: darken($primary,10%);
 $secondary: #C06F2B;
 $secondary-dark: darken($secondary,10%);
+
 $red:#E75448;
 $green:#2ecc71;
 $yellow:#f39c12;
 $gradient: linear-gradient(-120deg, $secondary, $primary);
-// $secondary: #043227;
-// $secondary-dark: #097168;
-// $middle: #ffcc88;
-// $primary: #fa482e;
-// $primary-light: #f4a32e;
-$Courier: 'Courier new', 'Courier', sans-serif;
+
+$Courier: 'Courier new', 'Courier', monospace;
 $SansSerif: 'Open Sans', 'Helvetica', 'Helvetica Neue', 'Arial', sans-serif;
 
-body{
-  font-family: $SansSerif;
+.github-corner svg{
+  fill: #333 !important;
 }
 
-pre{
-  white-space: pre-wrap;
-}
-
-img{
-  max-width: 100%;
-}
-
-.main-content{
-  h1,h2,h3,h4,h5,h6{
-    // font-family: $Courier;
-    color: $secondary;
-    font-weight: bold;
-  }
+.active, p{
   a{
-    color: $primary;
+    color: $primary !important; // red
+  }
+}
+
+.anchor:hover{
+  border-color: $primary !important;
+}
+
+section.cover{
+  color: #fff !important;
+  p{
+    opacity: .8 !important;
+  }
+}
+
+section.cover .cover-main p:last-child a{
+  border-color: #333 !important;
+  color: #333 !important;
+  &:hover{
+    color: #fff !important;
+  }
+}
+
+section.cover .cover-main p:last-child a:last-child {
+  background-color: #333 !important;
+  color: #fff !important;
+  &:hover{
+    color: #fff !important;
   }
 }
 
