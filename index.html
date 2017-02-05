@@ -45,10 +45,11 @@
     // that's bad but it's the fastest hack.
     var shell = null
     var bad = setInterval(function(){
-      var shell = new TermlyPrompt('#terminal-container')
-      if(shell) clearInterval(bad)
-      else console.log(shell)
-    }, 10)
+      if (document.getElementById('terminal-container')){
+        shell = new TermlyPrompt('#terminal-container')
+        clearInterval(bad)
+      }
+    }, 100)
   </script>
 </body>
 </html>
