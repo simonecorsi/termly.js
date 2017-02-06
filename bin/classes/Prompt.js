@@ -68,6 +68,7 @@ class Prompt extends Shell{
     input.style.width = inputWidth + "px"
     input.addEventListener('keyup', e => this.submitHandler(e))
     input.select()
+    this.container.scrollTop = this.container.scrollHeight + 1
 
     return input
   }
