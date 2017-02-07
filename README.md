@@ -19,8 +19,9 @@ Doit interactively! <br />
 
 ## Documentation
 
-Read the [Documentations](https://termlyjs.info/) for all the options.
-Below the [Changeslog](#changelog)
++ Play with the [DEMO](http://termlyjs.info/#/#demo)
++ Read the [Documentations](https://termlyjs.info/) for all the options.
++ Below the [Changeslog](#changelog)
 
 ## Installing
 
@@ -92,13 +93,13 @@ A more advanced approach to build something custom that suites your needs would 
 
 ## Changelog
 
-- Added Commands `printenv` and `export`
+**2.5.0**
 
+- Added Commands `printenv` and `export`
 - Added `env` object in shell class
-  - You pass and `env: {}` with all the variables you want set in `shell.env` at instantiation
+  - You can provide an `env: {}` with all the variables you want set in `shell.env` at instantiation
   - You can see current session variables calling `printenv`
   - You can set a variable during runtime with `export VAR=value` or `export var='long value'`
-
 - fake user and hostname are taken from the provided env (or from default), no more in the options object
 
 ## Contributing
