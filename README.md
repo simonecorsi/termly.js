@@ -20,7 +20,7 @@ Doit interactively! <br />
 ## Documentation
 
 + Play with the [DEMO](http://termlyjs.info/#/#demo)
-+ Read the [Documentations](https://termlyjs.info/) for all the options.
++ Read the [Documentations](http://termlyjs.info/) for all the options.
 + Below the [Changeslog](#changelog)
 
 ## Installing
