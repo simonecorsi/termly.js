@@ -19,7 +19,8 @@ Doit interactively! <br />
 
 ## Documentation
 
-Read the [Documentations](https://kirkhammetz.github.io/termly.js/) for all the options
+Read the [Documentations](https://termlyjs.info/) for all the options.
+Below the [Changeslog](#changelog)
 
 ## Installing
 
@@ -53,7 +54,7 @@ const shell = require('termly.js') // Shell only
 const shell = require('termly.js/bin/classes/Prompt') // Init with a Prompt IO Wrapper
 ```
 
-**Read the full docs for the differences**
+>Read the [docs](http://termlyjs.info/#/#bundles-differences) to know the differences
 
 ## Basic Usage
 
@@ -71,6 +72,8 @@ You can attach Termly.js to a DOM container and have it do the work of creating 
 </script>
 ```
 
+>Read the [docs](http://termlyjs.info/#/#options) at website for all the options
+
 **Using the Shell Class**
 
 A more advanced approach to build something custom that suites your needs would be to use Termly.js Shell Class, thus extending it with a wrapper and handle yourself all the DOM Input/Output in the way you desire it to behave.
@@ -85,11 +88,24 @@ A more advanced approach to build something custom that suites your needs would 
 </script>
 ```
 
-**Read the docs at website for all the options**
+>Read the [docs](http://termlyjs.info/#/#options) at website for all the options
+
+## Changelog
+
+- Added Commands `printenv` and `export`
+
+- Added `env` object in shell class
+  - You pass and `env: {}` with all the variables you want set in `shell.env` at instantiation
+  - You can see current session variables calling `printenv`
+  - You can set a variable during runtime with `export VAR=value` or `export var='long value'`
+
+- fake user and hostname are taken from the provided env (or from default), no more in the options object
 
 ## Contributing
 
-Actually this fits my needs and it works as expected. But if you have nice ideas and you want to contribute get your copy and fiddle with!
+Actually this fits my needs and it works as expected, but as someone pointed to my this can be useful so if you have nice ideas and you want to contribute get your copy and fiddle with!
+
+If you have to open a PR if possible squash your commits before sending, so I can give it a look more easily.
 
 If there are any issue let me know, I'll give it a look when I can.
 

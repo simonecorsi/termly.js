@@ -1,16 +1,17 @@
 const Interpreter = require('./Interpreter')
 const Filesystem = require('./Filesystem')
 
+const ENV = require('../configs/environment')
+
 /**
  * Shell Class inherits from Interpreter
  * Options:
  *  - filesystem {Object}
  *  - commands {Object}
- *  - user {String}
- *  - hostname {String}
+ *  - env {Object} all extra mocked variables
  */
 class Shell extends Interpreter{
-  constructor({ filesystem = undefined, commands = undefined, user = 'root', hostname = 'my.host.me' } = {}) {
+  constructor({ filesystem = undefined, commands = undefined, env = ENV } = {}) {
     super()
 
     this.polyfills()
@@ -25,8 +26,7 @@ class Shell extends Interpreter{
      * @return reference to instance of @class Filesystem
      */
     this.fs = new Filesystem(filesystem, this)
-    this.user = user
-    this.hostname = hostname
+    this.env = env
 
     // Init builtin commands, @method in parent
     // pass shell reference

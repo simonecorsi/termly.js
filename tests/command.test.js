@@ -146,6 +146,34 @@ describe('Built-in commands tests - ', () => {
     })
   })
 
+  describe('printenv Integration', () => {
+    const shell = new Shell()
+    it('should print the environments variables', () => {
+      expect(shell.exec('printenv')).to.eql('USER=root\nHOSTNAME=my.host.me\n')
+    })
+  })
+
+  describe('EXPORT command Integration', () => {
+    const shell = new Shell()
+    it('should return an error with no value', () => {
+      expect(shell.exec('export')).to.match(/-fatal export.*/)
+    })
+
+    it('should set unquoted value', () => {
+      expect(shell.env).to.not.have.property('TEST_VALUE')
+      shell.exec('export TEST_VALUE=123')
+      expect(shell.env.TEST_VALUE).to.exist
+      expect(shell.env.TEST_VALUE).to.equal('123')
+    })
+
+    it('should set quoted value', () => {
+      expect(shell.env).to.not.have.property('TEST_QUOTED_VALUE')
+      shell.exec('export TEST_QUOTED_VALUE="123 asd"')
+      expect(shell.env.TEST_QUOTED_VALUE).to.exist
+      expect(shell.env.TEST_QUOTED_VALUE).to.equal('123 asd')
+    })
+  })
+
   /**
   * HTTP REQUESTS COMMAND
   * @type {Command}

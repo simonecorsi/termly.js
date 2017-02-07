@@ -56,7 +56,7 @@ class Prompt extends Shell{
     const div = document.createElement('div')
     div.classList.add('current', 'terminal-row')
     div.innerHTML = ''
-    div.innerHTML += `<span class="terminal-info">${this.user}@${this.hostname} - ${this.fs.getCurrentDirectory()} ➜ </span>`
+    div.innerHTML += `<span class="terminal-info">${this.env.USER}@${this.env.HOSTNAME} - ${this.fs.getCurrentDirectory()} ➜ </span>`
     div.innerHTML += `<input type="text" class="terminal-input" size="2" style="cursor:none;">`
 
     // add new row and focus it

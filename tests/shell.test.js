@@ -8,18 +8,31 @@ describe('Shell Class', () => {
     expect(shellInstance).to.exist
   })
 
+  describe('Input parameters', () => {
+    it('should init with env parameter', () => {
+      const shell = new Shell({ env: { USER: 'testuser' }})
+      expect(shell.env.USER).to.equal('testuser')
+    })
+    it('should init with env parameter', () => {
+      const shell = new Shell({ env: { USER: 'testuser' }})
+      expect(shell.env.USER).to.equal('testuser')
+    })
+  })
+
   it('should return error if command doesnt exist', () => {
     expect(() => shellInstance.run('test')()).to.throw(Error)
   })
 
   it('should run the arguments command and have all arguments parsed returned', () => {
     const out = shellInstance.run('arguments first second')
-    expect(out).to.be.a('object')
-    expect(out).to.eql({
+    const expected = {
       command: 'arguments',
       _: ['first', 'second'],
       raw: 'arguments first second'
-    })
+    }
+    // WATCH OUT, the json is parsed to have 2 space tabs for output, remove them
+    expect(out).to.be.a('string')
+    expect(JSON.parse(out.replace(/\n/g,''))).to.eql(expected)
   })
 
   it('should have initialized the builtin command with shell reference', () => {

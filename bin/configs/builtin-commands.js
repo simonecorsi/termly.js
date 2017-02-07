@@ -8,9 +8,9 @@ module.exports = {
   help: {
     name: 'help',
     type: 'builtin',
-    man: 'List of available commands',
+    man: 'List of available commands\nType man <command> to have further info.',
     fn: function help() {
-      return `Commands available: ${Object.keys(this.shell.ShellCommands).join(', ')}`
+      return `Commands available: ${Object.keys(this.shell.ShellCommands).join(', ')}\nType "man <command>" to have further info.`
     }
   },
 
@@ -47,6 +47,62 @@ module.exports = {
     type: 'builtin',
     man: 'Return argument passed, used for testing purpose',
     fn: args => JSON.stringify(args, null, 2)
+  },
+
+  /**
+   * Return environment variables
+   * @return {String} of variables fake formatted as bash
+   */
+  printenv: {
+    name: 'printenv',
+    type: 'builtin',
+    man: 'Return environment variables',
+    fn: function() {
+      const env = this.shell.env
+      let res = ''
+      Object.keys(env).map((key) => {
+        res += `${key}=${env[key]}\n`
+      })
+      return res
+    }
+  },
+
+  /**
+   * Export viariable into the environment
+   * @return {String} of variable fake formatted as bash
+   */
+  export: {
+    name: 'export',
+    type: 'builtin',
+    man: 'Export a variable into the current environment',
+    fn: function(ARGV) {
+      if (!ARGV || !ARGV['_'].length) throw new Error(`-fatal ${this.name}: Invalid syntax,\n correct syntax: export VAR=value or VAR="much value, such environment"`)
+
+      /**
+       * UnQuoted value comes as
+       *    [ 'name=value' ]
+       * Quoted value comes as
+       *    [ 'name=', '"value"' ]
+       */
+      let input = ARGV['_']
+      let varName, varValue
+
+      // If unquoted value
+      if (input.length === 1) {
+        let res = input[0].split('=')
+        varName = res[0]
+        varValue = res[1]
+      }
+
+      // if quoted value
+      if (input.length > 1) {
+        varName = input[0].replace(/=$/,'')
+        varValue = input[1].replace(/(\'|\")/g,'')
+      }
+
+      this.shell.env[varName] = varValue
+      return `${varName}=${varValue}`
+    }
   },
 
   /**
