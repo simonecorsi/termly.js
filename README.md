@@ -37,18 +37,21 @@ bower install termly.js
 
 ## Getting Started
 
-You can get the builded and minified scripts
+You can choose to use one of the two bundle coming with Termly.js, the main package have the shell only and all it's utilities you can use it as you wish, the prompt bundle is a simple DOM Wrapper that handles inputs and outputs and DOM manipulation, for the sake of simplicity with this you only have to attach a container and Style your terminal
+
 
 ```html
 <!-- Get the Shell only package -->
 <script src="node_modules/termly.js/dist/termly.min.js"></script>
-<!-- Get the Shell + a Prompt I/O wrapper -->
+
+<!-- OR Get the Shell + a Prompt I/O wrapper -->
 <script src="node_modules/termly.js/dist/termly-prompt.min.js"></script>
 ```
 
 Or get directly from the sources (Babel+Bundler workflow)
 
 ```js
+// With a bundler
 // @NB ES6 Classes are exported
 const shell = require('termly.js') // Shell only
 // OR
