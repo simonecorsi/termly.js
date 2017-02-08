@@ -48,13 +48,25 @@ yarn add termly.js
 bower install termly.js
 ```
 
+## Bundles Differences
+
+Termly.js comes in two flavor:
+
+- Shell Only
+- A Prompt Wrapper on top of the Shell
+
+> **The Shell** `termly.min.js`: is the main class that init and build the simulated shell, you can provide a 'filesystem' and/or custom commands at instantiation to extend the defaults (I'll get on this below)
+
+> **The Prompt Wrapper** `termly-prompt.min.js` is a class on top of the Shell and extends it thus initializing the Shell as above but also providing the DOM I/O manipulation needed to interact with it (attaching to a container, generating input line, getting the input and sending to the shell to execute, generating an output line for the returned value), that leaves you to only deal with the CSS styling of the terminal.
+
 ## Getting Started
 
-> You can get the builded and minified scripts
+> You can get the builded and minified scripts, choose what
 
 ```html
 <!-- Get the Shell only package -->
 <script src="node_modules/termly.js/dist/termly.min.js"></script>
+
 <!-- Get the Shell + a Prompt I/O wrapper -->
 <script src="node_modules/termly.js/dist/termly-prompt.min.js"></script>
 ```
@@ -69,17 +81,6 @@ const shell = require('termly.js/bin/classes/Prompt') // Init with a Prompt IO W
 ```
 
 > The Prompt Wrapper handles only the creation of prompt's lines and Input/Ouput business, thus coming without CSS Styling, you have to do **your own** :)
-
-## Bundles Differences
-
-Termly.js comes in two flavor:
-
-- Shell Only
-- A Prompt Wrapper on top of the Shell
-
-> **The Shell** `termly.min.js`: is the main class that init and build the simulated shell, you can provide a 'filesystem' and/or custom commands at instantiation to extend the defaults (I'll get on this below)
-
-> **The Prompt Wrapper** `termly-prompt.min.js` is a class on top of the Shell and extends it thus initializing the Shell as above but also providing the DOM I/O manipulation needed to interact with it (attaching to a container, generating input line, getting the input and sending to the shell to execute, generating an output line for the returned value), that leaves you to only deal with the CSS styling of the terminal.
 
 # Usage
 
@@ -124,8 +125,7 @@ Both Termly.js constructors can take an Option object with the following:
 |---|---|---|
 |filesystem| Object | Build-in Filesystem |
 |commands| Object | Build-in Commands |
-|user|  String | root |
-|hostname|  String | my<span></span>.host.me |
+|env| Object | Key/Value pair for shell's env variables |
 
 ## Filesystem
 
