@@ -163,3 +163,5 @@ section.cover .cover-main p:last-child a:last-child {
       background: transparent;
       color: white;
       position: relative; }
+    #terminal-wrapper #terminal-container .terminal-output {
+      white-space: normal !important; }
