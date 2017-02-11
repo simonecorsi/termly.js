@@ -28,7 +28,7 @@ class Filesystem {
     this.buildVirtualFs(fs)
     // Generate the root directory using the File contructor
     // and add the prev parsed FS as it's content
-    let parsedFs = new File({ name: '/', content: fs })
+    let parsedFs = new File({ name: '/', content: fs, type: 'dir' })
     return parsedFs
   }
 
@@ -110,20 +110,16 @@ class Filesystem {
     // fs = Object.assign(fs, {})
 
     // Exit Condition
-    if (!path.length) return fs
+    if (!path.length) return fs.type === 'dir' ? fs.content : fs
 
     // Get current node
     let node = path.shift()
 
     // Go deeper if it's not the root dir
     if (node !== '/') {
-      // check if node exist
-      if (fs[node]) {
-        // return file or folder
-        fs = fs[node].type === 'dir' ? fs[node].content : fs[node]
-      } else {
-        throw new Error('File doesn\'t exist')
-      }
+      const currentNode = fs.content[node]
+      if (!currentNode) throw new Error('File doesn\'t exist')
+      fs = currentNode
     }
     return this.fileWalker(path, fs)
   }
@@ -134,6 +130,7 @@ class Filesystem {
    * calling provided callback on each
    * @param cb executed on each file found
    * @param fs [Shell Virtual Filesystem]
+   * TODO: REMOVE/REFACTOR, IS NOT USED
    */
   traverseFiles(cb = ()=>{}, fs = this.FileSystem){
     const self = this.traverseFiles
@@ -151,6 +148,7 @@ class Filesystem {
    * calling provided callback on each
    * @param cb executed on each file found
    * @param fs [Shell Virtual Filesystem]
+   * TODO: REMOVE/REFACTOR, IS NOT USED
    */
   traverseDirs(cb = ()=>{}, fs = this.FileSystem){
     for (let node in fs) {
@@ -164,10 +162,10 @@ class Filesystem {
   }
 
   /**
-   * Get Directory Node
-   * Passed as Reference or Instance,
-   * depend by a line in @method fileWalker, see comment there.
-   * @return Directory Node Object
+   * Get Filesystem Node
+   * Checks if is a file or directory
+   * and return accordingly formatted object
+   * @return {Object}
    */
   getNode(path = '', fileType) {
     if (typeof path !== 'string') throw new Error('Invalid input.')
@@ -180,25 +178,23 @@ class Filesystem {
       throw e
     }
 
+
     /**
      * ERROR HANDLING
      */
 
     // Handle List on a file
+    // CHANGED:
+    //  Print single file attributes insted of throwing error,
+    //  as on unix terminal
     if (fileType === 'dir' && node.type === 'file') {
-      throw new Error('Its a file not a directory')
+      node = { [node.name]: node }
     }
-    // Handle readfile on a dir
-    if (fileType === 'file' && node.type === 'dir') {
-      throw new Error('Its a directory not a file')
-    }
-    // handle readfile on non existing file
+
+    // Handle Cat on a directory
     if (fileType === 'file' && !node.type) {
-      throw new Error('Invalid file path')
-    }
-    // handle invalid / nonexisting path
-    if (!node) {
-      throw new Error('Invalid path, file/folder doesn\'t exist')
+      console.log(node[0])
+      throw new Error(`${pathArray[pathArray.length - 1]} is a directory not a file`)
     }
 
     return { path, pathArray , node }
@@ -221,7 +217,7 @@ class Filesystem {
 
   /**
    * List Current Working Directory Files
-   * @return {}
+   * @return {Object}
    */
   listDir(path = '') {
     let result
@@ -233,6 +229,10 @@ class Filesystem {
     return result.node
   }
 
+  /**
+   * Read File
+   * @return {Object}
+   */
   readFile(path = '') {
     let result
     try {

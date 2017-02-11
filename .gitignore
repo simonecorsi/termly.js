@@ -4,3 +4,4 @@ _site
 .sass-cache
 dev.html
 images/
+npm-debug.log
