@@ -11,7 +11,7 @@ const ENV = require('../configs/environment')
  *  - env {Object} all extra mocked variables
  */
 class Shell extends Interpreter{
-  constructor({ filesystem = undefined, commands = undefined, env = ENV } = {}) {
+  constructor({ filesystem = undefined, commands = undefined, env = {} } = {}) {
     super()
 
     this.polyfills()
@@ -26,7 +26,10 @@ class Shell extends Interpreter{
      * @return reference to instance of @class Filesystem
      */
     this.fs = new Filesystem(filesystem, this)
-    this.env = env
+    this.env = {
+      ...ENV,
+      ...env
+    }
 
     // Init builtin commands, @method in parent
     // pass shell reference
