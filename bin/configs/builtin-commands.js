@@ -39,6 +39,15 @@ module.exports = {
     }
   },
 
+  pwd: {
+    name: 'pwd',
+    type: 'builtin',
+    man: 'Print current working directory',
+    fn: function about() {
+      return this.shell.fs.cwd.join('/').replace(/\/{2,}/g, '/')
+    }
+  },
+
   /**
    * Return passed arguments, for testing purposes
    */
