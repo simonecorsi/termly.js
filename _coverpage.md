@@ -1,4 +1,4 @@
-![logo](images/termly.png) <small>2.4.0</small>
+![logo](images/termly.png) <small>2.5.2</small>
 
 <!-- # Termly.js <small>2.4.0</small> -->
 
