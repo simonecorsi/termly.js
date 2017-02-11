@@ -24,8 +24,12 @@ class Filesystem {
    * @return new Filesystem as nodes of multiple @class File
    */
   initFs(fs) {
+    // Walk All nodes and generate with File Constricturo
     this.buildVirtualFs(fs)
-    return fs
+    // Generate the root directory using the File contructor
+    // and add the prev parsed FS as it's content
+    let parsedFs = new File({ name: '/', content: fs })
+    return parsedFs
   }
 
   /**
