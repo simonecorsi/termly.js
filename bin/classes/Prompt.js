@@ -79,6 +79,7 @@ class Prompt extends Shell{
     }
     const pre = document.createElement('pre')
     pre.textContent = out
+    pre.className = 'terminal-output'
     this.container.appendChild(pre)
     if (newLine) {
       return this.generateRow()
