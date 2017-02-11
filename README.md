@@ -127,6 +127,15 @@ Both Termly.js constructors can take an Option object with the following:
 |[commands](/#commands)| Object | Build-in Commands |
 |[env](/#environment-variables)| Object | Key/Value pair for shell's env variables |
 
+Options object at instantiation:
+```js
+  const shell = new TermlyPrompt('#container', {
+    filesystem: YourFileSystemObject, // Object
+    commands: YourCommandsObject, // Object
+    env: YourEnvironmentObject, // Object
+  })
+```
+
 ## Filesystem
 
 Termly.js filesystem is build from a plain javascript object literal and every node is parsed in a `File` OR `Directory` using those simple rules:
@@ -187,7 +196,13 @@ You can access the shell reference in the body function using `this.shell`.
 
 ## Environment Variables
 
-asdasd
+You can provide Termly.js with environment variables that you can reuse later in you commands. <br />
+As default Termly.js has USER and HOSTNAME variables set, which you can override. Simple provide an `env: {}` object with all you variable at instantiation to have all set. Those variable will be store in `shell.env` and you can access them in your command with the shell reference in `this.shell.env`.
+
+There are two buildin commands for environment to use at runtime
+
+- `printenv` which will print all ENV variable in a linux-like format
+- `export` which will export and add a new variable in the Environment, **syntax**: `export VARIABLE=value` or `export VARIABLE="LONG VALUE"`
 
 # Inputs
 
@@ -359,8 +374,6 @@ The Main Class is `Shell.js`, `Prompt.js` is the DOM wrapper which inherits from
 - `@method pathStringToArray` get a path as a string and turn to an array
 - `@method pathArrayToString` get a path as a array and turn to an string
 - `@method fileWalker` Recursive Virtual Filesystem File Walker, return the node found if any.
-- `@method traverseFiles` traverse the FS all files (not directory) at least once, and call the callback provided on it, if any
-- `@method traverseDirs` traverse the FS all directory at least once, and call the callback provided on it, if any
 - `@method getNode` given a path and a filetype call fileWalker to find it, if found return file/dir as asked, its path as string and array
 - `@method changeDir` builtin change directory command, used by CD command
 - `@method listDir` builtin list directory command, used by LS command
