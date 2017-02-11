@@ -70,7 +70,8 @@ module.exports = {
       const env = this.shell.env
       let res = ''
       Object.keys(env).map((key) => {
-        res += `${key}=${env[key]}\n`
+        const value = typeof env[key] === 'object' && !Array.isArray(env[key]) ? JSON.stringify(env[key]) : env[key]
+        res += `${key}=${value}\n`
       })
       return res
     }
