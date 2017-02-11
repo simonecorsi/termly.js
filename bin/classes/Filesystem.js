@@ -125,43 +125,6 @@ class Filesystem {
   }
 
   /**
-   * traverseFiles
-   * accessing all file at least once
-   * calling provided callback on each
-   * @param cb executed on each file found
-   * @param fs [Shell Virtual Filesystem]
-   * TODO: REMOVE/REFACTOR, IS NOT USED
-   */
-  traverseFiles(cb = ()=>{}, fs = this.FileSystem){
-    const self = this.traverseFiles
-    for (let node in fs) {
-      if (fs.hasOwnProperty(node)) {
-        if (fs[node].type === 'dir') this.traverseFiles(cb, fs[node].content)
-        else cb(fs[node])
-      }
-    }
-  }
-
-  /**
-   * traverseDirs
-   * accessing all directory at least once
-   * calling provided callback on each
-   * @param cb executed on each file found
-   * @param fs [Shell Virtual Filesystem]
-   * TODO: REMOVE/REFACTOR, IS NOT USED
-   */
-  traverseDirs(cb = ()=>{}, fs = this.FileSystem){
-    for (let node in fs) {
-      if (fs.hasOwnProperty(node)) {
-        if (fs[node].type === 'dir') {
-          cb(fs[node])
-          this.traverseDirs(cb, fs[node].content)
-        }
-      }
-    }
-  }
-
-  /**
    * Get Filesystem Node
    * Checks if is a file or directory
    * and return accordingly formatted object

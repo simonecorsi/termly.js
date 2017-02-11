@@ -42,15 +42,15 @@ describe('Shell Class', () => {
 
   it('should have initialized the virtual filesystem with default and saved reference', () => {
     expect(shellInstance.fs).to.exist
-    expect(shellInstance.fs.FileSystem['file.h']).to.exist
+    expect(shellInstance.fs.FileSystem.content['file.h']).to.exist
   })
 
   it('should create a custom filesystem when passed in costructor', () => {
     const mock_fs = { file: 123, dir: { file2: 456 }}
     const shellInstance2 = new Shell({ filesystem: mock_fs })
     expect(shellInstance2).to.exist
-    expect(shellInstance2.fs.FileSystem.file.content).to.exist.and.to.equal(123)
-    expect(shellInstance2.fs.FileSystem.dir.content).to.exist.and.to.be.a('object')
+    expect(shellInstance2.fs.FileSystem.content.file.content).to.exist.and.to.equal(123)
+    expect(shellInstance2.fs.FileSystem.content.dir.content).to.exist.and.to.be.a('object')
   })
 
   it('should create a shell with custom commands', () => {
