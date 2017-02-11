@@ -1,4 +1,4 @@
-# Termly.js
+# [Termly.js](http://termlyjs.info/)
 ### Simple, Extensible, Hackable and Lightweight Browser Terminal Simulator!
 
 Want to showcase your new shiny CLI Tool you just released? <br />
