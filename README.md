@@ -123,9 +123,9 @@ Both Termly.js constructors can take an Option object with the following:
 
 |Option|Type|Defaults|
 |---|---|---|
-|filesystem| Object | Build-in Filesystem |
-|commands| Object | Build-in Commands |
-|env| Object | Key/Value pair for shell's env variables |
+|[filesystem](/#filesystem)| Object | Build-in Filesystem |
+|[commands](/#commands)| Object | Build-in Commands |
+|[env](/#environment-variables)| Object | Key/Value pair for shell's env variables |
 
 ## Filesystem
 
@@ -184,6 +184,10 @@ Every Command you create get a reference to the main shell object thus having al
 You can access the shell reference in the body function using `this.shell`.
 
 > Keep in mind that to use this you **MUST** write the function using its full syntax, you can of course use Arrow Function but you won't get the reference, plain simple.
+
+## Environment Variables
+
+asdasd
 
 # Inputs
 
