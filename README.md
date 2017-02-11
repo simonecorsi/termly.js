@@ -96,6 +96,22 @@ A more advanced approach to build something custom that suites your needs would 
 
 ## Changelog
 
+**2.5.4**
+
+- Fixed ENV object not getting the defaults if empty object
+
+**2.5.3**
+
+- fixed printnev to print obejcts
+
+**2.5.2**
+
+- added pwd command
+
+**2.5.1**
+
+- Filesystem root dir structure instantialized as an instance of File()
+
 **2.5.0**
 
 - Added Commands `printenv` and `export`
