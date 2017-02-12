@@ -61,7 +61,7 @@ Termly.js comes in two flavor:
 
 ## Getting Started
 
-> You can get the builded and minified scripts, choose what
+> You can use one of the minified scripts
 
 ```html
 <!-- Get the Shell only package -->
@@ -71,7 +71,7 @@ Termly.js comes in two flavor:
 <script src="node_modules/termly.js/dist/termly-prompt.min.js"></script>
 ```
 
-> Or get directly from the sources (Babel+Bundler workflow)
+> Or `require` one of the exported source class (pairing with a Babel+Bundler workflow)
 
 ```js
 // @NB ES6 Classes are exported
@@ -84,9 +84,9 @@ const shell = require('termly.js/bin/classes/Prompt') // Init with a Prompt IO W
 
 # Usage
 
-Both the Shell and the Prompt wrapper can get parameters at instantiation whose most important are a custom Filesystem and a set of custom commands, both fall back to defaults if not provided.
+Both the Shell and the Prompt wrapper can get [options](#options) at instantiation, whose most important are a custom Filesystem and a set of custom commands, both fall back to defaults if not provided.
 
-!> Don't add both Termly.js Shell and Prompt scripts, because the Prompt inherit from the Shells thus having adding I/O Function extending the main class.
+!> Don't add both Termly.js Shell and Prompt scripts, because the Prompt inherit from the Shells thus adding only DOM manipulation on input and output on top of the Shell class.
 
 ## Using the Prompt Wrapper
 
@@ -109,7 +109,7 @@ A more advanced approach to build something custom that suites your needs would 
 <script src='dist/termly.min.js'></script>
 <script>
   // Documentation for options in the next section
-  var shell = new Termly('#container', { /* options object */ })
+  var shell = new Termly({ /* options object */ })
   shell.run('help')
   //> 'Commands available: help, whoami, about, arguments, cd, ls, cat, man, http'
 </script>
