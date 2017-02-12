@@ -53,9 +53,9 @@ Or get directly from the sources (Babel+Bundler workflow)
 ```js
 // With a bundler
 // @NB ES6 Classes are exported
-const shell = require('termly.js') // Shell only
+const Shell = require('termly.js') // Shell only
 // OR
-const shell = require('termly.js/bin/classes/Prompt') // Init with a Prompt IO Wrapper
+const Prompt = require('termly.js/bin/classes/Prompt') // Init with a Prompt IO Wrapper
 ```
 
 >Read the [docs](http://termlyjs.info/#/#bundles-differences) to know the differences

@@ -2,7 +2,7 @@
   "name": "termly.js",
   "version": "2.5.4",
   "description": "Simple, Extensible, Hackable and Lightweight Javascript Browser Terminal Simulator!",
-  "main": "dist/termly.min.js",
+  "main": "bin/classes/Shell.js",
   "scripts": {
     "test": "mocha --compilers babel-core/register tests/",
     "build": "NODE_ENV=production webpack -p",
