@@ -86,7 +86,7 @@ A more advanced approach to build something custom that suites your needs would 
 <script src='dist/termly.min.js'></script>
 <script>
   // Documentation for options in the next section
-  var shell = new Termly('#container', { /* options object */ })
+  var shell = new Termly({ /* options object */ })
   shell.run('help')
   //> 'Commands available: help, whoami, about, arguments, cd, ls, cat, man, http'
 </script>
