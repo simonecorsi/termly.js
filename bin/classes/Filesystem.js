@@ -141,25 +141,6 @@ class Filesystem {
       throw e
     }
 
-
-    /**
-     * ERROR HANDLING
-     */
-
-    // Handle List on a file
-    // CHANGED:
-    //  Print single file attributes insted of throwing error,
-    //  as on unix terminal
-    if (fileType === 'dir' && node.type === 'file') {
-      node = { [node.name]: node }
-    }
-
-    // Handle Cat on a directory
-    if (fileType === 'file' && !node.type) {
-      console.log(node[0])
-      throw new Error(`${pathArray[pathArray.length - 1]} is a directory not a file`)
-    }
-
     return { path, pathArray , node }
   }
 
@@ -175,7 +156,7 @@ class Filesystem {
       throw err
     }
     this.cwd = result.pathArray
-    return `changed directory.`
+    return `changed directory: ${this.getCurrentDirectory()}`
   }
 
   /**
@@ -188,6 +169,9 @@ class Filesystem {
       result = this.getNode(path, 'dir')
     } catch (err) {
       throw err
+    }
+    if (result.node.type === 'file') {
+      result.node = { [result.node.name]: result.node }
     }
     return result.node
   }
@@ -203,9 +187,15 @@ class Filesystem {
     } catch (err) {
       throw err
     }
+    if (!result.node.type) {
+      throw new Error(`${result.pathArray[result.pathArray.length - 1]} is a directory not a file`)
+    }
     return result.node
   }
 
+  /**
+   * Get Current Working Directory as a string
+   */
   getCurrentDirectory() {
     let cwdAsString
     try {

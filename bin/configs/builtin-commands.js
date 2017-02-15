@@ -44,7 +44,7 @@ module.exports = {
     type: 'builtin',
     man: 'Print current working directory',
     fn: function about() {
-      return this.shell.fs.cwd.join('/').replace(/\/{2,}/g, '/')
+      return this.shell.fs.getCurrentDirectory()
     }
   },
 
