@@ -1,3 +1,5 @@
+<meta property="og:image" content="https://github.com/Kirkhammetz/termly.js/blob/gh-pages/images/termlyjs-preview.png?raw=true">
+
 # [Termly.js](http://termlyjs.info/)
 ### Simple, Extensible, Hackable and Lightweight Browser Terminal Simulator!
 
@@ -15,7 +17,6 @@ Doit interactively! <br />
   <h4>Or calling directly to the class and building your own wrapper</h4>
   <img src="https://github.com/Kirkhammetz/termly.js/blob/statics/console.gif?raw=true" align="center" />
 </div>
-
 
 ## Documentation
 
@@ -95,6 +96,10 @@ A more advanced approach to build something custom that suites your needs would 
 >Read the [docs](http://termlyjs.info/#/#options) at website for all the options
 
 ## Changelog
+
+**2.5.5 - stable**
+
+- Fixed Filesystem methods cd-ing into files bug which cames with the change in how filesystem got inited some patch ago.
 
 **2.5.4**
 
