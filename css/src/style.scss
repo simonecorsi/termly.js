@@ -18,6 +18,10 @@ $gradient: linear-gradient(-120deg, $secondary, $primary);
 $Courier: 'Courier new', 'Courier', monospace;
 $SansSerif: 'Open Sans', 'Helvetica', 'Helvetica Neue', 'Arial', sans-serif;
 
+.cover.show{
+  background: linear-gradient(-120deg, #C06F2B, #C02B2B) !important;
+}
+
 .github-corner svg{
   fill: #333 !important;
 }
