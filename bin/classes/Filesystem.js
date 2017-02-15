@@ -150,10 +150,18 @@ class Filesystem {
    */
   changeDir(path = '') {
     let result
+    if (path === '..') {
+      let prevDir = this.cwd.splice(0, this.cwd.length - 1)
+      if (!prevDir.length) return 'You are in the root directory'
+      path = this.pathArrayToString(prevDir)
+    }
     try {
       result = this.getNode(path, 'dir')
     } catch (err) {
       throw err
+    }
+    if (result.node.type === 'file') {
+      throw new Error(`${result.pathArray[result.pathArray.length - 1]} is a file not a directory`)
     }
     this.cwd = result.pathArray
     return `changed directory: ${this.getCurrentDirectory()}`
