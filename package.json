@@ -1,6 +1,6 @@
 {
   "name": "termly.js",
-  "version": "2.5.5",
+  "version": "2.5.6",
   "description": "Simple, Extensible, Hackable and Lightweight Javascript Browser Terminal Simulator!",
   "main": "bin/classes/Shell.js",
   "scripts": {
