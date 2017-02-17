@@ -1,6 +1,6 @@
 ![logo](images/termly.png) <small>2.5.2</small>
 
-<!-- # Termly.js <small>2.5.5</small> -->
+<!-- # Termly.js <small>2.5.6</small> -->
 
 > Simple, Extensible, Hackable Terminal Simulator for the Browser!
 
