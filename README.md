@@ -97,7 +97,12 @@ A more advanced approach to build something custom that suites your needs would 
 
 ## Changelog
 
-**2.5.5 - stable**
+**2.5.6 - stable**
+
+- Prompt.js: Array output returned from commands execution now stringified
+
+
+**2.5.5**
 
 - Fixed Filesystem methods cd-ing into files bug which cames with the change in how filesystem got inited some patch ago.
 

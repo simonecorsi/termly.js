@@ -10,8 +10,7 @@ var Shell = require('./Shell')
  * Options:
  *  - filesystem {Object}
  *  - commands {Object}
- *  - user {String}
- *  - hostname {String}
+ *  - env {Object}
  */
 class Prompt extends Shell{
   constructor(selector = undefined, options = {}) {
@@ -99,8 +98,9 @@ class Prompt extends Shell{
       if (command === 'clear') return this.clear()
 
       // EXEC
-      const output = this.run(command)
-      // if is a {Promise} resolve it ad parse as json
+      let output = this.run(command)
+
+      // if is a {Promise} resolve it ad parse as json response
       if (output['then']) {
         this.generateOutput('Pending request...', false)
         return output.then(res => {
@@ -114,6 +114,11 @@ class Prompt extends Shell{
           return this.generateOutput(res)
         }).catch(err => this.generateOutput(err.message))
       }
+
+      if (typeof output === 'object' || Array.isArray(output)) {
+        output = JSON.stringify(output, null, 2)
+      }
+
       return this.generateOutput(output)
     }
   }
