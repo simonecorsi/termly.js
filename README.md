@@ -40,7 +40,7 @@ Termly.js has no dependencies, is vanilla Javascript and is lightweight `~11kb m
 
 Get the zip [Package](https://github.com/Kirkhammetz/termly.js/archive/master.zip) directly or better:
 
-``bash
+```bash
 npm install termly.js
 # OR
 yarn add termly.js
