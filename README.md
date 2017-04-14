@@ -97,9 +97,10 @@ A more advanced approach to build something custom that suites your needs would 
 
 ## Changelog
 
-**2.5.7 - stable**
+**2.6.0 - stable**
 
 - History: Added command history in localStorage, `history` command, and clear flag `history -c` to reset it.
+  - Added arrow to navigate history from Prompt Wrapper
 
 **2.5.6**
 

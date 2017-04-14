@@ -13,9 +13,9 @@ var Shell = require('./Shell')
  *  - env {Object}
  */
 class Prompt extends Shell{
+
   constructor(selector = undefined, options = {}) {
     super(options) // must pass option here
-
     if (!selector) throw new Error('No wrapper element selector provided')
     try {
       this.container = document.querySelector(selector)
@@ -23,7 +23,7 @@ class Prompt extends Shell{
     } catch (e) {
       throw new Error('new Terminal(): Not valid DOM selector.')
     }
-
+    this.historyPosition = 0
     return this.init()
   }
 
@@ -34,6 +34,7 @@ class Prompt extends Shell{
       let input = this.container.querySelector('.current .terminal-input')
       if (input) input.focus()
     })
+    this.container.addEventListener('keydown', e => this.upDownKeyHandler(e))
   }
 
   generateRow() {
@@ -120,6 +121,25 @@ class Prompt extends Shell{
       }
 
       return this.generateOutput(output)
+    }
+  }
+
+  upDownKeyHandler(e) {
+    e.stopPropagation()
+    if (e.which === 38 || e.which === 40) {
+      const history = this.getHistory()
+      let input = this.container.querySelector('.current .terminal-input')
+      if (e.which === 38) {
+        this.historyPosition = this.historyPosition < history.length - 1
+          ? this.historyPosition + 1
+          : 0
+      }
+      if (e.which === 40) {
+        this.historyPosition = this.historyPosition > 0
+          ? this.historyPosition - 1
+          : history.length - 1
+      }
+      input.value = history[this.historyPosition]
     }
   }
 }

@@ -265,7 +265,7 @@ module.exports = {
       }
 
       // Return history
-      const history = this.shell.getHistory()
+      const history = this.shell.getHistory().reverse()
       let response = ''
       for (var i = 0; i < history.length; i++) {
         response += `${i}\t${history[i]}\n`

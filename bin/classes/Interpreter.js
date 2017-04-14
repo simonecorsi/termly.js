@@ -118,9 +118,11 @@ class Interpreter {
    * Set command string to history
    */
   setHistoryItem(cmd) {
-    const history = JSON.parse(localStorage.getItem('termlyHistory'))
-    history.push(cmd)
-    return localStorage.setItem('termlyHistory', JSON.stringify(history))
+    if (cmd.length) {
+      const history = JSON.parse(localStorage.getItem('termlyHistory'))
+      history.unshift(cmd)
+      return localStorage.setItem('termlyHistory', JSON.stringify(history))
+    }
   }
 
   /**
