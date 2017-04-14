@@ -11,6 +11,9 @@ const Parser = require('string-to-argv.js')
  *
  */
 class Interpreter {
+  constructor() {
+    this.buildHistory()
+  }
 
   /**
    * CHANGED: Changed to use Kirkhammetz/string-to-argv.js
@@ -24,6 +27,11 @@ class Interpreter {
    * @return {String}
    */
   exec(cmd) {
+
+    /**
+     * Set command history
+     */
+    this.setHistoryItem(cmd)
 
     /**
      * CHANGED: Wrote a simple parser in another branch, then splitted into an npm module. using it here
@@ -95,6 +103,38 @@ class Interpreter {
       }
     })
     return ShellCommands
+  }
+
+  /**
+   * Build history storage if doesn't exist
+   */
+  buildHistory() {
+    if (!localStorage.getItem('termlyHistory')) {
+      localStorage.setItem('termlyHistory', JSON.stringify([]))
+    }
+  }
+
+  /**
+   * Set command string to history
+   */
+  setHistoryItem(cmd) {
+    const history = JSON.parse(localStorage.getItem('termlyHistory'))
+    history.push(cmd)
+    return localStorage.setItem('termlyHistory', JSON.stringify(history))
+  }
+
+  /**
+   * Get History
+   */
+  getHistory() {
+    return JSON.parse(localStorage.getItem('termlyHistory'))
+  }
+
+  /**
+   * Clear History
+   */
+  clearHistory() {
+    return localStorage.setItem('termlyHistory', JSON.stringify([]))
   }
 }
 

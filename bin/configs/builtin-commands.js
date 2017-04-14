@@ -247,4 +247,31 @@ module.exports = {
       }).catch(err => {throw new Error(`-fetch error response returned but it was not a valid JSON. Cannot Parse.`)})
     },
   },
+
+  /**
+   * History Commands
+   * Return list of command in history
+   */
+  history: {
+    name: 'history',
+    type: 'builtin',
+    man: 'Return list of previous executed commands, use -c flag to clear',
+    fn: function (ARGV) {
+
+      // Clear history
+      if (ARGV.c) {
+        this.shell.clearHistory()
+        return 'History Cleared.'
+      }
+
+      // Return history
+      const history = this.shell.getHistory()
+      let response = ''
+      for (var i = 0; i < history.length; i++) {
+        response += `${i}\t${history[i]}\n`
+      }
+
+      return response
+    }
+  }
 }
