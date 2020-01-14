@@ -9,12 +9,11 @@
   <div id="terminal-container">
     <div class="session">
       <h1>Welcome to Termly.js</h1>
-      \* Simple, Extensible, Lightweight Javascript Browser Terminal Simulator!<br>
-      \*<br>
-      \* Type help for list of commands<br>
-      \* Type man &lt;command&gt; for extra info<br>
-      \* source: <a href="https://github.com/Kirkhammetz/termly.js" style="color:white !important; text-decoration: underline;">View on Github</a><br>
-      \*
+      Simple, Extensible, Lightweight Javascript Browser Terminal Simulator!<br>
+      <br>
+      Type help for list of commands<br>
+      Type man &lt;command&gt; for extra info<br>
+      source: <a href="https://github.com/Kirkhammetz/termly.js" style="color:white !important; text-decoration: underline;">View on Github</a><br>
     </div>
   </div>
 </div>
@@ -121,11 +120,11 @@ A more advanced approach to build something custom that suites your needs would 
 
 Both Termly.js constructors can take an Option object with the following:
 
-|Option|Type|Defaults|
-|---|---|---|
-|[filesystem](/#filesystem)| Object | Build-in Filesystem |
-|[commands](/#commands)| Object | Build-in Commands |
-|[env](/#environment-variables)| Object | Key/Value pair for shell's env variables |
+| Option                         | Type   | Defaults                                 |
+| ------------------------------ | ------ | ---------------------------------------- |
+| [filesystem](/#filesystem)     | Object | Build-in Filesystem                      |
+| [commands](/#commands)         | Object | Build-in Commands                        |
+| [env](/#environment-variables) | Object | Key/Value pair for shell's env variables |
 
 Options object at instantiation:
 ```js
@@ -218,12 +217,12 @@ The arguments in the command input string are passed to each command (more on ho
 
 **ARGV object syntax**
 
-|key|use|
-|---|---|
-|raw|Is the Raw command string parsed|
-|command| Is the command name|
-|_| Array of arguments which are not option flags ordered as seen |
-|flag| flag value|
+| key     | use                                                           |
+| ------- | ------------------------------------------------------------- |
+| raw     | Is the Raw command string parsed                              |
+| command | Is the command name                                           |
+| _       | Array of arguments which are not option flags ordered as seen |
+| flag    | flag value                                                    |
 
 **Now an example speak better than thousands words**:
 
@@ -325,14 +324,14 @@ npm test
 
 **Classes Inheritance**
 
-|main|Class|Parent|
-|---|---|---|
-|true|Prompt|Shell|
-|true|Shell|Interpreter|
-| |Interpreter| |
-| |Filesystem| |
-| |File| |
-| |Command|  |
+| main | Class       | Parent      |
+| ---- | ----------- | ----------- |
+| true | Prompt      | Shell       |
+| true | Shell       | Interpreter |
+|      | Interpreter |             |
+|      | Filesystem  |             |
+|      | File        |             |
+|      | Command     |             |
 
 The Main Class is `Shell.js`, `Prompt.js` is the DOM wrapper which inherits from it, thus making two different bundle.
 
