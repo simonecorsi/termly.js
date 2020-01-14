@@ -9,11 +9,12 @@
   <div id="terminal-container">
     <div class="session">
       <h1>Welcome to Termly.js</h1>
-      Simple, Extensible, Lightweight Javascript Browser Terminal Simulator!<br>
-      <br>
-      Type help for list of commands<br>
-      Type man &lt;command&gt; for extra info<br>
-      source: <a href="https://github.com/Kirkhammetz/termly.js" style="color:white !important; text-decoration: underline;">View on Github</a><br>
+      \* Simple, Extensible, Lightweight Javascript Browser Terminal Simulator!<br>
+      \*<br>
+      \* Type help for list of commands<br>
+      \* Type man &lt;command&gt; for extra info<br>
+      \* source: <a href="https://github.com/Kirkhammetz/termly.js" style="color:white !important; text-decoration: underline;">View on Github</a><br>
+      \*
     </div>
   </div>
 </div>
