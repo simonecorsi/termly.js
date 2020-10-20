@@ -16,7 +16,7 @@ class Interpreter {
   }
 
   /**
-   * CHANGED: Changed to use Kirkhammetz/string-to-argv.js
+   * CHANGED: Changed to use simonecorsi/string-to-argv.js
    * Keep this function separate for testing
    */
   parse(cmd) {
