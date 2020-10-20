@@ -22,7 +22,7 @@
     "js",
     "vanilla"
   ],
-  "homepage": "https://github.com/Kirkhammetz/termly.js",
+  "homepage": "https://github.com/simonecorsi/termly.js",
   "ignore": [
     "**/.*",
     "node_modules",

@@ -1,6 +1,6 @@
-<meta property="og:image" content="https://github.com/Kirkhammetz/termly.js/blob/gh-pages/images/termlyjs-preview.png?raw=true">
+<meta property="og:image" content="https://github.com/simonecorsi/termly.js/blob/gh-pages/images/termlyjs-preview.png?raw=true">
 
-# [Termly.js](https://kirkhammetz.github.io/termly.js)
+# [Termly.js](https://simonecorsi.github.io/termly.js)
 
 ### Simple, Extensible, Hackable and Lightweight Browser Terminal Simulator!
 
@@ -12,22 +12,22 @@ Doit interactively! <br />
 
 <div align="center">
   <h4>Use inside a nice wrapper</h4>
-  <img src="https://github.com/Kirkhammetz/termly.js/blob/statics/termly.gif?raw=true" align="center" />
+  <img src="https://github.com/simonecorsi/termly.js/blob/statics/termly.gif?raw=true" align="center" />
 </div>
 <div align="center">
   <h4>Or calling directly to the class and building your own wrapper</h4>
-  <img src="https://github.com/Kirkhammetz/termly.js/blob/statics/console.gif?raw=true" align="center" />
+  <img src="https://github.com/simonecorsi/termly.js/blob/statics/console.gif?raw=true" align="center" />
 </div>
 
 ## Documentation
 
-- Play with the [DEMO](https://kirkhammetz.github.io/termly.js#/#demo)
-- Read the [Documentations](https://kirkhammetz.github.io/termly.js) for all the options.
+- Play with the [DEMO](https://simonecorsi.github.io/termly.js#/#demo)
+- Read the [Documentations](https://simonecorsi.github.io/termly.js) for all the options.
 - Below the [Changeslog](#changelog)
 
 ## Installing
 
-Get the zip [Package](https://github.com/Kirkhammetz/termly.js/archive/master.zip) directly or better:
+Get the zip [Package](https://github.com/simonecorsi/termly.js/archive/master.zip) directly or better:
 
 ```sh
 npm install termly.js
@@ -59,7 +59,7 @@ const Shell = require('termly.js'); // Shell only
 const Prompt = require('termly.js/bin/classes/Prompt'); // Init with a Prompt IO Wrapper
 ```
 
-> Read the [docs](https://kirkhammetz.github.io/termly.js#/#bundles-differences) to know the differences
+> Read the [docs](https://simonecorsi.github.io/termly.js#/#bundles-differences) to know the differences
 
 ## Basic Usage
 
@@ -79,7 +79,7 @@ You can attach Termly.js to a DOM container and have it do the work of creating 
 </script>
 ```
 
-> Read the [docs](https://kirkhammetz.github.io/termly.js#/#options) at website for all the options
+> Read the [docs](https://simonecorsi.github.io/termly.js#/#options) at website for all the options
 
 **Using the Shell Class**
 
@@ -97,7 +97,7 @@ A more advanced approach to build something custom that suites your needs would 
 </script>
 ```
 
-> Read the [docs](https://kirkhammetz.github.io/termly.js#/#options) at website for all the options
+> Read the [docs](https://simonecorsi.github.io/termly.js#/#options) at website for all the options
 
 ## Changelog
 
@@ -149,7 +149,7 @@ If there are any issue let me know, I'll give it a look when I can.
 
 ## Authors
 
-- **Simone Corsi** - _Initial work_ - [Kirkhammetz](https://github.com/Kirkhammetz)
+- **Simone Corsi** - _Initial work_ - [simonecorsi](https://github.com/simonecorsi)
 
 ## Acknowledgments
 
