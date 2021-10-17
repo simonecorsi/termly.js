@@ -85,6 +85,29 @@ class Prompt extends Shell{
       return this.generateRow()
     }
   }
+  
+  // Could be integrated in generateOutput() with an additional parameter "html = false" and
+  // if(html){pre.innerHTML=out} else {pre.textContent=out}
+  generateHtmlOutput(out = '', newLine = true) {
+    if (Array.isArray(out)) {
+      out = out.join("\n")
+    }
+    const pre = document.createElement('pre')
+    pre.innerHTML = out
+    pre.className = 'terminal-output'
+    this.container.appendChild(pre)
+    if (newLine) {
+      return this.generateRow()
+    }
+  }
+  
+  appendHtmlOutput(out, newLine = true) {
+    out.className += ' terminal-output'
+    this.container.appendChild(out)
+    if (newLine) {
+      return this.generateRow()
+    }
+  }
 
   clear() {
     this.container.innerHTML = ''
